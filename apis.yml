@@ -1,0 +1,64 @@
+aid: lunchbox
+name: Lunchbox
+description: >-
+  Lunchbox is a digital ordering and guest engagement platform for enterprise
+  restaurant chains and ghost kitchens, offering online ordering, catering,
+  loyalty, marketing CRM, order aggregation, and call center tooling across
+  thousands of locations. For technology partners, Lunchbox provides an Open
+  API that connects a restaurant's tech stack to its ecosystem, exposing
+  location and menu data, guest account management, and order injection into
+  the POS. The Open API supports last-mile delivery webhooks, menu consumption
+  for digital boards and kiosks, and third-party marketplace integrations, and
+  is documented on a dedicated developer portal at docs.lunchbox.io.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Restaurant
+  - Online Ordering
+  - Guest Engagement
+  - Catering
+  - Menus
+  - Orders
+  - Enterprise
+url: https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/apis.yml
+created: '2026-06-02'
+modified: '2026-06-02'
+specificationVersion: '0.19'
+apis:
+  - aid: lunchbox:open-api
+    name: Lunchbox Open API
+    description: >-
+      The Lunchbox Open API is a connectivity platform linking a restaurant's
+      tech stack to the Lunchbox ecosystem. It includes a Core API for ordering
+      functions and frontend interfaces, and supports retrieving location and
+      menu data, managing guest accounts, injecting orders into the POS,
+      last-mile delivery webhooks, digital menu boards, and kiosk and
+      third-party marketplace experiences.
+    humanURL: https://docs.lunchbox.io/
+    tags:
+      - Online Ordering
+      - Menus
+      - Orders
+      - Guests
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.lunchbox.io/
+      - type: GettingStarted
+        url: https://support.lunchbox.io/en/articles/8684620-open-api-overview
+common:
+  - type: Website
+    url: https://lunchbox.io/
+  - type: Documentation
+    url: https://docs.lunchbox.io/
+  - type: APIReference
+    url: https://docs.lunchbox.io/
+  - type: Support
+    url: https://support.lunchbox.io/
+  - type: GitHubOrganization
+    url: https://github.com/lunchboxinc
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/lunchboxtechnologies
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
