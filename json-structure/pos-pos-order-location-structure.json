@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/pos-pos-order-location-structure.json",
+  "name": "PosOrderLocation",
+  "description": "PosOrderLocation schema from Lunchbox POS API",
+  "type": "object",
+  "properties": {
+    "address1": {
+      "type": "string",
+      "example": "1216 Broadway"
+    },
+    "address2": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "address3": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "statecode": {
+      "type": "string",
+      "example": "NY"
+    },
+    "zipcode": {
+      "type": "string",
+      "example": "10001"
+    },
+    "province": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "country": {
+      "type": "string",
+      "example": "US"
+    },
+    "phone": {
+      "type": "string",
+      "nullable": true,
+      "example": "2125551411"
+    },
+    "instructions": {
+      "type": "string",
+      "example": "string"
+    }
+  }
+}

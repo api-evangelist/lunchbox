@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/management-store-page-structure.json",
+  "name": "StorePage",
+  "description": "StorePage schema from Lunchbox Management API",
+  "type": "object",
+  "properties": {
+    "current_page": {
+      "type": "int32",
+      "example": 1
+    },
+    "next_page": {
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    },
+    "previous_page": {
+      "type": "int32",
+      "nullable": true,
+      "example": 1
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ManagedStoreSummary"
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServiceTypeConfig",
+  "description": "ServiceTypeConfig schema from Lunchbox Management API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/management-service-type-config-schema.json",
+  "type": "object",
+  "properties": {
+    "approved": {
+      "type": "boolean",
+      "example": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "example": true
+    },
+    "group_base_prep_time": {
+      "type": "integer",
+      "example": 1
+    },
+    "base_prep_time": {
+      "type": "integer",
+      "example": 1
+    },
+    "lead_time": {
+      "type": "integer",
+      "example": 1
+    },
+    "hold_same_day_orders": {
+      "type": "boolean",
+      "example": true
+    },
+    "pos_autosend": {
+      "type": "boolean",
+      "example": true
+    },
+    "hold_future_orders": {
+      "type": "boolean",
+      "example": true
+    },
+    "min_subtotal": {
+      "type": "number",
+      "example": 1.0
+    },
+    "allow_check_in": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

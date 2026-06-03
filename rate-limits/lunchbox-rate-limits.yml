@@ -1,0 +1,66 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Lunchbox
+providerId: lunchbox
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Restaurant
+  - Online Ordering
+  - Open API
+description: >-
+  The Lunchbox 2.0 Open API documentation (a Postman-published reference) states
+  that the API uses standard HTTP status codes to indicate success or failure
+  and that all schemas are JSON, but it does not publish specific per-second,
+  per-minute, or daily request-rate numbers, nor documented rate-limit response
+  headers. Access is provisioned per restaurant chain and authenticated with a
+  team token (Authorization: Token <team_token>) for the Core, Management, and
+  POS APIs, and with an Api-Key for the Loyalty API; enabling order webhooks
+  requires coordination with the Lunchbox team. Concrete throttling limits are
+  therefore established per integration partner via that onboarding process and
+  are not reconciled here against a published limits page.
+responseCodes:
+  throttled: 429
+  serverError: 500
+limits:
+  - name: Core API requests
+    scope: chain/token
+    metric: varies
+    limit: 'not publicly documented; provisioned per chain during onboarding'
+    notes: Authenticated with a team token scoped to the restaurant chain.
+  - name: Management API requests
+    scope: chain/token
+    metric: varies
+    limit: 'not publicly documented; administrative throughput agreed with Lunchbox'
+  - name: Loyalty API requests
+    scope: merchant/key
+    metric: varies
+    limit: 'not publicly documented; scoped to the loyalty engine Api-Key'
+  - name: POS API order submission
+    scope: chain/pos-store
+    metric: varies
+    limit: 'not publicly documented; coordinated with the POS integration partner'
+  - name: Order webhooks
+    scope: chain/endpoint
+    metric: varies
+    limit: 'event-driven; delivery cadence coordinated with the Lunchbox team'
+    notes: >-
+      Transaction, store-update, and order-update webhooks are enabled only
+      after providing Lunchbox with a destination URL.
+policies:
+  - name: Token-Scoped Access
+    description: >-
+      Limits and quotas are bound to the per-chain team token (Core, Management,
+      POS) or the loyalty Api-Key, not to individual end users.
+  - name: Partner Onboarding
+    description: >-
+      Rate limits, webhook cadence, and POS throughput are negotiated and
+      configured during partner onboarding rather than self-service.
+  - name: Standard HTTP Semantics
+    description: >-
+      Clients should treat 4xx/5xx responses with standard HTTP semantics and
+      retry idempotent operations (GET, PUT, DELETE) with backoff on transient
+      5xx errors.

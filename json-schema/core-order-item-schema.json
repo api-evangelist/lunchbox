@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderItem",
+  "description": "OrderItem schema from Lunchbox Core API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/core-order-item-schema.json",
+  "type": "object",
+  "properties": {
+    "menu_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "quantity": {
+      "type": "integer",
+      "example": 1
+    },
+    "item_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "category_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "comment": {
+      "type": "string",
+      "example": "string"
+    },
+    "style_id": {
+      "type": "integer",
+      "nullable": true,
+      "example": 1234
+    },
+    "size_id": {
+      "type": "integer",
+      "nullable": true,
+      "example": 1234
+    },
+    "child_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderChildItem"
+      },
+      "example": []
+    }
+  }
+}

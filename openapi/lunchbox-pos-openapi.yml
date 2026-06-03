@@ -1,0 +1,426 @@
+openapi: 3.0.3
+info:
+  title: Lunchbox POS API
+  description: >-
+    The Lunchbox 2.0 POS API defines the contract between Lunchbox and a POS
+    provider integration. Lunchbox retrieves store details and submits orders to
+    the POS provider, and the POS provider notifies Lunchbox of store and order
+    changes via webhooks. This specification documents the endpoints Lunchbox
+    calls on the POS provider, plus the inbound webhooks the POS provider sends
+    to Lunchbox (modeled as callbacks). All payloads are JSON.
+  version: '2.0'
+  contact:
+    name: Lunchbox Support
+    email: support@lunchbox.io
+    url: https://docs.lunchbox.io/
+servers:
+- url: https://{chain_name}.lunchbox.io/api/v2
+  description: Per-chain Lunchbox 2.0 POS API base URL
+  variables:
+    chain_name:
+      default: chain
+      description: The restaurant chain's Lunchbox subdomain
+security:
+- tokenAuth: []
+tags:
+- name: Stores
+  description: Retrieve POS store mappings and store details.
+- name: Orders
+  description: Submit, retrieve, and update orders against the POS.
+paths:
+  /pos/stores:
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Stores
+      operationId: posGetStores
+      responses:
+        '200':
+          description: List of POS store identifiers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pos_store_id:
+                      type: string
+              examples:
+                PosGetStores200Example:
+                  summary: Default posGetStores 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /pos/stores/{store_id}:
+    parameters:
+    - name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store Details
+      operationId: posGetStoreDetails
+      responses:
+        '200':
+          description: Detailed POS store record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PosStore'
+              examples:
+                PosGetStoreDetails200Example:
+                  summary: Default posGetStoreDetails 200 response
+                  x-microcks-default: true
+                  value: {}
+      callbacks:
+        storeUpdated:
+          '{$request.body#/lunchbox_webhook_url}':
+            post:
+              summary: Store Updated Webhook
+              description: >-
+                The POS provider triggers this webhook to notify Lunchbox that a
+                store has been added or updated. Lunchbox then calls Get Store
+                Details using the provided pos_store_id.
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/StoreUpdateEvent'
+              responses:
+                '200':
+                  description: Webhook acknowledged.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /pos/orders/{pos_store_id}:
+    parameters:
+    - $ref: '#/components/parameters/PosStoreId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Submit an Order
+      description: Lunchbox uses this call to submit orders to the POS.
+      operationId: posSubmitOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PosOrder'
+            examples:
+              PosSubmitOrderRequestExample:
+                summary: Default posSubmitOrder request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Order accepted by the POS.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PosOrderAck'
+              examples:
+                PosSubmitOrder200Example:
+                  summary: Default posSubmitOrder 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /pos/orders/{pos_store_id}/{pos_order_id}:
+    parameters:
+    - $ref: '#/components/parameters/PosStoreId'
+    - name: pos_order_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get an Order
+      operationId: posGetOrder
+      responses:
+        '200':
+          description: The requested POS order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PosOrder'
+              examples:
+                PosGetOrder200Example:
+                  summary: Default posGetOrder 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Orders]
+      summary: Lunchbox Update an Order
+      operationId: posUpdateOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PosOrder'
+            examples:
+              PosUpdateOrderRequestExample:
+                summary: Default posUpdateOrder request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Order updated.
+      callbacks:
+        orderUpdated:
+          '{$request.body#/lunchbox_webhook_url}':
+            post:
+              summary: Order Updated Webhook
+              description: >-
+                The POS provider triggers this webhook to notify Lunchbox that
+                an order has been updated from the POS provider's side.
+                Acceptable statuses are is_completed and is_canceled.
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/OrderUpdateEvent'
+              responses:
+                '200':
+                  description: Webhook acknowledged.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Team token passed as: Authorization: Token <team_token>'
+  parameters:
+    PosStoreId:
+      name: pos_store_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    PosStore:
+      type: object
+      properties:
+        pos_store_id:
+          type: string
+          example: '123456'
+        store_id:
+          type: string
+          example: '123456'
+        name:
+          type: string
+          example: Sample
+        contact:
+          $ref: '#/components/schemas/PosContact'
+        location:
+          $ref: '#/components/schemas/PosLocation'
+    PosContact:
+      type: object
+      properties:
+        active:
+          type: boolean
+          example: true
+        address1:
+          type: string
+          example: 1216 Broadway
+        address2:
+          type: string
+          nullable: true
+          example: string
+        address3:
+          type: string
+          nullable: true
+          example: string
+        city:
+          type: string
+          example: New York
+        state:
+          type: string
+          example: NY
+        postal_code:
+          type: string
+          example: '10001'
+        country:
+          type: string
+          example: US
+        phone:
+          type: string
+          example: '2125551411'
+        latitude:
+          type: number
+          example: 40.74661
+        longitude:
+          type: number
+          example: -73.98833
+    PosLocation:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/PosHours'
+          example: []
+    PosHours:
+      type: object
+      properties:
+        iso_day_of_week:
+          type: integer
+          example: 1
+        start_time:
+          type: string
+          example: string
+        end_time:
+          type: string
+          example: string
+    PosOrder:
+      type: object
+      properties:
+        pos_store_id:
+          type: string
+          example: '123456'
+        order_id:
+          type: string
+          example: 1234
+        ready_ts:
+          type: string
+          format: date-time
+          example: '2023-07-25T06:00:00-04:00'
+        service_type_id:
+          type: integer
+          example: 1234
+        service_type:
+          type: string
+          example: string
+        status:
+          type: object
+          properties:
+            is_finalized:
+              type: boolean
+            is_completed:
+              type: boolean
+            is_canceled:
+              type: boolean
+          example: {}
+        customer:
+          type: object
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
+            phone:
+              type: string
+            company_name:
+              type: string
+            customer_id:
+              type: integer
+            email:
+              type: string
+              format: email
+          example: {}
+        location:
+          $ref: '#/components/schemas/PosOrderLocation'
+        charges:
+          type: object
+          properties:
+            total_cents:
+              type: integer
+            subtotal_cents:
+              type: integer
+            tax_cents:
+              type: integer
+            delivery_cents:
+              type: integer
+            tip_cents:
+              type: integer
+            remaining_cents:
+              type: integer
+          example: {}
+    PosOrderLocation:
+      type: object
+      properties:
+        address1:
+          type: string
+          example: 1216 Broadway
+        address2:
+          type: string
+          nullable: true
+          example: string
+        address3:
+          type: string
+          nullable: true
+          example: string
+        city:
+          type: string
+          example: New York
+        statecode:
+          type: string
+          example: NY
+        zipcode:
+          type: string
+          example: '10001'
+        province:
+          type: string
+          nullable: true
+          example: string
+        country:
+          type: string
+          example: US
+        phone:
+          type: string
+          nullable: true
+          example: '2125551411'
+        instructions:
+          type: string
+          example: string
+    PosOrderAck:
+      type: object
+      properties:
+        pos_store_id:
+          type: string
+          example: '123456'
+        pos_order_id:
+          type: string
+          example: 1234
+        status:
+          type: object
+          properties:
+            is_completed:
+              type: boolean
+          example: {}
+    StoreUpdateEvent:
+      type: object
+      required: [event_type, pos_store_id]
+      properties:
+        event_type:
+          type: string
+          enum: [store_update]
+          example: store_update
+        pos_store_id:
+          type: string
+          example: '123456'
+    OrderUpdateEvent:
+      type: object
+      required: [event_type, pos_store_id, pos_order_id]
+      properties:
+        event_type:
+          type: string
+          enum: [order_update]
+          example: order_update
+        pos_store_id:
+          type: string
+          example: '123456'
+        pos_order_id:
+          type: string
+          example: 1234

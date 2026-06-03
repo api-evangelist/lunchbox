@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-auth-session-structure.json",
+  "name": "AuthSession",
+  "description": "AuthSession schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "auth_cookie": {
+      "type": "string",
+      "example": "string"
+    }
+  }
+}

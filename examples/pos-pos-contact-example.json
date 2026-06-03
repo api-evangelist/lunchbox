@@ -1,0 +1,13 @@
+{
+  "active": true,
+  "address1": "1216 Broadway",
+  "address2": "string",
+  "address3": "string",
+  "city": "New York",
+  "state": "NY",
+  "postal_code": "10001",
+  "country": "US",
+  "phone": "2125551411",
+  "latitude": 40.74661,
+  "longitude": -73.98833
+}

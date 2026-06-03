@@ -1,0 +1,168 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "lbx": "https://docs.lunchbox.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ManagedOrderSummary": "lbx:ManagedOrderSummary",
+    "ManagedStore": "lbx:ManagedStore",
+    "ManagedStoreSummary": "lbx:ManagedStoreSummary",
+    "OrderPage": "lbx:OrderPage",
+    "ServiceTypeConfig": "lbx:ServiceTypeConfig",
+    "StorePage": "lbx:StorePage",
+    "ordersid": {
+      "@id": "lbx:ordersid",
+      "@type": "xsd:integer"
+    },
+    "totalCents": {
+      "@id": "lbx:total_cents",
+      "@type": "xsd:integer"
+    },
+    "statusid": {
+      "@id": "lbx:statusid",
+      "@type": "xsd:integer"
+    },
+    "serviceName": {
+      "@id": "lbx:service_name",
+      "@type": "xsd:string"
+    },
+    "grouporderid": {
+      "@id": "lbx:grouporderid",
+      "@type": "xsd:integer"
+    },
+    "isdelivery": {
+      "@id": "lbx:isdelivery",
+      "@type": "xsd:boolean"
+    },
+    "tzName": {
+      "@id": "lbx:tz_name",
+      "@type": "xsd:string"
+    },
+    "dpstamp": {
+      "@id": "lbx:dpstamp",
+      "@type": "xsd:dateTime"
+    },
+    "enableLoyalty": {
+      "@id": "lbx:enable_loyalty",
+      "@type": "xsd:boolean"
+    },
+    "driverManagement": {
+      "@id": "lbx:driver_management",
+      "@type": "xsd:boolean"
+    },
+    "globalDisableGroupOrder": {
+      "@id": "lbx:global_disable_group_order",
+      "@type": "xsd:boolean"
+    },
+    "restaurantData": {
+      "@id": "lbx:restaurant_data",
+      "@type": "@id"
+    },
+    "storeId": {
+      "@id": "lbx:store_id",
+      "@type": "xsd:string"
+    },
+    "restId": {
+      "@id": "lbx:rest_id",
+      "@type": "xsd:integer"
+    },
+    "restName": {
+      "@id": "lbx:rest_name",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "lbx:status",
+      "@type": "xsd:string"
+    },
+    "setupType": {
+      "@id": "lbx:setup_type",
+      "@type": "xsd:string"
+    },
+    "address1": {
+      "@id": "lbx:address1",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "lbx:city",
+      "@type": "xsd:string"
+    },
+    "stateName": {
+      "@id": "lbx:state_name",
+      "@type": "xsd:string"
+    },
+    "stateCode": {
+      "@id": "lbx:state_code",
+      "@type": "xsd:string"
+    },
+    "stateId": {
+      "@id": "lbx:state_id",
+      "@type": "xsd:integer"
+    },
+    "zipCode": {
+      "@id": "lbx:zip_code",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "lbx:timezone",
+      "@type": "xsd:string"
+    },
+    "currentPage": {
+      "@id": "lbx:current_page",
+      "@type": "xsd:integer"
+    },
+    "nextPage": {
+      "@id": "lbx:next_page",
+      "@type": "xsd:integer"
+    },
+    "previousPage": {
+      "@id": "lbx:previous_page",
+      "@type": "xsd:integer"
+    },
+    "results": {
+      "@id": "lbx:results",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "approved": {
+      "@id": "lbx:approved",
+      "@type": "xsd:boolean"
+    },
+    "enabled": {
+      "@id": "lbx:enabled",
+      "@type": "xsd:boolean"
+    },
+    "groupBasePrepTime": {
+      "@id": "lbx:group_base_prep_time",
+      "@type": "xsd:integer"
+    },
+    "basePrepTime": {
+      "@id": "lbx:base_prep_time",
+      "@type": "xsd:integer"
+    },
+    "leadTime": {
+      "@id": "lbx:lead_time",
+      "@type": "xsd:integer"
+    },
+    "holdSameDayOrders": {
+      "@id": "lbx:hold_same_day_orders",
+      "@type": "xsd:boolean"
+    },
+    "posAutosend": {
+      "@id": "lbx:pos_autosend",
+      "@type": "xsd:boolean"
+    },
+    "holdFutureOrders": {
+      "@id": "lbx:hold_future_orders",
+      "@type": "xsd:boolean"
+    },
+    "minSubtotal": {
+      "@id": "lbx:min_subtotal",
+      "@type": "xsd:decimal"
+    },
+    "allowCheckIn": {
+      "@id": "lbx:allow_check_in",
+      "@type": "xsd:boolean"
+    }
+  }
+}

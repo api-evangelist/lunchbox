@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/management-managed-order-summary-structure.json",
+  "name": "ManagedOrderSummary",
+  "description": "ManagedOrderSummary schema from Lunchbox Management API",
+  "type": "object",
+  "properties": {
+    "ordersid": {
+      "type": "int32",
+      "example": 1234
+    },
+    "total_cents": {
+      "type": "int32",
+      "example": 100
+    },
+    "statusid": {
+      "type": "int32",
+      "example": 1234
+    },
+    "service_name": {
+      "type": "string",
+      "example": "Sample"
+    },
+    "grouporderid": {
+      "type": "int32",
+      "example": 1234
+    },
+    "isdelivery": {
+      "type": "boolean",
+      "example": true
+    },
+    "tz_name": {
+      "type": "string",
+      "example": "Sample"
+    },
+    "dpstamp": {
+      "type": "datetime",
+      "example": "2023-07-25T06:00:00-04:00"
+    }
+  }
+}

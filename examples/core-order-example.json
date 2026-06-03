@@ -1,0 +1,12 @@
+{
+  "ordersid": 1234,
+  "restaurant_id": 1234,
+  "is_cancelable": true,
+  "is_editable": true,
+  "ordering_status": "string",
+  "comments_to_restaurant": "string",
+  "internal_notes": "string",
+  "tip_percentages": [],
+  "customer": "string",
+  "charges": "string"
+}

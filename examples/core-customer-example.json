@@ -1,0 +1,14 @@
+{
+  "customer_id": 1234,
+  "first_name": "John",
+  "last_name": "Smith",
+  "email": "demo@lunchbox.io",
+  "phone": "2125551411",
+  "is_phone_verified": "2125551411",
+  "is_verified": true,
+  "is_guest": true,
+  "is_mgmt": true,
+  "company_name": "Sample",
+  "occupation": "string",
+  "birthdate": "1990-05-21"
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "description": "Order schema from Lunchbox Core API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/core-order-schema.json",
+  "type": "object",
+  "properties": {
+    "ordersid": {
+      "type": "integer",
+      "example": 1234
+    },
+    "restaurant_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "is_cancelable": {
+      "type": "boolean",
+      "example": true
+    },
+    "is_editable": {
+      "type": "boolean",
+      "example": true
+    },
+    "ordering_status": {
+      "type": "string",
+      "example": "string"
+    },
+    "comments_to_restaurant": {
+      "type": "string",
+      "example": "string"
+    },
+    "internal_notes": {
+      "type": "string",
+      "example": "string"
+    },
+    "tip_percentages": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "example": []
+    },
+    "customer": {
+      "$ref": "#/components/schemas/Customer"
+    },
+    "charges": {
+      "$ref": "#/components/schemas/Charges"
+    }
+  }
+}

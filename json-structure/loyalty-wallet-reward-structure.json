@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/loyalty-wallet-reward-structure.json",
+  "name": "WalletReward",
+  "description": "WalletReward schema from Lunchbox Loyalty API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "uuid",
+      "example": "130945e3-2b24-4530-a696-3b2c6977ba1c"
+    }
+  }
+}

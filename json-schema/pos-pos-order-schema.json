@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PosOrder",
+  "description": "PosOrder schema from Lunchbox POS API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/pos-pos-order-schema.json",
+  "type": "object",
+  "properties": {
+    "pos_store_id": {
+      "type": "string",
+      "example": "123456"
+    },
+    "order_id": {
+      "type": "string",
+      "example": 1234
+    },
+    "ready_ts": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-07-25T06:00:00-04:00"
+    },
+    "service_type_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "service_type": {
+      "type": "string",
+      "example": "string"
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "is_finalized": {
+          "type": "boolean"
+        },
+        "is_completed": {
+          "type": "boolean"
+        },
+        "is_canceled": {
+          "type": "boolean"
+        }
+      },
+      "example": {}
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "customer_id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "example": {}
+    },
+    "location": {
+      "$ref": "#/components/schemas/PosOrderLocation"
+    },
+    "charges": {
+      "type": "object",
+      "properties": {
+        "total_cents": {
+          "type": "integer"
+        },
+        "subtotal_cents": {
+          "type": "integer"
+        },
+        "tax_cents": {
+          "type": "integer"
+        },
+        "delivery_cents": {
+          "type": "integer"
+        },
+        "tip_cents": {
+          "type": "integer"
+        },
+        "remaining_cents": {
+          "type": "integer"
+        }
+      },
+      "example": {}
+    }
+  }
+}

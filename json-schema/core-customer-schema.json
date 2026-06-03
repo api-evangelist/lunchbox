@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Customer",
+  "description": "Customer schema from Lunchbox Core API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/core-customer-schema.json",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "first_name": {
+      "type": "string",
+      "example": "John"
+    },
+    "last_name": {
+      "type": "string",
+      "example": "Smith"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "demo@lunchbox.io"
+    },
+    "phone": {
+      "type": "string",
+      "example": "2125551411"
+    },
+    "is_phone_verified": {
+      "type": "boolean",
+      "example": "2125551411"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "example": true
+    },
+    "is_guest": {
+      "type": "boolean",
+      "example": true
+    },
+    "is_mgmt": {
+      "type": "boolean",
+      "example": true
+    },
+    "company_name": {
+      "type": "string",
+      "nullable": true,
+      "example": "Sample"
+    },
+    "occupation": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date",
+      "nullable": true,
+      "example": "1990-05-21"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-order-child-item-structure.json",
+  "name": "OrderChildItem",
+  "description": "OrderChildItem schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "menu_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "quantity": {
+      "type": "int32",
+      "example": 1
+    },
+    "pick_list_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "item_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "category_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "style_id": {
+      "type": "int32",
+      "nullable": true,
+      "example": 1234
+    },
+    "size_id": {
+      "type": "int32",
+      "nullable": true,
+      "example": 1234
+    }
+  }
+}

@@ -1,0 +1,314 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Lunchbox Loyalty API \u2014 User Wallet"
+  description: "Loyalty \u2014 User Wallet. 8 operations. Lead operation: Create a User Wallet. Self-contained Naftiko capability covering one Lunchbox business surface."
+  tags:
+  - Lunchbox
+  - Loyalty
+  - User Wallet
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    LUNCHBOX_LOYALTY_API_KEY: LUNCHBOX_LOYALTY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: loyalty-user-wallet
+    baseUri: https://loyalty.lunchbox.io
+    description: "Lunchbox Loyalty API \u2014 User Wallet. Self-contained, no shared references."
+    authentication:
+      type: apikey
+      key: Api-Key
+      value: '{{env.LUNCHBOX_LOYALTY_API_KEY}}'
+      placement: header
+    resources:
+    - name: loyalty-engine-user-wallets
+      path: /loyalty-engine/user-wallets
+      operations:
+      - name: createUserWallet
+        method: POST
+        description: Create a User Wallet
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets
+      path: /loyalty-engine/user-wallets
+      operations:
+      - name: searchUserWallets
+        method: GET
+        description: Search User Wallets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets-user-wallet-id
+      path: /loyalty-engine/user-wallets/{user_wallet_id}
+      operations:
+      - name: getUserWallet
+        method: GET
+        description: Get a User Wallet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets-user-wallet-id
+      path: /loyalty-engine/user-wallets/{user_wallet_id}
+      operations:
+      - name: updateUserWallet
+        method: PATCH
+        description: Update a User Wallet
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets-user-wallet-id-confirm
+      path: /loyalty-engine/user-wallets/{user_wallet_id}/confirm
+      operations:
+      - name: confirmUserWallet
+        method: POST
+        description: Confirm a Wallet Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets-user-wallet-id-validate
+      path: /loyalty-engine/user-wallets/{user_wallet_id}/validate
+      operations:
+      - name: validateUserWallet
+        method: POST
+        description: Validate a Wallet Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets-user-wallet-id-refund
+      path: /loyalty-engine/user-wallets/{user_wallet_id}/refund
+      operations:
+      - name: refundUserWallet
+        method: POST
+        description: Refund a Wallet Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: loyalty-engine-user-wallets-user-wallet-id-adjust
+      path: /loyalty-engine/user-wallets/{user_wallet_id}/adjust
+      operations:
+      - name: adjustUserWallet
+        method: PATCH
+        description: Adjust a Wallet Balance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: loyalty-user-wallet-rest
+    port: 8080
+    description: "REST adapter for Lunchbox Loyalty API \u2014 User Wallet."
+    resources:
+    - path: /v1/loyalty-engine-user-wallets
+      name: loyalty-engine-user-wallets
+      description: REST surface for Create a User Wallet.
+      operations:
+      - method: POST
+        name: createUserWallet
+        description: Create a User Wallet
+        call: loyalty-user-wallet.createUserWallet
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets
+      name: loyalty-engine-user-wallets
+      description: REST surface for Search User Wallets.
+      operations:
+      - method: GET
+        name: searchUserWallets
+        description: Search User Wallets
+        call: loyalty-user-wallet.searchUserWallets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets-user-wallet-id
+      name: loyalty-engine-user-wallets-user-wallet-id
+      description: REST surface for Get a User Wallet.
+      operations:
+      - method: GET
+        name: getUserWallet
+        description: Get a User Wallet
+        call: loyalty-user-wallet.getUserWallet
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets-user-wallet-id
+      name: loyalty-engine-user-wallets-user-wallet-id
+      description: REST surface for Update a User Wallet.
+      operations:
+      - method: PATCH
+        name: updateUserWallet
+        description: Update a User Wallet
+        call: loyalty-user-wallet.updateUserWallet
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets-user-wallet-id-confirm
+      name: loyalty-engine-user-wallets-user-wallet-id-confirm
+      description: REST surface for Confirm a Wallet Transaction.
+      operations:
+      - method: POST
+        name: confirmUserWallet
+        description: Confirm a Wallet Transaction
+        call: loyalty-user-wallet.confirmUserWallet
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets-user-wallet-id-validate
+      name: loyalty-engine-user-wallets-user-wallet-id-validate
+      description: REST surface for Validate a Wallet Transaction.
+      operations:
+      - method: POST
+        name: validateUserWallet
+        description: Validate a Wallet Transaction
+        call: loyalty-user-wallet.validateUserWallet
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets-user-wallet-id-refund
+      name: loyalty-engine-user-wallets-user-wallet-id-refund
+      description: REST surface for Refund a Wallet Transaction.
+      operations:
+      - method: POST
+        name: refundUserWallet
+        description: Refund a Wallet Transaction
+        call: loyalty-user-wallet.refundUserWallet
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/loyalty-engine-user-wallets-user-wallet-id-adjust
+      name: loyalty-engine-user-wallets-user-wallet-id-adjust
+      description: REST surface for Adjust a Wallet Balance.
+      operations:
+      - method: PATCH
+        name: adjustUserWallet
+        description: Adjust a Wallet Balance
+        call: loyalty-user-wallet.adjustUserWallet
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: loyalty-user-wallet-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Lunchbox Loyalty API \u2014 User Wallet."
+    tools:
+    - name: create-user-wallet
+      description: Create a User Wallet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: loyalty-user-wallet.createUserWallet
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-user-wallets
+      description: Search User Wallets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: loyalty-user-wallet.searchUserWallets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-wallet
+      description: Get a User Wallet
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: loyalty-user-wallet.getUserWallet
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user-wallet
+      description: Update a User Wallet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: loyalty-user-wallet.updateUserWallet
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: confirm-wallet-transaction
+      description: Confirm a Wallet Transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: loyalty-user-wallet.confirmUserWallet
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate-wallet-transaction
+      description: Validate a Wallet Transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: loyalty-user-wallet.validateUserWallet
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: refund-wallet-transaction
+      description: Refund a Wallet Transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: loyalty-user-wallet.refundUserWallet
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adjust-wallet-balance
+      description: Adjust a Wallet Balance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: loyalty-user-wallet.adjustUserWallet
+      outputParameters:
+      - type: object
+        mapping: $.

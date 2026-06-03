@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WalletReward",
+  "description": "WalletReward schema from Lunchbox Loyalty API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/loyalty-wallet-reward-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "130945e3-2b24-4530-a696-3b2c6977ba1c"
+    }
+  }
+}

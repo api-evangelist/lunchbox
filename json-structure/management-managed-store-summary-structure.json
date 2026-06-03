@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/management-managed-store-summary-structure.json",
+  "name": "ManagedStoreSummary",
+  "description": "ManagedStoreSummary schema from Lunchbox Management API",
+  "type": "object",
+  "properties": {
+    "store_id": {
+      "type": "string",
+      "example": "123456"
+    },
+    "rest_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "rest_name": {
+      "type": "string",
+      "example": "Sample"
+    },
+    "status": {
+      "type": "string",
+      "example": "string"
+    },
+    "setup_type": {
+      "type": "string",
+      "example": "string"
+    },
+    "address1": {
+      "type": "string",
+      "example": "1216 Broadway"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "state_name": {
+      "type": "string",
+      "example": "NY"
+    },
+    "state_code": {
+      "type": "string",
+      "example": "NY"
+    },
+    "state_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "zip_code": {
+      "type": "string",
+      "example": "10001"
+    },
+    "timezone": {
+      "type": "string",
+      "example": "string"
+    }
+  }
+}

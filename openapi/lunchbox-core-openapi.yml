@@ -1,0 +1,1751 @@
+openapi: 3.0.3
+info:
+  title: Lunchbox Core API
+  description: >-
+    The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering
+    functions and building frontend interfaces that interact with the variety
+    of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and
+    more. It exposes customer (guest) account management, store and menu data,
+    order creation and item management, discounts, payments, group ordering, and
+    order webhooks. The API uses standard HTTP status codes and all schemas are
+    in JSON format.
+  version: '2.0'
+  contact:
+    name: Lunchbox Support
+    email: support@lunchbox.io
+    url: https://docs.lunchbox.io/
+  termsOfService: https://lunchbox.io/
+servers:
+- url: https://{chain_name}.lunchbox.io/api/v2
+  description: Per-chain Lunchbox 2.0 Core API base URL
+  variables:
+    chain_name:
+      default: chain
+      description: The restaurant chain's Lunchbox subdomain
+security:
+- tokenAuth: []
+tags:
+- name: Customer
+  description: Guest account registration, authentication, and profile management.
+- name: Orders
+  description: Order creation, item management, discounts, payments, and group orders.
+- name: Stores
+  description: Store configuration, hours, menus, and discounts.
+- name: Misc
+  description: Reference data such as contact, countries, and states.
+paths:
+  /customers/login:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Log in a Customer
+      operationId: loginCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              username: demo@lunchbox.io
+              password: '12345678'
+      responses:
+        '200':
+          description: Customer authenticated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSession'
+              examples:
+                LoginCustomer200Example:
+                  summary: Default loginCustomer 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/registration:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Register a Customer
+      operationId: registerCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+            examples:
+              RegisterCustomerRequestExample:
+                summary: Default registerCustomer request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Customer created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                RegisterCustomer200Example:
+                  summary: Default registerCustomer 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/logout:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Log Out a Customer
+      operationId: logoutCustomer
+      responses:
+        '200':
+          description: Customer logged out.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: string
+                    example: Logged out
+              examples:
+                LogoutCustomer200Example:
+                  summary: Default logoutCustomer 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/guest:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Log in as a Guest
+      operationId: loginGuest
+      responses:
+        '200':
+          description: Guest session created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_id:
+                    type: integer
+                  ok:
+                    type: boolean
+              examples:
+                LoginGuest200Example:
+                  summary: Default loginGuest 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/login_by_foreign_auth:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Log in by Foreign Auth
+      operationId: loginByForeignAuth
+      responses:
+        '200':
+          description: Customer authenticated via a third-party identity provider.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSession'
+              examples:
+                LoginByForeignAuth200Example:
+                  summary: Default loginByForeignAuth 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/password:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Request or Reset Password
+      operationId: customerPassword
+      responses:
+        '200':
+          description: Password reset email or update processed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/send-verify-phone:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Send Phone Verification
+      operationId: sendVerifyPhone
+      responses:
+        '200':
+          description: Verification code sent to the customer's phone.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/verify-phone:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Verify Phone
+      operationId: verifyPhone
+      responses:
+        '200':
+          description: Phone number verified.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/send-verify-code:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Send Email Verification Code
+      operationId: sendVerifyCode
+      responses:
+        '200':
+          description: Verification code sent to the customer's email.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/verify:
+    post:
+      tags: [Customer]
+      summary: Lunchbox Verify Email
+      operationId: verifyEmail
+      responses:
+        '200':
+          description: Email verified.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/me:
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get the Current Customer
+      operationId: getCurrentCustomer
+      responses:
+        '200':
+          description: The authenticated customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                GetCurrentCustomer200Example:
+                  summary: Default getCurrentCustomer 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get a Customer
+      operationId: getCustomer
+      responses:
+        '200':
+          description: The requested customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                GetCustomer200Example:
+                  summary: Default getCustomer 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Customer]
+      summary: Lunchbox Update a Customer
+      operationId: updateCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+            examples:
+              UpdateCustomerRequestExample:
+                summary: Default updateCustomer request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Customer updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                UpdateCustomer200Example:
+                  summary: Default updateCustomer 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Delete a Customer
+      operationId: deleteCustomer
+      responses:
+        '200':
+          description: Customer deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/preferences:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get Customer Preferences
+      operationId: getCustomerPreferences
+      responses:
+        '200':
+          description: Customer preferences.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Customer]
+      summary: Lunchbox Update Customer Preferences
+      operationId: updateCustomerPreferences
+      responses:
+        '200':
+          description: Preferences updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/addresses:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox List Customer Addresses
+      operationId: listCustomerAddresses
+      responses:
+        '200':
+          description: Customer addresses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+              examples:
+                ListCustomerAddresses200Example:
+                  summary: Default listCustomerAddresses 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Customer]
+      summary: Lunchbox Add a Customer Address
+      operationId: addCustomerAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+            examples:
+              AddCustomerAddressRequestExample:
+                summary: Default addCustomerAddress request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Address added.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Delete a Customer Address
+      operationId: deleteCustomerAddress
+      parameters:
+      - name: address_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Address deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/saved-cards:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox List Saved Cards
+      operationId: listSavedCards
+      responses:
+        '200':
+          description: Saved payment cards.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Customer]
+      summary: Lunchbox Add a Saved Card
+      operationId: addSavedCard
+      responses:
+        '200':
+          description: Card saved.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Delete a Saved Card
+      operationId: deleteSavedCard
+      parameters:
+      - name: cc_account_id
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 1234
+      responses:
+        '200':
+          description: Card deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/saved-cards/{cc_account_id}/in-store-priority:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    - name: cc_account_id
+      in: path
+      required: true
+      schema:
+        type: string
+    put:
+      tags: [Customer]
+      summary: Lunchbox Set In-Store Card Priority
+      operationId: setInStoreCardPriority
+      responses:
+        '200':
+          description: In-store priority updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/orders:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get Customer Order History
+      operationId: getCustomerOrders
+      parameters:
+      - name: include_items
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: all_orders
+        in: query
+        schema:
+          type: boolean
+        example: true
+      responses:
+        '200':
+          description: Customer order history.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/group-orders:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get Customer Group Orders
+      operationId: getCustomerGroupOrders
+      responses:
+        '200':
+          description: Group orders for the customer.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/saved-orders:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    post:
+      tags: [Customer]
+      summary: Lunchbox Save an Order
+      operationId: saveOrder
+      responses:
+        '200':
+          description: Order saved.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Delete a Saved Order
+      operationId: deleteSavedOrder
+      parameters:
+      - name: order_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Saved order deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/loyalty:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get Customer Loyalty
+      operationId: getCustomerLoyalty
+      responses:
+        '200':
+          description: Loyalty balances and activity.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/memberships:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox List Customer Memberships
+      operationId: listCustomerMemberships
+      responses:
+        '200':
+          description: Customer memberships.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/memberships/{membership_id}:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    - name: membership_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get a Customer Membership
+      operationId: getCustomerMembership
+      responses:
+        '200':
+          description: The requested membership.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Cancel a Customer Membership
+      operationId: cancelCustomerMembership
+      responses:
+        '200':
+          description: Membership canceled.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/favorite-stores:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox List Favorite Stores
+      operationId: listFavoriteStores
+      responses:
+        '200':
+          description: Favorite stores.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Customer]
+      summary: Lunchbox Add a Favorite Store
+      operationId: addFavoriteStore
+      responses:
+        '200':
+          description: Favorite store added.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Delete a Favorite Store
+      operationId: deleteFavoriteStore
+      parameters:
+      - name: store_id
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '123456'
+      responses:
+        '200':
+          description: Favorite store removed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/favorite-items:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox List Favorite Items
+      operationId: listFavoriteItems
+      parameters:
+      - name: service_type_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      - name: include_unavailable
+        in: query
+        schema:
+          type: boolean
+        example: true
+      - name: store_id
+        in: query
+        schema:
+          type: string
+        example: '123456'
+      responses:
+        '200':
+          description: Favorite items.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Customer]
+      summary: Lunchbox Add a Favorite Item
+      operationId: addFavoriteItem
+      responses:
+        '200':
+          description: Favorite item added.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Customer]
+      summary: Lunchbox Delete a Favorite Item
+      operationId: deleteFavoriteItem
+      parameters:
+      - name: favorite_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Favorite item removed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/orders/checkin:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    get:
+      tags: [Customer]
+      summary: Lunchbox Get Check-In Orders
+      operationId: getCheckinOrders
+      responses:
+        '200':
+          description: Orders eligible for check-in.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/orders/checkin/{order_id}:
+    parameters:
+    - $ref: '#/components/parameters/CustomerId'
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Customer]
+      summary: Lunchbox Check in to an Order
+      operationId: checkinOrder
+      responses:
+        '200':
+          description: Customer checked in.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/new:
+    post:
+      tags: [Orders]
+      summary: Lunchbox Create an Order
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrderRequest'
+            examples:
+              CreateOrderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Order created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                CreateOrder200Example:
+                  summary: Default createOrder 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get an Order
+      operationId: getOrder
+      responses:
+        '200':
+          description: The requested order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                GetOrder200Example:
+                  summary: Default getOrder 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      tags: [Orders]
+      summary: Lunchbox Update an Order
+      operationId: updateOrder
+      responses:
+        '200':
+          description: Order updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Orders]
+      summary: Lunchbox Delete an Order
+      operationId: deleteOrder
+      parameters:
+      - name: customer_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Order deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/items:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Add Item to an Order
+      operationId: addOrderItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddItemsRequest'
+            examples:
+              AddOrderItemRequestExample:
+                summary: Default addOrderItem request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Item added; updated order returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                AddOrderItem200Example:
+                  summary: Default addOrderItem 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/items/{order_item_id}:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    - name: order_item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    delete:
+      tags: [Orders]
+      summary: Lunchbox Delete an Order Item
+      operationId: deleteOrderItem
+      responses:
+        '200':
+          description: Item removed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/discount:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Apply a Discount
+      operationId: applyDiscount
+      responses:
+        '200':
+          description: Discount applied.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags: [Orders]
+      summary: Lunchbox Remove a Discount
+      operationId: removeDiscount
+      parameters:
+      - name: customer_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      - name: discount_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Discount removed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/available_discounts:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox List Available Discounts
+      operationId: listAvailableDiscounts
+      responses:
+        '200':
+          description: Discounts available for the order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/payment-methods:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox List Order Payment Methods
+      operationId: listOrderPaymentMethods
+      responses:
+        '200':
+          description: Payment methods available for the order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/payment/{payment_id}:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    - name: payment_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get an Order Payment
+      operationId: getOrderPayment
+      responses:
+        '200':
+          description: Payment details.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/payment/:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Submit a Payment
+      operationId: submitPayment
+      responses:
+        '200':
+          description: Payment submitted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/payment/{payment_id}:
+    parameters:
+    - name: payment_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get a Payment
+      operationId: getPayment
+      parameters:
+      - name: pay_proc_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Payment details.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/payment-with-qr/:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Submit a QR Payment
+      operationId: submitQrPayment
+      responses:
+        '200':
+          description: QR payment submitted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/search:
+    post:
+      tags: [Orders]
+      summary: Lunchbox Search Orders
+      operationId: searchOrders
+      responses:
+        '200':
+          description: Matching orders.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/actions/show_receipt:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox Show Order Receipt
+      operationId: showOrderReceipt
+      parameters:
+      - name: customer_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Order receipt.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/group/members:
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get Group Order Members
+      operationId: getGroupOrderMembers
+      parameters:
+      - name: join_code
+        in: query
+        required: true
+        schema:
+          type: string
+        example: string
+      responses:
+        '200':
+          description: Members of the group order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Orders]
+      summary: Lunchbox Join a Group Order
+      operationId: joinGroupOrder
+      parameters:
+      - name: join_code
+        in: query
+        required: true
+        schema:
+          type: string
+        example: string
+      responses:
+        '200':
+          description: Joined the group order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/group/{order_id}/members:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Add a Group Order Member
+      operationId: addGroupOrderMember
+      responses:
+        '200':
+          description: Member added to the group order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{order_id}/charitable-foundations:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox List Charitable Foundations
+      operationId: listCharitableFoundations
+      responses:
+        '200':
+          description: Charitable foundations available for the order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/configuration:
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Chain Configuration
+      operationId: getChainConfiguration
+      responses:
+        '200':
+          description: Chain-level configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores:
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store Info
+      operationId: getStore
+      parameters:
+      - name: store_id
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '123456'
+      responses:
+        '200':
+          description: Store information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+              examples:
+                GetStore200Example:
+                  summary: Default getStore 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/hours:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store Hours
+      operationId: getStoreHours
+      responses:
+        '200':
+          description: Store operating hours.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/payment-methods:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store Payment Methods
+      operationId: getStorePaymentMethods
+      parameters:
+      - name: service_type_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Payment methods supported by the store.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/delivery-info:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    post:
+      tags: [Stores]
+      summary: Lunchbox Get Store Delivery Info
+      operationId: getStoreDeliveryInfo
+      responses:
+        '200':
+          description: Delivery availability and quote for an address.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store Menus
+      operationId: getStoreMenus
+      parameters:
+      - name: service_type_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Menus for the store.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Menu'
+              examples:
+                GetStoreMenus200Example:
+                  summary: Default getStoreMenus 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Menu Categories
+      operationId: getMenuCategories
+      responses:
+        '200':
+          description: Categories within the menu.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories/{category_id}/items:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    - $ref: '#/components/parameters/CategoryId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Category Items
+      operationId: getCategoryItems
+      responses:
+        '200':
+          description: Items within the category.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuItem'
+              examples:
+                GetCategoryItems200Example:
+                  summary: Default getCategoryItems 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories/{category_id}/items/{item_id}:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    - $ref: '#/components/parameters/CategoryId'
+    - $ref: '#/components/parameters/ItemId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get a Menu Item
+      operationId: getMenuItem
+      responses:
+        '200':
+          description: The requested menu item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                GetMenuItem200Example:
+                  summary: Default getMenuItem 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/item-search:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Search Menu Items
+      operationId: searchMenuItems
+      parameters:
+      - name: barcode
+        in: query
+        schema:
+          type: string
+        example: string
+      responses:
+        '200':
+          description: Matching menu items.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/promos:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store Promos
+      operationId: getStorePromos
+      parameters:
+      - name: customer_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Promotions for the store.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories/{category_id}/items/{item_id}/reviews:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    - $ref: '#/components/parameters/CategoryId'
+    - $ref: '#/components/parameters/ItemId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Item Reviews
+      operationId: getItemReviews
+      responses:
+        '200':
+          description: Reviews for the menu item.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Stores]
+      summary: Lunchbox Create an Item Review
+      operationId: createItemReview
+      responses:
+        '200':
+          description: Review created.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/available_memberships:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Available Memberships
+      operationId: getAvailableMemberships
+      responses:
+        '200':
+          description: Memberships available at the store.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menu:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get External Ordering Menu
+      operationId: getExternalOrderingMenu
+      responses:
+        '200':
+          description: Read-only menu for external ordering providers.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/orders:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    post:
+      tags: [Stores]
+      summary: Lunchbox Submit External Ordering Order
+      operationId: submitExternalOrder
+      responses:
+        '200':
+          description: Order submitted by an external ordering provider.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /contact:
+    get:
+      tags: [Misc]
+      summary: Lunchbox Get Contact Info
+      operationId: getContact
+      responses:
+        '200':
+          description: Contact information.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Misc]
+      summary: Lunchbox Submit a Contact Message
+      operationId: submitContact
+      responses:
+        '200':
+          description: Message submitted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /countries:
+    get:
+      tags: [Misc]
+      summary: Lunchbox List Countries
+      operationId: listCountries
+      responses:
+        '200':
+          description: Supported countries.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /states:
+    get:
+      tags: [Misc]
+      summary: Lunchbox List States
+      operationId: listStates
+      responses:
+        '200':
+          description: Supported states.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Team token passed as: Authorization: Token <team_token>'
+  parameters:
+    CustomerId:
+      name: customer_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    MenuId:
+      name: menu_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    LoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        password:
+          type: string
+          example: string
+    AuthSession:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        auth_cookie:
+          type: string
+          example: string
+    RegistrationRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        password:
+          type: string
+          example: string
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Smith
+        phone:
+          type: string
+          example: '2125551411'
+        email_optin:
+          type: boolean
+          example: true
+        auto_login:
+          type: boolean
+          example: true
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+    Customer:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Smith
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
+        is_phone_verified:
+          type: boolean
+          example: '2125551411'
+        is_verified:
+          type: boolean
+          example: true
+        is_guest:
+          type: boolean
+          example: true
+        is_mgmt:
+          type: boolean
+          example: true
+        company_name:
+          type: string
+          nullable: true
+          example: Sample
+        occupation:
+          type: string
+          nullable: true
+          example: string
+        birthdate:
+          type: string
+          format: date
+          nullable: true
+          example: '1990-05-21'
+    Address:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          example: 1234
+        address1:
+          type: string
+          example: 1216 Broadway
+        address2:
+          type: string
+          nullable: true
+          example: string
+        address3:
+          type: string
+          nullable: true
+          example: string
+        city:
+          type: string
+          example: New York
+        statecode:
+          type: string
+          example: NY
+        zipcode:
+          type: string
+          example: '10001'
+        country:
+          type: string
+          example: US
+        instructions:
+          type: string
+          nullable: true
+          example: string
+        latitude:
+          type: number
+          example: 40.74661
+        longitude:
+          type: number
+          example: -73.98833
+    NewOrderRequest:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        store_id:
+          type: string
+          example: '123456'
+        service_type_id:
+          type: integer
+          example: 1234
+        is_group_order:
+          type: boolean
+          example: true
+    AddItemsRequest:
+      type: object
+      required: [customer_id, items]
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+          example: []
+    OrderItem:
+      type: object
+      properties:
+        menu_id:
+          type: integer
+          example: 1234
+        quantity:
+          type: integer
+          example: 1
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        comment:
+          type: string
+          example: string
+        style_id:
+          type: integer
+          nullable: true
+          example: 1234
+        size_id:
+          type: integer
+          nullable: true
+          example: 1234
+        child_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderChildItem'
+          example: []
+    OrderChildItem:
+      type: object
+      properties:
+        menu_id:
+          type: integer
+          example: 1234
+        quantity:
+          type: integer
+          example: 1
+        pick_list_id:
+          type: integer
+          example: 1234
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        style_id:
+          type: integer
+          nullable: true
+          example: 1234
+        size_id:
+          type: integer
+          nullable: true
+          example: 1234
+    Order:
+      type: object
+      properties:
+        ordersid:
+          type: integer
+          example: 1234
+        restaurant_id:
+          type: integer
+          example: 1234
+        is_cancelable:
+          type: boolean
+          example: true
+        is_editable:
+          type: boolean
+          example: true
+        ordering_status:
+          type: string
+          example: string
+        comments_to_restaurant:
+          type: string
+          example: string
+        internal_notes:
+          type: string
+          example: string
+        tip_percentages:
+          type: array
+          items:
+            type: number
+          example: []
+        customer:
+          $ref: '#/components/schemas/Customer'
+        charges:
+          $ref: '#/components/schemas/Charges'
+    Charges:
+      type: object
+      properties:
+        total_cents:
+          type: integer
+          example: 100
+        subtotal_cents:
+          type: integer
+          example: 100
+        tax_cents:
+          type: integer
+          example: 100
+        delivery_cents:
+          type: integer
+          example: 100
+        tip_cents:
+          type: integer
+          example: 100
+        remaining_cents:
+          type: integer
+          example: 100
+    Store:
+      type: object
+      properties:
+        store_id:
+          type: string
+          example: '123456'
+        rest_id:
+          type: integer
+          example: 1234
+        rest_name:
+          type: string
+          example: Sample
+        address1:
+          type: string
+          example: 1216 Broadway
+        city:
+          type: string
+          example: New York
+        state_code:
+          type: string
+          example: NY
+        zip_code:
+          type: string
+          example: '10001'
+        timezone:
+          type: string
+          example: string
+        latitude:
+          type: number
+          example: 40.74661
+        longitude:
+          type: number
+          example: -73.98833
+        enable_loyalty:
+          type: boolean
+          example: true
+    Menu:
+      type: object
+      properties:
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        service_type_id:
+          type: integer
+          example: 1234
+    MenuItem:
+      type: object
+      properties:
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        description:
+          type: string
+          example: string
+        price_cents:
+          type: integer
+          example: 100
+        is_available:
+          type: boolean
+          example: true

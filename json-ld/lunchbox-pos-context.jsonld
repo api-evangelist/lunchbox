@@ -1,0 +1,201 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "lbx": "https://docs.lunchbox.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "OrderUpdateEvent": "lbx:OrderUpdateEvent",
+    "PosContact": "lbx:PosContact",
+    "PosHours": "lbx:PosHours",
+    "PosLocation": "lbx:PosLocation",
+    "PosOrderAck": "lbx:PosOrderAck",
+    "PosOrderLocation": "lbx:PosOrderLocation",
+    "PosOrder": "lbx:PosOrder",
+    "PosStore": "lbx:PosStore",
+    "StoreUpdateEvent": "lbx:StoreUpdateEvent",
+    "eventType": {
+      "@id": "lbx:event_type",
+      "@type": "xsd:string"
+    },
+    "posStoreId": {
+      "@id": "lbx:pos_store_id",
+      "@type": "xsd:string"
+    },
+    "posOrderId": {
+      "@id": "lbx:pos_order_id",
+      "@type": "xsd:string"
+    },
+    "active": {
+      "@id": "lbx:active",
+      "@type": "xsd:boolean"
+    },
+    "address1": {
+      "@id": "lbx:address1",
+      "@type": "xsd:string"
+    },
+    "address2": {
+      "@id": "lbx:address2",
+      "@type": "xsd:string"
+    },
+    "address3": {
+      "@id": "lbx:address3",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "lbx:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "lbx:state",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "lbx:postal_code",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "lbx:country",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "lbx:phone",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "lbx:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "lbx:longitude",
+      "@type": "xsd:decimal"
+    },
+    "isoDayOfWeek": {
+      "@id": "lbx:iso_day_of_week",
+      "@type": "xsd:integer"
+    },
+    "startTime": {
+      "@id": "lbx:start_time",
+      "@type": "xsd:string"
+    },
+    "endTime": {
+      "@id": "lbx:end_time",
+      "@type": "xsd:string"
+    },
+    "hours": {
+      "@id": "lbx:hours",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "lbx:status",
+      "@type": "@id"
+    },
+    "isCompleted": {
+      "@id": "lbx:is_completed",
+      "@type": "xsd:boolean"
+    },
+    "statecode": {
+      "@id": "lbx:statecode",
+      "@type": "xsd:string"
+    },
+    "zipcode": {
+      "@id": "lbx:zipcode",
+      "@type": "xsd:string"
+    },
+    "province": {
+      "@id": "lbx:province",
+      "@type": "xsd:string"
+    },
+    "instructions": {
+      "@id": "lbx:instructions",
+      "@type": "xsd:string"
+    },
+    "orderId": {
+      "@id": "lbx:order_id",
+      "@type": "xsd:string"
+    },
+    "readyTs": {
+      "@id": "lbx:ready_ts",
+      "@type": "xsd:dateTime"
+    },
+    "serviceTypeId": {
+      "@id": "lbx:service_type_id",
+      "@type": "xsd:integer"
+    },
+    "serviceType": {
+      "@id": "lbx:service_type",
+      "@type": "xsd:string"
+    },
+    "isFinalized": {
+      "@id": "lbx:is_finalized",
+      "@type": "xsd:boolean"
+    },
+    "isCanceled": {
+      "@id": "lbx:is_canceled",
+      "@type": "xsd:boolean"
+    },
+    "customer": {
+      "@id": "lbx:customer",
+      "@type": "@id"
+    },
+    "firstName": {
+      "@id": "lbx:first_name",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "lbx:last_name",
+      "@type": "xsd:string"
+    },
+    "companyName": {
+      "@id": "lbx:company_name",
+      "@type": "xsd:string"
+    },
+    "customerId": {
+      "@id": "lbx:customer_id",
+      "@type": "xsd:integer"
+    },
+    "email": "schema:email",
+    "location": {
+      "@id": "lbx:location",
+      "@type": "xsd:string"
+    },
+    "charges": {
+      "@id": "lbx:charges",
+      "@type": "@id"
+    },
+    "totalCents": {
+      "@id": "lbx:total_cents",
+      "@type": "xsd:integer"
+    },
+    "subtotalCents": {
+      "@id": "lbx:subtotal_cents",
+      "@type": "xsd:integer"
+    },
+    "taxCents": {
+      "@id": "lbx:tax_cents",
+      "@type": "xsd:integer"
+    },
+    "deliveryCents": {
+      "@id": "lbx:delivery_cents",
+      "@type": "xsd:integer"
+    },
+    "tipCents": {
+      "@id": "lbx:tip_cents",
+      "@type": "xsd:integer"
+    },
+    "remainingCents": {
+      "@id": "lbx:remaining_cents",
+      "@type": "xsd:integer"
+    },
+    "storeId": {
+      "@id": "lbx:store_id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "contact": {
+      "@id": "lbx:contact",
+      "@type": "xsd:string"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "pos_store_id": "123456",
+  "order_id": 1234,
+  "ready_ts": "2023-07-25T06:00:00-04:00",
+  "service_type_id": 1234,
+  "service_type": "string",
+  "status": {},
+  "customer": {},
+  "location": "string",
+  "charges": {}
+}

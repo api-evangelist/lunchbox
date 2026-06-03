@@ -1,0 +1,17 @@
+{
+  "id": "130945e3-2b24-4530-a696-3b2c6977ba1c",
+  "merchantId": "130945e3-2b24-4530-a696-3b2c6977ba1c",
+  "email": "demo@lunchbox.io",
+  "firstName": "John",
+  "lastName": "Smith",
+  "phone": "2125551411",
+  "birthdate": "2023-07-25T06:00:00-04:00",
+  "pointsBalance": 1,
+  "creditsBalance": 1,
+  "lifetimePointsBalance": 1,
+  "isActive": true,
+  "lastBirthdayYear": 1,
+  "createdAt": "2023-07-25T06:00:00-04:00",
+  "updatedAt": "2023-07-25T06:00:00-04:00",
+  "walletRewards": []
+}

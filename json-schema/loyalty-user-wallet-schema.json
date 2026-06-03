@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserWallet",
+  "description": "UserWallet schema from Lunchbox Loyalty API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/loyalty-user-wallet-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "130945e3-2b24-4530-a696-3b2c6977ba1c"
+    },
+    "merchantId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "130945e3-2b24-4530-a696-3b2c6977ba1c"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "demo@lunchbox.io"
+    },
+    "firstName": {
+      "type": "string",
+      "example": "John"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Smith"
+    },
+    "phone": {
+      "type": "string",
+      "example": "2125551411"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "example": "2023-07-25T06:00:00-04:00"
+    },
+    "pointsBalance": {
+      "type": "integer",
+      "example": 1
+    },
+    "creditsBalance": {
+      "type": "integer",
+      "example": 1
+    },
+    "lifetimePointsBalance": {
+      "type": "integer",
+      "example": 1
+    },
+    "isActive": {
+      "type": "boolean",
+      "example": true
+    },
+    "lastBirthdayYear": {
+      "type": "integer",
+      "nullable": true,
+      "example": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-07-25T06:00:00-04:00"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2023-07-25T06:00:00-04:00"
+    },
+    "walletRewards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WalletReward"
+      },
+      "example": []
+    }
+  }
+}

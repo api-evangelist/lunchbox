@@ -19,22 +19,23 @@ tags:
   - Catering
   - Menus
   - Orders
+  - Loyalty
   - Enterprise
 url: https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/apis.yml
 created: '2026-06-02'
 modified: '2026-06-02'
 specificationVersion: '0.19'
 apis:
-  - aid: lunchbox:open-api
-    name: Lunchbox Open API
+  - aid: lunchbox:core-api
+    name: Lunchbox Core API
     description: >-
-      The Lunchbox Open API is a connectivity platform linking a restaurant's
-      tech stack to the Lunchbox ecosystem. It includes a Core API for ordering
-      functions and frontend interfaces, and supports retrieving location and
-      menu data, managing guest accounts, injecting orders into the POS,
-      last-mile delivery webhooks, digital menu boards, and kiosk and
-      third-party marketplace experiences.
+      The Lunchbox 2.0 Core API is used for interfacing with ordering functions
+      and building frontend interfaces that interact with Lunchbox integrations:
+      POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes guest
+      (customer) account management, store and menu data, order creation and
+      item management, discounts, payments, group ordering, and order webhooks.
     humanURL: https://docs.lunchbox.io/
+    baseURL: https://{chain_name}.lunchbox.io/api/v2
     tags:
       - Online Ordering
       - Menus
@@ -46,6 +47,83 @@ apis:
         url: https://docs.lunchbox.io/
       - type: GettingStarted
         url: https://support.lunchbox.io/en/articles/8684620-open-api-overview
+      - type: OpenAPI
+        url: openapi/lunchbox-core-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/core-customer.yaml
+      - type: NaftikoCapability
+        url: capabilities/core-orders.yaml
+      - type: NaftikoCapability
+        url: capabilities/core-stores.yaml
+      - type: NaftikoCapability
+        url: capabilities/core-misc.yaml
+  - aid: lunchbox:management-api
+    name: Lunchbox Management API
+    description: >-
+      The Lunchbox 2.0 Management API performs administrative functions for a
+      restaurant chain, including listing and configuring stores, configuring
+      service types, fetching and managing orders, voiding orders, canceling
+      deliveries, and issuing refunds.
+    humanURL: https://docs.lunchbox.io/
+    baseURL: https://{chain_name}.lunchbox.io/api/v2
+    tags:
+      - Administration
+      - Stores
+      - Orders
+    properties:
+      - type: Documentation
+        url: https://docs.lunchbox.io/
+      - type: OpenAPI
+        url: openapi/lunchbox-management-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/management-stores.yaml
+      - type: NaftikoCapability
+        url: capabilities/management-service-types.yaml
+      - type: NaftikoCapability
+        url: capabilities/management-orders.yaml
+  - aid: lunchbox:loyalty-api
+    name: Lunchbox Loyalty API
+    description: >-
+      The Lunchbox 2.0 Loyalty API interacts with Lunchbox Loyalty so that
+      partners can adjust loyalty balances, redeem rewards, and catalog user
+      wallets. It is served by the loyalty engine and authenticated with an
+      API key.
+    humanURL: https://docs.lunchbox.io/
+    baseURL: https://{loyalty_base_url}
+    tags:
+      - Loyalty
+      - Wallets
+      - Rewards
+    properties:
+      - type: Documentation
+        url: https://docs.lunchbox.io/
+      - type: OpenAPI
+        url: openapi/lunchbox-loyalty-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/loyalty-user-wallet.yaml
+  - aid: lunchbox:pos-api
+    name: Lunchbox POS API
+    description: >-
+      The Lunchbox 2.0 POS API defines the contract between Lunchbox and a POS
+      provider integration. Lunchbox retrieves store details and submits orders
+      to the POS provider, and the POS provider notifies Lunchbox of store and
+      order changes via webhooks.
+    humanURL: https://docs.lunchbox.io/
+    baseURL: https://{chain_name}.lunchbox.io/api/v2
+    tags:
+      - POS
+      - Orders
+      - Webhooks
+      - Stores
+    properties:
+      - type: Documentation
+        url: https://docs.lunchbox.io/
+      - type: OpenAPI
+        url: openapi/lunchbox-pos-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/pos-stores.yaml
+      - type: NaftikoCapability
+        url: capabilities/pos-orders.yaml
 common:
   - type: Website
     url: https://lunchbox.io/
@@ -59,6 +137,20 @@ common:
     url: https://github.com/lunchboxinc
   - type: LinkedIn
     url: https://www.linkedin.com/company/lunchboxtechnologies
+  - type: Pricing
+    url: https://lunchbox.io/service-fees
+  - type: StatusPage
+    url: https://lunchbox.instatus.com
+  - type: Plans
+    url: plans/lunchbox-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/lunchbox-rate-limits.yml
+  - type: FinOps
+    url: finops/lunchbox-finops.yml
+  - type: Vocabulary
+    url: vocabulary/lunchbox-vocabulary.yml
+  - type: Spectral
+    url: rules/lunchbox-spectral-rules.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

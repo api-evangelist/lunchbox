@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/pos-pos-hours-structure.json",
+  "name": "PosHours",
+  "description": "PosHours schema from Lunchbox POS API",
+  "type": "object",
+  "properties": {
+    "iso_day_of_week": {
+      "type": "int32",
+      "example": 1
+    },
+    "start_time": {
+      "type": "string",
+      "example": "string"
+    },
+    "end_time": {
+      "type": "string",
+      "example": "string"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/pos-pos-location-structure.json",
+  "name": "PosLocation",
+  "description": "PosLocation schema from Lunchbox POS API",
+  "type": "object",
+  "properties": {
+    "hours": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PosHours"
+      },
+      "example": []
+    }
+  }
+}

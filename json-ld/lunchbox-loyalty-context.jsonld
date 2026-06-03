@@ -1,0 +1,71 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "lbx": "https://docs.lunchbox.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "UserWalletCreate": "lbx:UserWalletCreate",
+    "UserWallet": "lbx:UserWallet",
+    "UserWalletUpdate": "lbx:UserWalletUpdate",
+    "WalletReward": "lbx:WalletReward",
+    "firstName": {
+      "@id": "lbx:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "lbx:lastName",
+      "@type": "xsd:string"
+    },
+    "birthdate": {
+      "@id": "lbx:birthdate",
+      "@type": "xsd:date"
+    },
+    "email": "schema:email",
+    "phone": {
+      "@id": "lbx:phone",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "lbx:id",
+      "@type": "xsd:string"
+    },
+    "merchantId": {
+      "@id": "lbx:merchantId",
+      "@type": "xsd:string"
+    },
+    "pointsBalance": {
+      "@id": "lbx:pointsBalance",
+      "@type": "xsd:integer"
+    },
+    "creditsBalance": {
+      "@id": "lbx:creditsBalance",
+      "@type": "xsd:integer"
+    },
+    "lifetimePointsBalance": {
+      "@id": "lbx:lifetimePointsBalance",
+      "@type": "xsd:integer"
+    },
+    "isActive": {
+      "@id": "lbx:isActive",
+      "@type": "xsd:boolean"
+    },
+    "lastBirthdayYear": {
+      "@id": "lbx:lastBirthdayYear",
+      "@type": "xsd:integer"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "walletRewards": {
+      "@id": "lbx:walletRewards",
+      "@container": "@set",
+      "@type": "xsd:string"
+    }
+  }
+}

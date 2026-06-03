@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-new-order-request-structure.json",
+  "name": "NewOrderRequest",
+  "description": "NewOrderRequest schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "store_id": {
+      "type": "string",
+      "example": "123456"
+    },
+    "service_type_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "is_group_order": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

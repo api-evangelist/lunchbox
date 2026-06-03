@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/loyalty-user-wallet-create-structure.json",
+  "name": "UserWalletCreate",
+  "description": "UserWalletCreate schema from Lunchbox Loyalty API",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "example": "John"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Smith"
+    },
+    "birthdate": {
+      "type": "date",
+      "example": "1990-05-21"
+    },
+    "email": {
+      "type": "string",
+      "example": "demo@lunchbox.io"
+    },
+    "phone": {
+      "type": "string",
+      "example": "2125551411"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}

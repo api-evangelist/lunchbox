@@ -1,0 +1,10 @@
+{
+  "email": "demo@lunchbox.io",
+  "password": "string",
+  "first_name": "John",
+  "last_name": "Smith",
+  "phone": "2125551411",
+  "email_optin": true,
+  "auto_login": true,
+  "birthdate": "1990-05-21"
+}

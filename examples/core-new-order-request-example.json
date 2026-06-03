@@ -1,0 +1,6 @@
+{
+  "customer_id": 1234,
+  "store_id": "123456",
+  "service_type_id": 1234,
+  "is_group_order": true
+}

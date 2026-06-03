@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-charges-structure.json",
+  "name": "Charges",
+  "description": "Charges schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "total_cents": {
+      "type": "int32",
+      "example": 100
+    },
+    "subtotal_cents": {
+      "type": "int32",
+      "example": 100
+    },
+    "tax_cents": {
+      "type": "int32",
+      "example": 100
+    },
+    "delivery_cents": {
+      "type": "int32",
+      "example": 100
+    },
+    "tip_cents": {
+      "type": "int32",
+      "example": 100
+    },
+    "remaining_cents": {
+      "type": "int32",
+      "example": 100
+    }
+  }
+}

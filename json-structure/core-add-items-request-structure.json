@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-add-items-request-structure.json",
+  "name": "AddItemsRequest",
+  "description": "AddItemsRequest schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderItem"
+      },
+      "example": []
+    }
+  },
+  "required": [
+    "customer_id",
+    "items"
+  ]
+}

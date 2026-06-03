@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Charges",
+  "description": "Charges schema from Lunchbox Core API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/core-charges-schema.json",
+  "type": "object",
+  "properties": {
+    "total_cents": {
+      "type": "integer",
+      "example": 100
+    },
+    "subtotal_cents": {
+      "type": "integer",
+      "example": 100
+    },
+    "tax_cents": {
+      "type": "integer",
+      "example": 100
+    },
+    "delivery_cents": {
+      "type": "integer",
+      "example": 100
+    },
+    "tip_cents": {
+      "type": "integer",
+      "example": 100
+    },
+    "remaining_cents": {
+      "type": "integer",
+      "example": 100
+    }
+  }
+}

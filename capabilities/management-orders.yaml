@@ -1,0 +1,284 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Lunchbox Management API \u2014 Orders"
+  description: "Administration \u2014 Orders. 7 operations. Lead operation: Get Orders. Self-contained Naftiko capability covering one Lunchbox business surface."
+  tags:
+  - Lunchbox
+  - Administration
+  - Orders
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    LUNCHBOX_TOKEN: LUNCHBOX_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: management-orders
+    baseUri: https://chain.lunchbox.io/api/v2
+    description: "Lunchbox Management API \u2014 Orders. Self-contained, no shared references."
+    authentication:
+      type: bearer
+      token: '{{env.LUNCHBOX_TOKEN}}'
+    resources:
+    - name: management-orders
+      path: /management/orders
+      operations:
+      - name: managementGetOrders
+        method: GET
+        description: Get Orders
+        inputParameters:
+        - name: rest_id
+          in: query
+          type: integer
+          required: false
+          description: ''
+        - name: promise_date
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: order_status
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management-store-store-id-order-details-order-id
+      path: /management/store/{store_id}/order_details/{order_id}
+      operations:
+      - name: managementGetOrderDetails
+        method: GET
+        description: Get Order Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management-store-store-id-orders-order-id-void-order
+      path: /management/store/{store_id}/orders/{order_id}/void_order
+      operations:
+      - name: voidOrder
+        method: POST
+        description: Void an Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management-store-rest-id-orders-manage-order
+      path: /management/store/{rest_id}/orders/manage_order
+      operations:
+      - name: manageOrder
+        method: POST
+        description: Manage an Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management-store-rest-id-orders-order-id-cancel-delivery
+      path: /management/store/{rest_id}/orders/{order_id}/cancel-delivery
+      operations:
+      - name: cancelDelivery
+        method: POST
+        description: Cancel a Delivery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management-orders-order-id-refund
+      path: /management/orders/{order_id}/refund
+      operations:
+      - name: getOrderRefund
+        method: GET
+        description: Get Order Refund
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: management-orders-order-id-refund
+      path: /management/orders/{order_id}/refund
+      operations:
+      - name: refundOrder
+        method: POST
+        description: Refund an Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: management-orders-rest
+    port: 8080
+    description: "REST adapter for Lunchbox Management API \u2014 Orders."
+    resources:
+    - path: /v1/management-orders
+      name: management-orders
+      description: REST surface for Get Orders.
+      operations:
+      - method: GET
+        name: managementGetOrders
+        description: Get Orders
+        call: management-orders.managementGetOrders
+        with:
+          rest_id: rest.rest_id
+          promise_date: rest.promise_date
+          order_status: rest.order_status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management-store-store-id-order-details-order-id
+      name: management-store-store-id-order-details-order-id
+      description: REST surface for Get Order Details.
+      operations:
+      - method: GET
+        name: managementGetOrderDetails
+        description: Get Order Details
+        call: management-orders.managementGetOrderDetails
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management-store-store-id-orders-order-id-void-order
+      name: management-store-store-id-orders-order-id-void-order
+      description: REST surface for Void an Order.
+      operations:
+      - method: POST
+        name: voidOrder
+        description: Void an Order
+        call: management-orders.voidOrder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management-store-rest-id-orders-manage-order
+      name: management-store-rest-id-orders-manage-order
+      description: REST surface for Manage an Order.
+      operations:
+      - method: POST
+        name: manageOrder
+        description: Manage an Order
+        call: management-orders.manageOrder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management-store-rest-id-orders-order-id-cancel-delivery
+      name: management-store-rest-id-orders-order-id-cancel-delivery
+      description: REST surface for Cancel a Delivery.
+      operations:
+      - method: POST
+        name: cancelDelivery
+        description: Cancel a Delivery
+        call: management-orders.cancelDelivery
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management-orders-order-id-refund
+      name: management-orders-order-id-refund
+      description: REST surface for Get Order Refund.
+      operations:
+      - method: GET
+        name: getOrderRefund
+        description: Get Order Refund
+        call: management-orders.getOrderRefund
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management-orders-order-id-refund
+      name: management-orders-order-id-refund
+      description: REST surface for Refund an Order.
+      operations:
+      - method: POST
+        name: refundOrder
+        description: Refund an Order
+        call: management-orders.refundOrder
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-orders-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Lunchbox Management API \u2014 Orders."
+    tools:
+    - name: get-orders
+      description: Get Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-orders.managementGetOrders
+      with:
+        rest_id: tools.rest_id
+        promise_date: tools.promise_date
+        order_status: tools.order_status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order-details
+      description: Get Order Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-orders.managementGetOrderDetails
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: void-order
+      description: Void an Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-orders.voidOrder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: manage-order
+      description: Manage an Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-orders.manageOrder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-delivery
+      description: Cancel a Delivery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-orders.cancelDelivery
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order-refund
+      description: Get Order Refund
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: management-orders.getOrderRefund
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: refund-order
+      description: Refund an Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: management-orders.refundOrder
+      outputParameters:
+      - type: object
+        mapping: $.

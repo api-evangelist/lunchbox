@@ -1,0 +1,102 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Lunchbox
+providerId: lunchbox
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - Restaurant
+  - Online Ordering
+  - Guest Engagement
+  - Catering
+  - Enterprise
+description: >-
+  Lunchbox prices its digital ordering and guest-engagement platform on a
+  per-restaurant, per-month subscription model that decreases per additional
+  product adopted (commonly cited at $300/restaurant/month for the first
+  product, $200 for the second, and $100 for the third), with order aggregation
+  included. Small businesses with one to two locations are offered a free,
+  fee-reduced SMB tier, while multi-location enterprise brands receive custom
+  pricing for native app and web ordering, loyalty, marketing, and third-party
+  order aggregation. Card processing fees are capped and pass through to the
+  brand. Exact pricing is set in a signed Service Order agreement, so amounts
+  here are indicative and unreconciled against a live, public price sheet.
+sources:
+  - https://lunchbox.io/
+  - https://lunchbox.io/service-fees
+  - https://lunchbox.io/info/why-lunchbox
+  - https://www.capterra.com/p/196918/Lunchbox/
+plans:
+  - id: lunchbox-smb
+    name: SMB
+    type: freemium
+    description: Fast, simple, fee-reduced ordering for restaurants with one to two locations.
+    entries:
+      - label: Platform Subscription
+        name: platform_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: 'free (fee-reduced; see Service Order agreement)'
+    elements:
+      - name: Web Ordering
+      - name: Mobile Ordering
+      - name: Order Aggregation
+  - id: lunchbox-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Multi-location native app and web ordering, loyalty, marketing CRM, and
+      third-party order aggregation for enterprise restaurant brands.
+    entries:
+      - label: First Product (per restaurant)
+        name: first_product_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '$300/restaurant/month (indicative)'
+      - label: Second Product (per restaurant)
+        name: second_product_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '$200/restaurant/month (indicative)'
+      - label: Third Product (per restaurant)
+        name: third_product_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: '$100/restaurant/month (indicative)'
+      - label: Card Processing Fee
+        name: card_processing_fee
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: US
+        unit: 1
+        price: 'not to exceed 3.5% + $0.30 per card transaction'
+    elements:
+      - name: Web Ordering
+      - name: Native Mobile Apps
+      - name: Kiosk Ordering
+      - name: Catering
+      - name: Loyalty
+      - name: Marketing CRM
+      - name: Order Aggregation
+      - name: Gift Cards
+      - name: Open API Access

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-registration-request-structure.json",
+  "name": "RegistrationRequest",
+  "description": "RegistrationRequest schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "example": "demo@lunchbox.io"
+    },
+    "password": {
+      "type": "string",
+      "example": "string"
+    },
+    "first_name": {
+      "type": "string",
+      "example": "John"
+    },
+    "last_name": {
+      "type": "string",
+      "example": "Smith"
+    },
+    "phone": {
+      "type": "string",
+      "example": "2125551411"
+    },
+    "email_optin": {
+      "type": "boolean",
+      "example": true
+    },
+    "auto_login": {
+      "type": "boolean",
+      "example": true
+    },
+    "birthdate": {
+      "type": "date",
+      "example": "1990-05-21"
+    }
+  },
+  "required": [
+    "email",
+    "password"
+  ]
+}

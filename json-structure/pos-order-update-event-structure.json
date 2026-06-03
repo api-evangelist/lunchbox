@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/pos-order-update-event-structure.json",
+  "name": "OrderUpdateEvent",
+  "description": "OrderUpdateEvent schema from Lunchbox POS API",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "order_update"
+      ],
+      "example": "order_update"
+    },
+    "pos_store_id": {
+      "type": "string",
+      "example": "123456"
+    },
+    "pos_order_id": {
+      "type": "string",
+      "example": 1234
+    }
+  },
+  "required": [
+    "event_type",
+    "pos_store_id",
+    "pos_order_id"
+  ]
+}

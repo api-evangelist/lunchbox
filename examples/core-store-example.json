@@ -1,0 +1,13 @@
+{
+  "store_id": "123456",
+  "rest_id": 1234,
+  "rest_name": "Sample",
+  "address1": "1216 Broadway",
+  "city": "New York",
+  "state_code": "NY",
+  "zip_code": "10001",
+  "timezone": "string",
+  "latitude": 40.74661,
+  "longitude": -73.98833,
+  "enable_loyalty": true
+}

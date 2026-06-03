@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-order-item-structure.json",
+  "name": "OrderItem",
+  "description": "OrderItem schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "menu_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "quantity": {
+      "type": "int32",
+      "example": 1
+    },
+    "item_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "category_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "comment": {
+      "type": "string",
+      "example": "string"
+    },
+    "style_id": {
+      "type": "int32",
+      "nullable": true,
+      "example": 1234
+    },
+    "size_id": {
+      "type": "int32",
+      "nullable": true,
+      "example": 1234
+    },
+    "child_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OrderChildItem"
+      },
+      "example": []
+    }
+  }
+}

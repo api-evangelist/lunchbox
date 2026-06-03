@@ -1,0 +1,12 @@
+{
+  "address1": "1216 Broadway",
+  "address2": "string",
+  "address3": "string",
+  "city": "New York",
+  "statecode": "NY",
+  "zipcode": "10001",
+  "province": "string",
+  "country": "US",
+  "phone": "2125551411",
+  "instructions": "string"
+}

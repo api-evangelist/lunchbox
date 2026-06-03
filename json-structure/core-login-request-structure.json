@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-login-request-structure.json",
+  "name": "LoginRequest",
+  "description": "LoginRequest schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "example": "demo@lunchbox.io"
+    },
+    "password": {
+      "type": "string",
+      "example": "string"
+    }
+  },
+  "required": [
+    "username",
+    "password"
+  ]
+}

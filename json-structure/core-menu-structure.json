@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-menu-structure.json",
+  "name": "Menu",
+  "description": "Menu schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "menu_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "name": {
+      "type": "string",
+      "example": "Sample"
+    },
+    "service_type_id": {
+      "type": "int32",
+      "example": 1234
+    }
+  }
+}

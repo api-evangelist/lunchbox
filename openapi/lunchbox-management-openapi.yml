@@ -1,0 +1,424 @@
+openapi: 3.0.3
+info:
+  title: Lunchbox Management API
+  description: >-
+    The Lunchbox 2.0 Management API is used for performing administrative
+    functions for a restaurant chain, such as listing and configuring stores,
+    fetching and managing orders, voiding orders, managing deliveries, and
+    issuing refunds. Responses use standard HTTP status codes and JSON schemas.
+  version: '2.0'
+  contact:
+    name: Lunchbox Support
+    email: support@lunchbox.io
+    url: https://docs.lunchbox.io/
+servers:
+- url: https://{chain_name}.lunchbox.io/api/v2
+  description: Per-chain Lunchbox 2.0 Management API base URL
+  variables:
+    chain_name:
+      default: chain
+      description: The restaurant chain's Lunchbox subdomain
+security:
+- tokenAuth: []
+tags:
+- name: Stores
+  description: List and retrieve managed stores.
+- name: Service Types
+  description: Configure store service types.
+- name: Orders
+  description: Fetch, manage, void, cancel delivery for, and refund orders.
+paths:
+  /management/stores:
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Stores
+      operationId: managementGetStores
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: page
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: search
+        in: query
+        schema:
+          type: string
+        example: string
+      - name: rest_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      - name: promise_date
+        in: query
+        schema:
+          type: string
+          format: date
+        example: '1990-05-21'
+      responses:
+        '200':
+          description: Paginated list of managed stores.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorePage'
+              examples:
+                ManagementGetStores200Example:
+                  summary: Default managementGetStores 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/stores/{store_id}:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags: [Stores]
+      summary: Lunchbox Get Store by ID
+      operationId: managementGetStore
+      responses:
+        '200':
+          description: Detailed store record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedStore'
+              examples:
+                ManagementGetStore200Example:
+                  summary: Default managementGetStore 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/store/{rest_id}/service_types/{service_type_id}/config:
+    parameters:
+    - $ref: '#/components/parameters/RestId'
+    - name: service_type_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    put:
+      tags: [Service Types]
+      summary: Lunchbox Update Service Types Config
+      operationId: updateServiceTypeConfig
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceTypeConfig'
+            examples:
+              UpdateServiceTypeConfigRequestExample:
+                summary: Default updateServiceTypeConfig request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Service type configuration updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/orders:
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get Orders
+      operationId: managementGetOrders
+      parameters:
+      - name: rest_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      - name: promise_date
+        in: query
+        schema:
+          type: string
+          format: date
+        example: '1990-05-21'
+      - name: order_status
+        in: query
+        schema:
+          type: string
+        example: string
+      responses:
+        '200':
+          description: Paginated list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderPage'
+              examples:
+                ManagementGetOrders200Example:
+                  summary: Default managementGetOrders 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/store/{store_id}/order_details/{order_id}:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get Order Details
+      operationId: managementGetOrderDetails
+      responses:
+        '200':
+          description: Detailed order record.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/store/{store_id}/orders/{order_id}/void_order:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Void an Order
+      operationId: voidOrder
+      responses:
+        '200':
+          description: Order voided.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/store/{rest_id}/orders/manage_order:
+    parameters:
+    - $ref: '#/components/parameters/RestId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Manage an Order
+      operationId: manageOrder
+      responses:
+        '200':
+          description: Order management action processed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/store/{rest_id}/orders/{order_id}/cancel-delivery:
+    parameters:
+    - $ref: '#/components/parameters/RestId'
+    - $ref: '#/components/parameters/OrderId'
+    post:
+      tags: [Orders]
+      summary: Lunchbox Cancel a Delivery
+      operationId: cancelDelivery
+      responses:
+        '200':
+          description: Delivery canceled.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/orders/{order_id}/refund:
+    parameters:
+    - $ref: '#/components/parameters/OrderId'
+    get:
+      tags: [Orders]
+      summary: Lunchbox Get Order Refund
+      operationId: getOrderRefund
+      responses:
+        '200':
+          description: Refund details for the order.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags: [Orders]
+      summary: Lunchbox Refund an Order
+      operationId: refundOrder
+      responses:
+        '200':
+          description: Refund issued.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Team token passed as: Authorization: Token <team_token>'
+  parameters:
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    RestId:
+      name: rest_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    StorePage:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          example: 1
+        next_page:
+          type: integer
+          nullable: true
+          example: 1
+        previous_page:
+          type: integer
+          nullable: true
+          example: 1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagedStoreSummary'
+          example: []
+    ManagedStoreSummary:
+      type: object
+      properties:
+        store_id:
+          type: string
+          example: '123456'
+        rest_id:
+          type: integer
+          example: 1234
+        rest_name:
+          type: string
+          example: Sample
+        status:
+          type: string
+          example: string
+        setup_type:
+          type: string
+          example: string
+        address1:
+          type: string
+          example: 1216 Broadway
+        city:
+          type: string
+          example: New York
+        state_name:
+          type: string
+          example: NY
+        state_code:
+          type: string
+          example: NY
+        state_id:
+          type: integer
+          example: 1234
+        zip_code:
+          type: string
+          example: '10001'
+        timezone:
+          type: string
+          example: string
+    ManagedStore:
+      type: object
+      properties:
+        enable_loyalty:
+          type: boolean
+          example: true
+        driver_management:
+          type: boolean
+          example: true
+        global_disable_group_order:
+          type: boolean
+          example: true
+        restaurant_data:
+          type: object
+          additionalProperties: true
+          example: {}
+    ServiceTypeConfig:
+      type: object
+      properties:
+        approved:
+          type: boolean
+          example: true
+        enabled:
+          type: boolean
+          example: true
+        group_base_prep_time:
+          type: integer
+          example: 1
+        base_prep_time:
+          type: integer
+          example: 1
+        lead_time:
+          type: integer
+          example: 1
+        hold_same_day_orders:
+          type: boolean
+          example: true
+        pos_autosend:
+          type: boolean
+          example: true
+        hold_future_orders:
+          type: boolean
+          example: true
+        min_subtotal:
+          type: number
+          example: 1.0
+        allow_check_in:
+          type: boolean
+          example: true
+    OrderPage:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          example: 1
+        next_page:
+          type: integer
+          nullable: true
+          example: 1
+        previous_page:
+          type: integer
+          nullable: true
+          example: 1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagedOrderSummary'
+          example: []
+    ManagedOrderSummary:
+      type: object
+      properties:
+        ordersid:
+          type: integer
+          example: 1234
+        total_cents:
+          type: integer
+          example: 100
+        statusid:
+          type: integer
+          example: 1234
+        service_name:
+          type: string
+          example: Sample
+        grouporderid:
+          type: integer
+          example: 1234
+        isdelivery:
+          type: boolean
+          example: true
+        tz_name:
+          type: string
+          example: Sample
+        dpstamp:
+          type: string
+          format: date-time
+          example: '2023-07-25T06:00:00-04:00'

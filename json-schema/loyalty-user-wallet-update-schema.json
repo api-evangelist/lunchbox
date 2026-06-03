@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserWalletUpdate",
+  "description": "UserWalletUpdate schema from Lunchbox Loyalty API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/loyalty-user-wallet-update-schema.json",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "example": "John"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Smith"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date",
+      "example": "1990-05-21"
+    },
+    "phone": {
+      "type": "string",
+      "example": "2125551411"
+    }
+  }
+}

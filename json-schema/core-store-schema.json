@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Store",
+  "description": "Store schema from Lunchbox Core API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/core-store-schema.json",
+  "type": "object",
+  "properties": {
+    "store_id": {
+      "type": "string",
+      "example": "123456"
+    },
+    "rest_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "rest_name": {
+      "type": "string",
+      "example": "Sample"
+    },
+    "address1": {
+      "type": "string",
+      "example": "1216 Broadway"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "state_code": {
+      "type": "string",
+      "example": "NY"
+    },
+    "zip_code": {
+      "type": "string",
+      "example": "10001"
+    },
+    "timezone": {
+      "type": "string",
+      "example": "string"
+    },
+    "latitude": {
+      "type": "number",
+      "example": 40.74661
+    },
+    "longitude": {
+      "type": "number",
+      "example": -73.98833
+    },
+    "enable_loyalty": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

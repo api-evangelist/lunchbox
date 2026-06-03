@@ -1,0 +1,78 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Lunchbox Management API \u2014 Service Types"
+  description: "Administration \u2014 Service Types. 1 operations. Lead operation: Update Service Types Config. Self-contained Naftiko capability covering one Lunchbox business surface."
+  tags:
+  - Lunchbox
+  - Administration
+  - Service Types
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    LUNCHBOX_TOKEN: LUNCHBOX_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: management-service-types
+    baseUri: https://chain.lunchbox.io/api/v2
+    description: "Lunchbox Management API \u2014 Service Types. Self-contained, no shared references."
+    authentication:
+      type: bearer
+      token: '{{env.LUNCHBOX_TOKEN}}'
+    resources:
+    - name: management-store-rest-id-service-types-service-type-id-config
+      path: /management/store/{rest_id}/service_types/{service_type_id}/config
+      operations:
+      - name: updateServiceTypeConfig
+        method: PUT
+        description: Update Service Types Config
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: management-service-types-rest
+    port: 8080
+    description: "REST adapter for Lunchbox Management API \u2014 Service Types."
+    resources:
+    - path: /v1/management-store-rest-id-service-types-service-type-id-config
+      name: management-store-rest-id-service-types-service-type-id-config
+      description: REST surface for Update Service Types Config.
+      operations:
+      - method: PUT
+        name: updateServiceTypeConfig
+        description: Update Service Types Config
+        call: management-service-types.updateServiceTypeConfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: management-service-types-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Lunchbox Management API \u2014 Service Types."
+    tools:
+    - name: update-service-types-config
+      description: Update Service Types Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: management-service-types.updateServiceTypeConfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

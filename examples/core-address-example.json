@@ -1,0 +1,13 @@
+{
+  "address_id": 1234,
+  "address1": "1216 Broadway",
+  "address2": "string",
+  "address3": "string",
+  "city": "New York",
+  "statecode": "NY",
+  "zipcode": "10001",
+  "country": "US",
+  "instructions": "string",
+  "latitude": 40.74661,
+  "longitude": -73.98833
+}

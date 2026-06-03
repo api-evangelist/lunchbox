@@ -1,0 +1,97 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Lunchbox
+providerId: lunchbox
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Restaurant
+  - Online Ordering
+  - Enterprise
+description: >-
+  FOCUS-aligned FinOps for Lunchbox: per-restaurant, per-product monthly
+  subscriptions plus pass-through card processing fees on guest transactions.
+sources:
+  - https://lunchbox.io/
+  - https://lunchbox.io/service-fees
+  - https://www.capterra.com/p/196918/Lunchbox/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Lunchbox Technologies, Inc.
+serviceCategory: Restaurant Commerce
+billingModel:
+  pricingCategory: Tiered Subscription + Pass-Through Fees
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Purchase
+    - Usage
+    - Tax
+    - Refund
+focusColumns:
+  ServiceName: Lunchbox
+  ServiceCategory: Restaurant Commerce
+  ProviderName: Lunchbox
+  PublisherName: Lunchbox Technologies, Inc.
+  InvoiceIssuerName: Lunchbox Technologies, Inc.
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+meters:
+  - name: product_subscription
+    unit: month
+    aggregation: sum
+    dimensions:
+      - restaurant_location
+      - product
+  - name: restaurant_locations
+    unit: seat
+    aggregation: max
+    dimensions:
+      - rest_id
+  - name: card_transactions
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - store_id
+      - service_type
+  - name: card_processing_volume
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - store_id
+      - card_brand
+  - name: order_refunds
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - store_id
+principles:
+  - name: Visibility
+    description: >-
+      Use the Management API (Get Orders, Get Order Details, Get Stores) to pull
+      per-location order and refund activity, and reconcile card-processing
+      charges against the signed Service Order to see monthly platform spend.
+  - name: Allocation
+    description: >-
+      Attribute subscription and processing cost to brands and locations using
+      rest_id and store_id, the same identifiers the Core and Management APIs
+      expose on stores and orders.
+  - name: Optimization
+    description: >-
+      Consolidate products under the descending per-product pricing tiers,
+      enable included order aggregation to avoid third-party marketplace fees,
+      and use the dispute manager to recover lost revenue from third-party
+      delivery disputes.
+  - name: Accountability
+    description: >-
+      Assign a brand owner per Service Order, review per-location subscription
+      and processing fees monthly, and gate new product adoption against the
+      incremental per-restaurant fee.

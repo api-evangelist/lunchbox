@@ -1,0 +1,328 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Lunchbox"
+  description: >-
+    Unified taxonomy for the Lunchbox 2.0 Open API platform, mapping the
+    operational dimension (Core, Management, Loyalty, and POS OpenAPI surfaces)
+    to the capability dimension (Naftiko workflows that expose those surfaces as
+    REST resources and MCP tools).
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+operational:
+  apis:
+    - name: "Lunchbox Core API"
+      namespace: core
+      version: "2.0"
+      baseUrl: "https://{chain_name}.lunchbox.io/api/v2"
+      status: active
+    - name: "Lunchbox Management API"
+      namespace: management
+      version: "2.0"
+      baseUrl: "https://{chain_name}.lunchbox.io/api/v2"
+      status: active
+    - name: "Lunchbox Loyalty API"
+      namespace: loyalty
+      version: "2.0"
+      baseUrl: "https://{loyalty_base_url}"
+      status: active
+    - name: "Lunchbox POS API"
+      namespace: pos
+      version: "2.0"
+      baseUrl: "https://{chain_name}.lunchbox.io/api/v2"
+      status: active
+
+  resources:
+    - name: customers
+      apis: [core]
+      actions: [register, login, logout, get, update, delete, verify]
+    - name: addresses
+      apis: [core]
+      actions: [list, create, delete]
+    - name: saved-cards
+      apis: [core]
+      actions: [list, create, delete, update]
+    - name: memberships
+      apis: [core]
+      actions: [list, get, cancel]
+    - name: favorites
+      apis: [core]
+      actions: [list, create, delete]
+    - name: orders
+      apis: [core, management, pos]
+      actions: [create, get, update, delete, search, void, refund, submit]
+    - name: order-items
+      apis: [core]
+      actions: [create, delete]
+    - name: discounts
+      apis: [core]
+      actions: [list, apply, remove]
+    - name: payments
+      apis: [core]
+      actions: [list, get, submit]
+    - name: group-orders
+      apis: [core]
+      actions: [create, join, list-members, add-member]
+    - name: stores
+      apis: [core, management, pos]
+      actions: [list, get, get-hours, get-config, update-config]
+    - name: menus
+      apis: [core]
+      actions: [get, get-categories, get-items, search]
+    - name: reviews
+      apis: [core]
+      actions: [list, create]
+    - name: user-wallets
+      apis: [loyalty]
+      actions: [create, get, search, update, confirm, validate, refund, adjust]
+    - name: webhooks
+      apis: [core, pos]
+      actions: [transaction, store-update, order-update]
+
+  actions:
+    - name: list
+      methods: [GET]
+      pattern: read
+    - name: get
+      methods: [GET]
+      pattern: read
+    - name: search
+      methods: [POST]
+      pattern: query
+    - name: create
+      methods: [POST]
+      pattern: write
+    - name: update
+      methods: [POST, PUT, PATCH]
+      pattern: write
+    - name: delete
+      methods: [DELETE]
+      pattern: destructive
+    - name: submit
+      methods: [POST]
+      pattern: write
+    - name: void
+      methods: [POST]
+      pattern: destructive
+    - name: refund
+      methods: [POST, PATCH]
+      pattern: write
+    - name: adjust
+      methods: [PATCH]
+      pattern: write
+
+  schemas:
+    core:
+      - Customer
+      - Address
+      - Order
+      - OrderItem
+      - OrderChildItem
+      - Charges
+      - Store
+      - Menu
+      - MenuItem
+    administration:
+      - ManagedStore
+      - ManagedStoreSummary
+      - ServiceTypeConfig
+      - ManagedOrderSummary
+    loyalty:
+      - UserWallet
+      - WalletReward
+    pos:
+      - PosStore
+      - PosOrder
+      - PosOrderAck
+      - StoreUpdateEvent
+      - OrderUpdateEvent
+
+  parameters:
+    pagination:
+      - limit
+      - page
+    identifiers:
+      - customer_id
+      - order_id
+      - store_id
+      - rest_id
+      - menu_id
+      - category_id
+      - item_id
+      - pos_store_id
+      - pos_order_id
+      - user_wallet_id
+    filters:
+      - service_type_id
+      - promise_date
+      - order_status
+      - include_items
+      - all_orders
+      - join_code
+
+  enums:
+    events:
+      - store_update
+      - order_update
+    orderStatus:
+      - Completed
+      - New
+    serviceType:
+      - Pick-Up
+      - Delivery
+
+  authentication:
+    - scheme: tokenAuth
+      type: apiKey
+      placement: header
+      header: Authorization
+      format: "Token <team_token>"
+      apis: [core, management, pos]
+    - scheme: apiKeyAuth
+      type: apiKey
+      placement: header
+      header: Api-Key
+      apis: [loyalty]
+
+capability:
+  workflows:
+    - name: "Core — Customer"
+      file: capabilities/core-customer.yaml
+      apis: [core]
+      domains: [Guest Engagement]
+      personas: [Ordering Frontend Developer]
+    - name: "Core — Orders"
+      file: capabilities/core-orders.yaml
+      apis: [core]
+      domains: [Ordering]
+      personas: [Ordering Frontend Developer]
+    - name: "Core — Stores"
+      file: capabilities/core-stores.yaml
+      apis: [core]
+      domains: [Menus]
+      personas: [Ordering Frontend Developer]
+    - name: "Core — Misc"
+      file: capabilities/core-misc.yaml
+      apis: [core]
+      domains: [Reference Data]
+      personas: [Ordering Frontend Developer]
+    - name: "Management — Stores"
+      file: capabilities/management-stores.yaml
+      apis: [management]
+      domains: [Administration]
+      personas: [Restaurant Operator]
+    - name: "Management — Service Types"
+      file: capabilities/management-service-types.yaml
+      apis: [management]
+      domains: [Administration]
+      personas: [Restaurant Operator]
+    - name: "Management — Orders"
+      file: capabilities/management-orders.yaml
+      apis: [management]
+      domains: [Administration]
+      personas: [Restaurant Operator]
+    - name: "Loyalty — User Wallet"
+      file: capabilities/loyalty-user-wallet.yaml
+      apis: [loyalty]
+      domains: [Loyalty]
+      personas: [Loyalty Integrator]
+    - name: "POS — Stores"
+      file: capabilities/pos-stores.yaml
+      apis: [pos]
+      domains: [POS Integration]
+      personas: [POS Integration Partner]
+    - name: "POS — Orders"
+      file: capabilities/pos-orders.yaml
+      apis: [pos]
+      domains: [POS Integration]
+      personas: [POS Integration Partner]
+
+  personas:
+    - id: ordering-frontend-developer
+      name: "Ordering Frontend Developer"
+      description: Builds web, mobile, and kiosk ordering experiences on the Core API.
+      workflows:
+        - capabilities/core-customer.yaml
+        - capabilities/core-orders.yaml
+        - capabilities/core-stores.yaml
+        - capabilities/core-misc.yaml
+    - id: restaurant-operator
+      name: "Restaurant Operator"
+      description: Administers stores, service-type config, and orders for a chain.
+      workflows:
+        - capabilities/management-stores.yaml
+        - capabilities/management-service-types.yaml
+        - capabilities/management-orders.yaml
+    - id: loyalty-integrator
+      name: "Loyalty Integrator"
+      description: Manages loyalty wallets, balances, and reward redemption.
+      workflows:
+        - capabilities/loyalty-user-wallet.yaml
+    - id: pos-integration-partner
+      name: "POS Integration Partner"
+      description: Connects a POS system to receive store and order data from Lunchbox.
+      workflows:
+        - capabilities/pos-stores.yaml
+        - capabilities/pos-orders.yaml
+
+  domains:
+    - name: Ordering
+      resources: [orders, order-items, discounts, payments, group-orders]
+    - name: Guest Engagement
+      resources: [customers, addresses, saved-cards, memberships, favorites]
+    - name: Menus
+      resources: [stores, menus, reviews]
+    - name: Loyalty
+      resources: [user-wallets]
+    - name: Administration
+      resources: [stores, orders]
+    - name: POS Integration
+      resources: [stores, orders, webhooks]
+
+  namespaces:
+    - consumed: core-customer
+      rest: core-customer-rest
+      mcp: core-customer-mcp
+    - consumed: core-orders
+      rest: core-orders-rest
+      mcp: core-orders-mcp
+    - consumed: loyalty-user-wallet
+      rest: loyalty-user-wallet-rest
+      mcp: loyalty-user-wallet-mcp
+    - consumed: pos-orders
+      rest: pos-orders-rest
+      mcp: pos-orders-mcp
+
+  binds:
+    - key: LUNCHBOX_TOKEN
+      workflows:
+        - capabilities/core-customer.yaml
+        - capabilities/core-orders.yaml
+        - capabilities/management-orders.yaml
+        - capabilities/pos-orders.yaml
+    - key: LUNCHBOX_LOYALTY_API_KEY
+      workflows:
+        - capabilities/loyalty-user-wallet.yaml
+
+crossReference:
+  - resource: orders
+    operations: [createOrder, getOrder, updateOrder, deleteOrder, searchOrders, voidOrder, refundOrder, posSubmitOrder]
+    workflows: [capabilities/core-orders.yaml, capabilities/management-orders.yaml, capabilities/pos-orders.yaml]
+    personas: [Ordering Frontend Developer, Restaurant Operator, POS Integration Partner]
+  - resource: customers
+    operations: [registerCustomer, loginCustomer, getCustomer, updateCustomer, deleteCustomer]
+    workflows: [capabilities/core-customer.yaml]
+    personas: [Ordering Frontend Developer]
+  - resource: user-wallets
+    operations: [createUserWallet, getUserWallet, searchUserWallets, updateUserWallet, adjustUserWallet]
+    workflows: [capabilities/loyalty-user-wallet.yaml]
+    personas: [Loyalty Integrator]
+  - resource: menus
+    operations: [getStoreMenus, getMenuCategories, getCategoryItems, getMenuItem, searchMenuItems]
+    workflows: [capabilities/core-stores.yaml]
+    personas: [Ordering Frontend Developer]
+  - resource: stores
+    operations: [managementGetStores, managementGetStore, getStore, posGetStores, posGetStoreDetails]
+    workflows: [capabilities/management-stores.yaml, capabilities/core-stores.yaml, capabilities/pos-stores.yaml]
+    personas: [Restaurant Operator, POS Integration Partner]

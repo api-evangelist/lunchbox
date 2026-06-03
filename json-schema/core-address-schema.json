@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Address",
+  "description": "Address schema from Lunchbox Core API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/core-address-schema.json",
+  "type": "object",
+  "properties": {
+    "address_id": {
+      "type": "integer",
+      "example": 1234
+    },
+    "address1": {
+      "type": "string",
+      "example": "1216 Broadway"
+    },
+    "address2": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "address3": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "statecode": {
+      "type": "string",
+      "example": "NY"
+    },
+    "zipcode": {
+      "type": "string",
+      "example": "10001"
+    },
+    "country": {
+      "type": "string",
+      "example": "US"
+    },
+    "instructions": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "latitude": {
+      "type": "number",
+      "example": 40.74661
+    },
+    "longitude": {
+      "type": "number",
+      "example": -73.98833
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/pos-pos-order-ack-structure.json",
+  "name": "PosOrderAck",
+  "description": "PosOrderAck schema from Lunchbox POS API",
+  "type": "object",
+  "properties": {
+    "pos_store_id": {
+      "type": "string",
+      "example": "123456"
+    },
+    "pos_order_id": {
+      "type": "string",
+      "example": 1234
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "is_completed": {
+          "type": "boolean"
+        }
+      },
+      "example": {}
+    }
+  }
+}

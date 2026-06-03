@@ -1,0 +1,6 @@
+{
+  "enable_loyalty": true,
+  "driver_management": true,
+  "global_disable_group_order": true,
+  "restaurant_data": {}
+}

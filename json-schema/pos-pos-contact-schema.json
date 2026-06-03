@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PosContact",
+  "description": "PosContact schema from Lunchbox POS API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/pos-pos-contact-schema.json",
+  "type": "object",
+  "properties": {
+    "active": {
+      "type": "boolean",
+      "example": true
+    },
+    "address1": {
+      "type": "string",
+      "example": "1216 Broadway"
+    },
+    "address2": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "address3": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "state": {
+      "type": "string",
+      "example": "NY"
+    },
+    "postal_code": {
+      "type": "string",
+      "example": "10001"
+    },
+    "country": {
+      "type": "string",
+      "example": "US"
+    },
+    "phone": {
+      "type": "string",
+      "example": "2125551411"
+    },
+    "latitude": {
+      "type": "number",
+      "example": 40.74661
+    },
+    "longitude": {
+      "type": "number",
+      "example": -73.98833
+    }
+  }
+}

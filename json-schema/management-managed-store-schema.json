@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagedStore",
+  "description": "ManagedStore schema from Lunchbox Management API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-schema/management-managed-store-schema.json",
+  "type": "object",
+  "properties": {
+    "enable_loyalty": {
+      "type": "boolean",
+      "example": true
+    },
+    "driver_management": {
+      "type": "boolean",
+      "example": true
+    },
+    "global_disable_group_order": {
+      "type": "boolean",
+      "example": true
+    },
+    "restaurant_data": {
+      "type": "object",
+      "additionalProperties": true,
+      "example": {}
+    }
+  }
+}

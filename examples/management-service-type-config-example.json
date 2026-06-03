@@ -1,0 +1,12 @@
+{
+  "approved": true,
+  "enabled": true,
+  "group_base_prep_time": 1,
+  "base_prep_time": 1,
+  "lead_time": 1,
+  "hold_same_day_orders": true,
+  "pos_autosend": true,
+  "hold_future_orders": true,
+  "min_subtotal": 1.0,
+  "allow_check_in": true
+}

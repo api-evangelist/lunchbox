@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/json-structure/core-address-structure.json",
+  "name": "Address",
+  "description": "Address schema from Lunchbox Core API",
+  "type": "object",
+  "properties": {
+    "address_id": {
+      "type": "int32",
+      "example": 1234
+    },
+    "address1": {
+      "type": "string",
+      "example": "1216 Broadway"
+    },
+    "address2": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "address3": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "city": {
+      "type": "string",
+      "example": "New York"
+    },
+    "statecode": {
+      "type": "string",
+      "example": "NY"
+    },
+    "zipcode": {
+      "type": "string",
+      "example": "10001"
+    },
+    "country": {
+      "type": "string",
+      "example": "US"
+    },
+    "instructions": {
+      "type": "string",
+      "nullable": true,
+      "example": "string"
+    },
+    "latitude": {
+      "type": "double",
+      "example": 40.74661
+    },
+    "longitude": {
+      "type": "double",
+      "example": -73.98833
+    }
+  }
+}
