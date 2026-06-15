@@ -1,0 +1,1555 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lunchbox Core API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Log in a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Log in a Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Register a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/registration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Register a Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Log Out a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/logout"
+          },
+          "docs": "Lunchbox Log Out a Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Log in as a Guest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/guest"
+          },
+          "docs": "Lunchbox Log in as a Guest"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Log in by Foreign Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/login_by_foreign_auth"
+          },
+          "docs": "Lunchbox Log in by Foreign Auth"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Request or Reset Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/password"
+          },
+          "docs": "Lunchbox Request or Reset Password"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Send Phone Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/send-verify-phone"
+          },
+          "docs": "Lunchbox Send Phone Verification"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Verify Phone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/verify-phone"
+          },
+          "docs": "Lunchbox Verify Phone"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Send Email Verification Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/send-verify-code"
+          },
+          "docs": "Lunchbox Send Email Verification Code"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Verify Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/verify"
+          },
+          "docs": "Lunchbox Verify Email"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get the Current Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/me"
+          },
+          "docs": "Lunchbox Get the Current Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get a Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Update a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Update a Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete a Customer"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Customer Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/preferences",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Customer Preferences"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Update Customer Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/preferences",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Update Customer Preferences"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Customer Addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/addresses",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Customer Addresses"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Add a Customer Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/addresses",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Add a Customer Address"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete a Customer Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/addresses",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "address_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete a Customer Address"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Saved Cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/saved-cards",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Saved Cards"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Add a Saved Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/saved-cards",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Add a Saved Card"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete a Saved Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/saved-cards",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cc_account_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete a Saved Card"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Set In-Store Card Priority",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/saved-cards/:cc_account_id/in-store-priority",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cc_account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Set In-Store Card Priority"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Customer Order History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/orders",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_items",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "all_orders",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Customer Order History"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Customer Group Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/group-orders",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Customer Group Orders"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Save an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/saved-orders",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Save an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete a Saved Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/saved-orders",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete a Saved Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Customer Loyalty",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/loyalty",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Customer Loyalty"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Customer Memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/memberships",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Customer Memberships"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get a Customer Membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/memberships/:membership_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "membership_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get a Customer Membership"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Cancel a Customer Membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/memberships/:membership_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "membership_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Cancel a Customer Membership"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Favorite Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/favorite-stores",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Favorite Stores"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Add a Favorite Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/favorite-stores",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Add a Favorite Store"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete a Favorite Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/favorite-stores",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "store_id",
+                "value": "123456",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete a Favorite Store"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Favorite Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/favorite-items",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_type_id",
+                "value": "1234",
+                "type": "query"
+              },
+              {
+                "name": "include_unavailable",
+                "value": "true",
+                "type": "query"
+              },
+              {
+                "name": "store_id",
+                "value": "123456",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Favorite Items"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Add a Favorite Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/favorite-items",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Add a Favorite Item"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete a Favorite Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/favorite-items",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "favorite_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete a Favorite Item"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Check-In Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/orders/checkin",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Check-In Orders"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Check in to an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/customers/:customer_id/orders/checkin/:order_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Check in to an Order"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Create an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Create an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Update an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Update an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customer_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Add Item to an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/items",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Add Item to an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Delete an Order Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/items/:order_item_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Delete an Order Item"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Apply a Discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/discount",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Apply a Discount"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Remove a Discount",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/discount",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customer_id",
+                "value": "1234",
+                "type": "query"
+              },
+              {
+                "name": "discount_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Remove a Discount"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Available Discounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/available_discounts",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Available Discounts"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Order Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/payment-methods",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Order Payment Methods"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get an Order Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/payment/:payment_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get an Order Payment"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Submit a Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/payment/",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Submit a Payment"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get a Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/payment/:payment_id",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pay_proc_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get a Payment"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Submit a QR Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/payment-with-qr/",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Submit a QR Payment"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Search Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/search"
+          },
+          "docs": "Lunchbox Search Orders"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Show Order Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/actions/show_receipt",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customer_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Show Order Receipt"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Group Order Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/group/members",
+            "params": [
+              {
+                "name": "join_code",
+                "value": "string",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Group Order Members"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Join a Group Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/group/members",
+            "params": [
+              {
+                "name": "join_code",
+                "value": "string",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Join a Group Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Add a Group Order Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/group/:order_id/members",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Add a Group Order Member"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Charitable Foundations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/orders/:order_id/charitable-foundations",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox List Charitable Foundations"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Chain Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/configuration"
+          },
+          "docs": "Lunchbox Get Chain Configuration"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "123456",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Info"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/hours",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Hours"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/payment-methods",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_type_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Payment Methods"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Delivery Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/delivery-info",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Delivery Info"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Menus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_type_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Menus"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Menu Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Menu Categories"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Category Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Category Items"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get a Menu Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items/:item_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get a Menu Item"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Search Menu Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/item-search",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "barcode",
+                "value": "string",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Search Menu Items"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Promos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/promos",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customer_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Promos"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Item Reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items/:item_id/reviews",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Item Reviews"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Create an Item Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items/:item_id/reviews",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Create an Item Review"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Available Memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/available_memberships",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Available Memberships"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get External Ordering Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menu",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get External Ordering Menu"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Submit External Ordering Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/orders",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Submit External Ordering Order"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Misc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Contact Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/contact"
+          },
+          "docs": "Lunchbox Get Contact Info"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Submit a Contact Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/contact"
+          },
+          "docs": "Lunchbox Submit a Contact Message"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/countries"
+          },
+          "docs": "Lunchbox List Countries"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List States",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/states"
+          },
+          "docs": "Lunchbox List States"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

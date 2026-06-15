@@ -1,0 +1,902 @@
+{
+  "item": [
+    {
+      "id": "9c335493-9751-4ee0-a77c-71441225fcb3",
+      "name": "User Wallet",
+      "description": {
+        "content": "Create, search, retrieve, update, validate, confirm, refund, and adjust loyalty user wallets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de124326-5d96-4ce7-8643-be4365f0f5ac",
+          "name": "Lunchbox Create a User Wallet",
+          "request": {
+            "name": "Lunchbox Create a User Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthdate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24a4845f-c6f7-4b2f-8fc9-1c0c529013cc",
+              "name": "User wallet created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthdate\": \"1990-05-21\",\n  \"email\": \"john.smith@example.com\",\n  \"phone\": \"2125551234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08f1c992-341d-4e2a-86de-501e678f7f10",
+          "name": "Lunchbox Search User Wallets",
+          "request": {
+            "name": "Lunchbox Search User Wallets",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "757ad50a-c64b-4ecf-a9c3-88578b63b145",
+              "name": "Matching user wallets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d377619-8b0c-4256-80dd-38663f14c1b9",
+          "name": "Lunchbox Get a User Wallet",
+          "request": {
+            "name": "Lunchbox Get a User Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6cc4bb7-966e-47b6-a0b7-fe24b0ae96cb",
+              "name": "The requested user wallet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bae58fc8-047d-4fa4-85db-7308b6f11de2",
+          "name": "Lunchbox Update a User Wallet",
+          "request": {
+            "name": "Lunchbox Update a User Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthdate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4fa5018f-acfa-4b07-891a-72e5384c1056",
+              "name": "User wallet updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf907565-ac39-4c6f-b083-4aa4b444fe00",
+          "name": "Lunchbox Confirm a Wallet Transaction",
+          "request": {
+            "name": "Lunchbox Confirm a Wallet Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c04809e-ab26-4b62-8240-8b74b9edb5ab",
+              "name": "Transaction confirmed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06e73dcb-0af0-4e71-9758-2df3f0eff9d6",
+          "name": "Lunchbox Validate a Wallet Transaction",
+          "request": {
+            "name": "Lunchbox Validate a Wallet Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "096a8e6c-7589-4bf1-a269-523ee4e557cf",
+              "name": "Transaction validated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d43af9ac-442f-4ef9-a320-97bb0ccbee40",
+          "name": "Lunchbox Refund a Wallet Transaction",
+          "request": {
+            "name": "Lunchbox Refund a Wallet Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bb47ee0-d080-4088-81ba-bda9a2fcea59",
+              "name": "Transaction refunded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "becfbc80-d509-4532-ab8e-be27db715837",
+          "name": "Lunchbox Adjust a Wallet Balance",
+          "request": {
+            "name": "Lunchbox Adjust a Wallet Balance",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "adjust"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The loyalty engine host",
+                  "type": "any",
+                  "value": "{{loyalty_base_url}}",
+                  "key": "loyalty_base_url"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7a86f80-c1c8-4b33-b762-62c43bc4bfed",
+              "name": "Wallet balance adjusted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "adjust"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The loyalty engine host",
+                      "type": "any",
+                      "value": "{{loyalty_base_url}}",
+                      "key": "loyalty_base_url"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The loyalty engine host",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "loyalty.lunchbox.io",
+      "key": "loyalty_base_url"
+    },
+    {
+      "type": "string",
+      "value": "https://{{loyalty_base_url}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d6df7738-0a92-432e-834a-84981f5f9508",
+    "name": "Lunchbox Loyalty API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lunchbox 2.0 Loyalty API is used for interacting with Lunchbox Loyalty so that you can adjust loyalty balances, redeem rewards, and catalog user wallets. It is served by the Lunchbox loyalty engine and authenticated with an API key. Responses use standard HTTP status codes and JSON schemas.\n\nContact Support:\n Name: Lunchbox Support\n Email: support@lunchbox.io",
+      "type": "text/plain"
+    }
+  }
+}

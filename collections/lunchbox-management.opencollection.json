@@ -1,0 +1,276 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lunchbox Management API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/stores",
+            "params": [
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "string",
+                "type": "query"
+              },
+              {
+                "name": "rest_id",
+                "value": "1234",
+                "type": "query"
+              },
+              {
+                "name": "promise_date",
+                "value": "1990-05-21",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Stores"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/stores/:store_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store by ID"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Update Service Types Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/store/:rest_id/service_types/:service_type_id/config",
+            "params": [
+              {
+                "name": "rest_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_type_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Update Service Types Config"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/orders",
+            "params": [
+              {
+                "name": "rest_id",
+                "value": "1234",
+                "type": "query"
+              },
+              {
+                "name": "promise_date",
+                "value": "1990-05-21",
+                "type": "query"
+              },
+              {
+                "name": "order_status",
+                "value": "string",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Orders"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Order Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/store/:store_id/order_details/:order_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Order Details"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Void an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/store/:store_id/orders/:order_id/void_order",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Void an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Manage an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/store/:rest_id/orders/manage_order",
+            "params": [
+              {
+                "name": "rest_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Manage an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Cancel a Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/store/:rest_id/orders/:order_id/cancel-delivery",
+            "params": [
+              {
+                "name": "rest_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Cancel a Delivery"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Order Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/orders/:order_id/refund",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Order Refund"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Refund an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/orders/:order_id/refund",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Refund an Order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

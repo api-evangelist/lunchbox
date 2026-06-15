@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lunchbox Loyalty API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Search User Wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets"
+          },
+          "docs": "Lunchbox Search User Wallets"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Create a User Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Create a User Wallet"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get a User Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets/:user_wallet_id",
+            "params": [
+              {
+                "name": "user_wallet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get a User Wallet"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Update a User Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets/:user_wallet_id",
+            "params": [
+              {
+                "name": "user_wallet_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Update a User Wallet"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Confirm a Wallet Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets/:user_wallet_id/confirm",
+            "params": [
+              {
+                "name": "user_wallet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Confirm a Wallet Transaction"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Validate a Wallet Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets/:user_wallet_id/validate",
+            "params": [
+              {
+                "name": "user_wallet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Validate a Wallet Transaction"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Refund a Wallet Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets/:user_wallet_id/refund",
+            "params": [
+              {
+                "name": "user_wallet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Refund a Wallet Transaction"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Adjust a Wallet Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{loyalty_base_url}/loyalty-engine/user-wallets/:user_wallet_id/adjust",
+            "params": [
+              {
+                "name": "user_wallet_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Adjust a Wallet Balance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

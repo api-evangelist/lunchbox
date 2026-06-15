@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lunchbox POS API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/stores"
+          },
+          "docs": "Lunchbox Get Stores"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/stores/:store_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Submit an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/orders/:pos_store_id",
+            "params": [
+              {
+                "name": "pos_store_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox uses this call to submit orders to the POS."
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/orders/:pos_store_id/:pos_order_id",
+            "params": [
+              {
+                "name": "pos_store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pos_order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get an Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Update an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/orders/:pos_store_id/:pos_order_id",
+            "params": [
+              {
+                "name": "pos_store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pos_order_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lunchbox Update an Order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
