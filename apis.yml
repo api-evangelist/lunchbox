@@ -8,7 +8,7 @@ description: >-
   Open API supports last-mile delivery webhooks, menu consumption for digital boards and kiosks, and third-party
   marketplace integrations, and is documented on a dedicated developer portal at docs.lunchbox.io.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Restaurant
   - Online Ordering
