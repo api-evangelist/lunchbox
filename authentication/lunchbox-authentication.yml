@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lunchbox-core-openapi.yml, openapi/lunchbox-loyalty-openapi.yml, openapi/lunchbox-management-openapi.yml,
+  openapi/lunchbox-pos-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: tokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Team token passed as: Authorization: Token <team_token>'
+  sources:
+  - openapi/lunchbox-core-openapi.yml
+  - openapi/lunchbox-management-openapi.yml
+  - openapi/lunchbox-pos-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Api-Key
+  description: Loyalty engine API key passed in the Api-Key header.
+  sources:
+  - openapi/lunchbox-loyalty-openapi.yml
