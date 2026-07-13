@@ -1,13 +1,23 @@
-# Spectral ruleset for the Lunchbox 2.0 APIs (Core, Management, Loyalty, POS).
-# Enforces the conventions observed across the Lunchbox OpenAPI specifications:
-# Title Case "Lunchbox ..." summaries, camelCase operationIds with verb prefixes,
-# Title Case tags, snake_case parameters and schema properties, token/Api-Key auth.
-extends: [[spectral:oas, off]]
-
+# lunchbox — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 3/3 servers on lunchbox.io
+#   - path-params-casing: snake @ 100% (n=100)
+#   - query-params-casing: snake @ 100% (n=30)
+#   - operationid-casing: camel @ 100% (n=102)
+#   - schema-names-casing: pascal @ 100% (n=33)
+#   - schema-properties-casing: snake @ 93% (n=207)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - pagination params observed: ['limit', 'page']
+#   - merge: kept 31 existing, added 6 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-  # ---------------------------------------------------------------------------
-  # INFO / METADATA
-  # ---------------------------------------------------------------------------
   info-title-lunchbox:
     description: API title should start with "Lunchbox".
     severity: warn
@@ -15,7 +25,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^Lunchbox'
+        match: ^Lunchbox
   info-description-required:
     description: Info description is required and should be meaningful.
     severity: warn
@@ -37,10 +47,6 @@ rules:
     then:
       field: contact
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # OPENAPI VERSION
-  # ---------------------------------------------------------------------------
   openapi-version-3:
     description: Specs must use OpenAPI 3.0.x.
     severity: error
@@ -48,11 +54,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^3\.0\.\d+$'
-
-  # ---------------------------------------------------------------------------
-  # SERVERS
-  # ---------------------------------------------------------------------------
+        match: ^3\.0\.\d+$
   servers-defined:
     description: At least one server must be defined.
     severity: error
@@ -66,7 +68,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^https://'
+        match: ^https://
   servers-description:
     description: Each server should have a description.
     severity: info
@@ -74,10 +76,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # PATHS — NAMING CONVENTIONS
-  # ---------------------------------------------------------------------------
   paths-no-trailing-slash:
     description: Paths should not end with a trailing slash (except root collections).
     severity: warn
@@ -85,7 +83,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: '.+/$'
+        notMatch: .+/$
   paths-no-query-string:
     description: Path keys must not contain query strings.
     severity: error
@@ -93,11 +91,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: '\?'
-
-  # ---------------------------------------------------------------------------
-  # OPERATIONS
-  # ---------------------------------------------------------------------------
+        notMatch: \?
   operation-summary-required:
     description: Every operation must have a summary.
     severity: warn
@@ -127,7 +121,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-zA-Z0-9]*$'
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-tags-required:
     description: Every operation must have at least one tag.
     severity: warn
@@ -135,10 +129,6 @@ rules:
     then:
       field: tags
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # TAGS
-  # ---------------------------------------------------------------------------
   tags-global-defined:
     description: A global tags array should be defined.
     severity: info
@@ -160,11 +150,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[A-Z][A-Za-z]*( [A-Z][A-Za-z]*)*$'
-
-  # ---------------------------------------------------------------------------
-  # PARAMETERS
-  # ---------------------------------------------------------------------------
+        match: ^[A-Z][A-Za-z]*( [A-Z][A-Za-z]*)*$
   parameter-snake-case:
     description: Parameter names should be snake_case (Lunchbox convention).
     severity: warn
@@ -172,7 +158,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-z0-9_]*$'
+        match: ^[a-z][a-z0-9_]*$
   parameter-schema-required:
     description: Each parameter must define a schema.
     severity: error
@@ -180,10 +166,6 @@ rules:
     then:
       field: schema
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # REQUEST BODIES
-  # ---------------------------------------------------------------------------
   request-body-json:
     description: Request bodies should offer application/json.
     severity: warn
@@ -191,10 +173,6 @@ rules:
     then:
       field: application/json
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # RESPONSES
-  # ---------------------------------------------------------------------------
   response-success-defined:
     description: Each operation must define at least one 2xx response.
     severity: error
@@ -205,7 +183,7 @@ rules:
         schema:
           type: object
           patternProperties:
-            '^2\d\d$': {}
+            ^2\d\d$: {}
           minProperties: 1
   response-description-required:
     description: Each response must have a description.
@@ -214,10 +192,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # SCHEMAS — PROPERTY NAMING
-  # ---------------------------------------------------------------------------
   schema-property-snake-case:
     description: Schema property names should be snake_case (Core/Management/POS convention).
     severity: info
@@ -225,7 +199,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-zA-Z][a-zA-Z0-9_]*$'
+        match: ^[a-zA-Z][a-zA-Z0-9_]*$
   schema-property-typed:
     description: Schema properties should declare a type or a $ref.
     severity: info
@@ -235,15 +209,16 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: [type]
-            - required: ['$ref']
-            - required: [allOf]
-            - required: [oneOf]
-            - required: [anyOf]
-
-  # ---------------------------------------------------------------------------
-  # SECURITY
-  # ---------------------------------------------------------------------------
+          - required:
+            - type
+          - required:
+            - $ref
+          - required:
+            - allOf
+          - required:
+            - oneOf
+          - required:
+            - anyOf
   security-global-defined:
     description: A global security requirement should be defined.
     severity: warn
@@ -265,10 +240,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # HTTP METHOD CONVENTIONS
-  # ---------------------------------------------------------------------------
   get-no-request-body:
     description: GET operations must not declare a request body.
     severity: error
@@ -283,10 +254,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
-  # ---------------------------------------------------------------------------
-  # GENERAL QUALITY
-  # ---------------------------------------------------------------------------
   operation-examples-encouraged:
     description: Operations are encouraged to provide response examples.
     severity: info
@@ -296,6 +263,58 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: [example]
-            - required: [examples]
-            - required: [schema]
+          - required:
+            - example
+          - required:
+            - examples
+          - required:
+            - schema
+  servers-expected-domain:
+    description: Server URLs should be on the lunchbox.io domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: lunchbox\.io
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
