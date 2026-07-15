@@ -97,6 +97,8 @@ apis:
       - type: OpenAPI
         url: openapi/lunchbox-pos-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/lunchbox-agentic-access.yml
   - type: DomainSecurity
     url: security/lunchbox-domain-security.yml
   - type: Authentication
