@@ -1,0 +1,725 @@
+openapi: 3.0.3
+info:
+  title: Lunchbox Core Customer Stores API
+  description: 'The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.'
+  version: '2.0'
+  contact:
+    name: Lunchbox Support
+    email: support@lunchbox.io
+    url: https://docs.lunchbox.io/
+  termsOfService: https://lunchbox.io/
+servers:
+- url: https://{chain_name}.lunchbox.io/api/v2
+  description: Per-chain Lunchbox 2.0 Core API base URL
+  variables:
+    chain_name:
+      default: chain
+      description: The restaurant chain's Lunchbox subdomain
+security:
+- tokenAuth: []
+tags:
+- name: Stores
+  description: Store configuration, hours, menus, and discounts.
+paths:
+  /stores/configuration:
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Chain Configuration
+      operationId: getChainConfiguration
+      responses:
+        '200':
+          description: Chain-level configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores:
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Info
+      operationId: getStore
+      parameters:
+      - name: store_id
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '123456'
+      responses:
+        '200':
+          description: Store information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+              examples:
+                GetStore200Example:
+                  summary: Default getStore 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/hours:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Hours
+      operationId: getStoreHours
+      responses:
+        '200':
+          description: Store operating hours.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/payment-methods:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Payment Methods
+      operationId: getStorePaymentMethods
+      parameters:
+      - name: service_type_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Payment methods supported by the store.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/delivery-info:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    post:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Delivery Info
+      operationId: getStoreDeliveryInfo
+      responses:
+        '200':
+          description: Delivery availability and quote for an address.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Menus
+      operationId: getStoreMenus
+      parameters:
+      - name: service_type_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Menus for the store.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Menu'
+              examples:
+                GetStoreMenus200Example:
+                  summary: Default getStoreMenus 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Menu Categories
+      operationId: getMenuCategories
+      responses:
+        '200':
+          description: Categories within the menu.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories/{category_id}/items:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    - $ref: '#/components/parameters/CategoryId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Category Items
+      operationId: getCategoryItems
+      responses:
+        '200':
+          description: Items within the category.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuItem'
+              examples:
+                GetCategoryItems200Example:
+                  summary: Default getCategoryItems 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories/{category_id}/items/{item_id}:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    - $ref: '#/components/parameters/CategoryId'
+    - $ref: '#/components/parameters/ItemId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get a Menu Item
+      operationId: getMenuItem
+      responses:
+        '200':
+          description: The requested menu item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                GetMenuItem200Example:
+                  summary: Default getMenuItem 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/item-search:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Search Menu Items
+      operationId: searchMenuItems
+      parameters:
+      - name: barcode
+        in: query
+        schema:
+          type: string
+        example: string
+      responses:
+        '200':
+          description: Matching menu items.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/promos:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Promos
+      operationId: getStorePromos
+      parameters:
+      - name: customer_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      responses:
+        '200':
+          description: Promotions for the store.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menus/{menu_id}/categories/{category_id}/items/{item_id}/reviews:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    - $ref: '#/components/parameters/MenuId'
+    - $ref: '#/components/parameters/CategoryId'
+    - $ref: '#/components/parameters/ItemId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Item Reviews
+      operationId: getItemReviews
+      responses:
+        '200':
+          description: Reviews for the menu item.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Stores
+      summary: Lunchbox Create an Item Review
+      operationId: createItemReview
+      responses:
+        '200':
+          description: Review created.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/available_memberships:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Available Memberships
+      operationId: getAvailableMemberships
+      responses:
+        '200':
+          description: Memberships available at the store.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/menu:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get External Ordering Menu
+      operationId: getExternalOrderingMenu
+      responses:
+        '200':
+          description: Read-only menu for external ordering providers.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores/{store_id}/orders:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    post:
+      tags:
+      - Stores
+      summary: Lunchbox Submit External Ordering Order
+      operationId: submitExternalOrder
+      responses:
+        '200':
+          description: Order submitted by an external ordering provider.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/stores:
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Stores
+      operationId: managementGetStores
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: page
+        in: query
+        schema:
+          type: integer
+        example: 1
+      - name: search
+        in: query
+        schema:
+          type: string
+        example: string
+      - name: rest_id
+        in: query
+        schema:
+          type: integer
+        example: 1234
+      - name: promise_date
+        in: query
+        schema:
+          type: string
+          format: date
+        example: '1990-05-21'
+      responses:
+        '200':
+          description: Paginated list of managed stores.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorePage'
+              examples:
+                ManagementGetStores200Example:
+                  summary: Default managementGetStores 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /management/stores/{store_id}:
+    parameters:
+    - $ref: '#/components/parameters/StoreId'
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store by ID
+      operationId: managementGetStore
+      responses:
+        '200':
+          description: Detailed store record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedStore'
+              examples:
+                ManagementGetStore200Example:
+                  summary: Default managementGetStore 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /pos/stores:
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Stores
+      operationId: posGetStores
+      responses:
+        '200':
+          description: List of POS store identifiers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pos_store_id:
+                      type: string
+              examples:
+                PosGetStores200Example:
+                  summary: Default posGetStores 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /pos/stores/{store_id}:
+    parameters:
+    - name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Stores
+      summary: Lunchbox Get Store Details
+      operationId: posGetStoreDetails
+      responses:
+        '200':
+          description: Detailed POS store record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PosStore'
+              examples:
+                PosGetStoreDetails200Example:
+                  summary: Default posGetStoreDetails 200 response
+                  x-microcks-default: true
+                  value: {}
+      callbacks:
+        storeUpdated:
+          '{$request.body#/lunchbox_webhook_url}':
+            post:
+              summary: Store Updated Webhook
+              description: The POS provider triggers this webhook to notify Lunchbox that a store has been added or updated. Lunchbox then calls Get Store Details using the provided pos_store_id.
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/StoreUpdateEvent'
+              responses:
+                '200':
+                  description: Webhook acknowledged.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Store:
+      type: object
+      properties:
+        store_id:
+          type: string
+          example: '123456'
+        rest_id:
+          type: integer
+          example: 1234
+        rest_name:
+          type: string
+          example: Sample
+        address1:
+          type: string
+          example: 1216 Broadway
+        city:
+          type: string
+          example: New York
+        state_code:
+          type: string
+          example: NY
+        zip_code:
+          type: string
+          example: '10001'
+        timezone:
+          type: string
+          example: string
+        latitude:
+          type: number
+          example: 40.74661
+        longitude:
+          type: number
+          example: -73.98833
+        enable_loyalty:
+          type: boolean
+          example: true
+    PosLocation:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/PosHours'
+          example: []
+    StorePage:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          example: 1
+        next_page:
+          type: integer
+          nullable: true
+          example: 1
+        previous_page:
+          type: integer
+          nullable: true
+          example: 1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagedStoreSummary'
+          example: []
+    PosContact:
+      type: object
+      properties:
+        active:
+          type: boolean
+          example: true
+        address1:
+          type: string
+          example: 1216 Broadway
+        address2:
+          type: string
+          nullable: true
+          example: string
+        address3:
+          type: string
+          nullable: true
+          example: string
+        city:
+          type: string
+          example: New York
+        state:
+          type: string
+          example: NY
+        postal_code:
+          type: string
+          example: '10001'
+        country:
+          type: string
+          example: US
+        phone:
+          type: string
+          example: '2125551411'
+        latitude:
+          type: number
+          example: 40.74661
+        longitude:
+          type: number
+          example: -73.98833
+    Menu:
+      type: object
+      properties:
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        service_type_id:
+          type: integer
+          example: 1234
+    ManagedStore:
+      type: object
+      properties:
+        enable_loyalty:
+          type: boolean
+          example: true
+        driver_management:
+          type: boolean
+          example: true
+        global_disable_group_order:
+          type: boolean
+          example: true
+        restaurant_data:
+          type: object
+          additionalProperties: true
+          example: {}
+    ManagedStoreSummary:
+      type: object
+      properties:
+        store_id:
+          type: string
+          example: '123456'
+        rest_id:
+          type: integer
+          example: 1234
+        rest_name:
+          type: string
+          example: Sample
+        status:
+          type: string
+          example: string
+        setup_type:
+          type: string
+          example: string
+        address1:
+          type: string
+          example: 1216 Broadway
+        city:
+          type: string
+          example: New York
+        state_name:
+          type: string
+          example: NY
+        state_code:
+          type: string
+          example: NY
+        state_id:
+          type: integer
+          example: 1234
+        zip_code:
+          type: string
+          example: '10001'
+        timezone:
+          type: string
+          example: string
+    MenuItem:
+      type: object
+      properties:
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        description:
+          type: string
+          example: string
+        price_cents:
+          type: integer
+          example: 100
+        is_available:
+          type: boolean
+          example: true
+    PosStore:
+      type: object
+      properties:
+        pos_store_id:
+          type: string
+          example: '123456'
+        store_id:
+          type: string
+          example: '123456'
+        name:
+          type: string
+          example: Sample
+        contact:
+          $ref: '#/components/schemas/PosContact'
+        location:
+          $ref: '#/components/schemas/PosLocation'
+    PosHours:
+      type: object
+      properties:
+        iso_day_of_week:
+          type: integer
+          example: 1
+        start_time:
+          type: string
+          example: string
+        end_time:
+          type: string
+          example: string
+    StoreUpdateEvent:
+      type: object
+      required:
+      - event_type
+      - pos_store_id
+      properties:
+        event_type:
+          type: string
+          enum:
+          - store_update
+          example: store_update
+        pos_store_id:
+          type: string
+          example: '123456'
+  parameters:
+    MenuId:
+      name: menu_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Team token passed as: Authorization: Token <team_token>'

@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Lunchbox Core Customer Service Types API
+  description: 'The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.'
+  version: '2.0'
+  contact:
+    name: Lunchbox Support
+    email: support@lunchbox.io
+    url: https://docs.lunchbox.io/
+  termsOfService: https://lunchbox.io/
+servers:
+- url: https://{chain_name}.lunchbox.io/api/v2
+  description: Per-chain Lunchbox 2.0 Core API base URL
+  variables:
+    chain_name:
+      default: chain
+      description: The restaurant chain's Lunchbox subdomain
+security:
+- tokenAuth: []
+tags:
+- name: Service Types
+  description: Configure store service types.
+paths:
+  /management/store/{rest_id}/service_types/{service_type_id}/config:
+    parameters:
+    - $ref: '#/components/parameters/RestId'
+    - name: service_type_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    put:
+      tags:
+      - Service Types
+      summary: Lunchbox Update Service Types Config
+      operationId: updateServiceTypeConfig
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceTypeConfig'
+            examples:
+              UpdateServiceTypeConfigRequestExample:
+                summary: Default updateServiceTypeConfig request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Service type configuration updated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ServiceTypeConfig:
+      type: object
+      properties:
+        approved:
+          type: boolean
+          example: true
+        enabled:
+          type: boolean
+          example: true
+        group_base_prep_time:
+          type: integer
+          example: 1
+        base_prep_time:
+          type: integer
+          example: 1
+        lead_time:
+          type: integer
+          example: 1
+        hold_same_day_orders:
+          type: boolean
+          example: true
+        pos_autosend:
+          type: boolean
+          example: true
+        hold_future_orders:
+          type: boolean
+          example: true
+        min_subtotal:
+          type: number
+          example: 1.0
+        allow_check_in:
+          type: boolean
+          example: true
+  parameters:
+    RestId:
+      name: rest_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Team token passed as: Authorization: Token <team_token>'
