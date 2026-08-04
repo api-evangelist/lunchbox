@@ -1,0 +1,312 @@
+openapi: 3.0.3
+info:
+  title: Lunchbox Loyalty API
+  description: >-
+    The Lunchbox 2.0 Loyalty API is used for interacting with Lunchbox Loyalty
+    so that you can adjust loyalty balances, redeem rewards, and catalog user
+    wallets. It is served by the Lunchbox loyalty engine and authenticated with
+    an API key. Responses use standard HTTP status codes and JSON schemas.
+  version: '2.0'
+  contact:
+    name: Lunchbox Support
+    email: support@lunchbox.io
+    url: https://docs.lunchbox.io/
+servers:
+- url: https://{loyalty_base_url}
+  description: Lunchbox loyalty engine base URL
+  variables:
+    loyalty_base_url:
+      default: loyalty.lunchbox.io
+      description: The loyalty engine host
+security:
+- apiKeyAuth: []
+tags:
+- name: User Wallet
+  description: Create, search, retrieve, update, validate, confirm, refund, and adjust loyalty user wallets.
+paths:
+  /loyalty-engine/user-wallets:
+    post:
+      tags: [User Wallet]
+      summary: Lunchbox Create a User Wallet
+      operationId: createUserWallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserWalletCreate'
+            example:
+              firstName: John
+              lastName: Smith
+              birthdate: '1990-05-21'
+              email: john.smith@example.com
+              phone: '2125551234'
+      responses:
+        '201':
+          description: User wallet created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWallet'
+              examples:
+                CreateUserWallet201Example:
+                  summary: Default createUserWallet 201 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags: [User Wallet]
+      summary: Lunchbox Search User Wallets
+      operationId: searchUserWallets
+      responses:
+        '200':
+          description: Matching user wallets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserWallet'
+              examples:
+                SearchUserWallets200Example:
+                  summary: Default searchUserWallets 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty-engine/user-wallets/{user_wallet_id}:
+    parameters:
+    - $ref: '#/components/parameters/UserWalletId'
+    get:
+      tags: [User Wallet]
+      summary: Lunchbox Get a User Wallet
+      operationId: getUserWallet
+      responses:
+        '200':
+          description: The requested user wallet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWallet'
+              examples:
+                GetUserWallet200Example:
+                  summary: Default getUserWallet 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags: [User Wallet]
+      summary: Lunchbox Update a User Wallet
+      operationId: updateUserWallet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserWalletUpdate'
+            examples:
+              UpdateUserWalletRequestExample:
+                summary: Default updateUserWallet request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: User wallet updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWallet'
+              examples:
+                UpdateUserWallet200Example:
+                  summary: Default updateUserWallet 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty-engine/user-wallets/{user_wallet_id}/confirm:
+    parameters:
+    - $ref: '#/components/parameters/UserWalletId'
+    post:
+      tags: [User Wallet]
+      summary: Lunchbox Confirm a Wallet Transaction
+      operationId: confirmUserWallet
+      responses:
+        '200':
+          description: Transaction confirmed.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty-engine/user-wallets/{user_wallet_id}/validate:
+    parameters:
+    - $ref: '#/components/parameters/UserWalletId'
+    post:
+      tags: [User Wallet]
+      summary: Lunchbox Validate a Wallet Transaction
+      operationId: validateUserWallet
+      responses:
+        '200':
+          description: Transaction validated.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty-engine/user-wallets/{user_wallet_id}/refund:
+    parameters:
+    - $ref: '#/components/parameters/UserWalletId'
+    post:
+      tags: [User Wallet]
+      summary: Lunchbox Refund a Wallet Transaction
+      operationId: refundUserWallet
+      responses:
+        '200':
+          description: Transaction refunded.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty-engine/user-wallets/{user_wallet_id}/adjust:
+    parameters:
+    - $ref: '#/components/parameters/UserWalletId'
+    patch:
+      tags: [User Wallet]
+      summary: Lunchbox Adjust a Wallet Balance
+      operationId: adjustUserWallet
+      responses:
+        '200':
+          description: Wallet balance adjusted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWallet'
+              examples:
+                AdjustUserWallet200Example:
+                  summary: Default adjustUserWallet 200 response
+                  x-microcks-default: true
+                  value: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Loyalty engine API key passed in the Api-Key header.
+  parameters:
+    UserWalletId:
+      name: user_wallet_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    UserWalletCreate:
+      type: object
+      required: [email]
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
+    UserWalletUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+        phone:
+          type: string
+          example: '2125551411'
+    UserWallet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 130945e3-2b24-4530-a696-3b2c6977ba1c
+        merchantId:
+          type: string
+          format: uuid
+          example: 130945e3-2b24-4530-a696-3b2c6977ba1c
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        phone:
+          type: string
+          example: '2125551411'
+        birthdate:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2023-07-25T06:00:00-04:00'
+        pointsBalance:
+          type: integer
+          example: 1
+        creditsBalance:
+          type: integer
+          example: 1
+        lifetimePointsBalance:
+          type: integer
+          example: 1
+        isActive:
+          type: boolean
+          example: true
+        lastBirthdayYear:
+          type: integer
+          nullable: true
+          example: 1
+        createdAt:
+          type: string
+          format: date-time
+          example: '2023-07-25T06:00:00-04:00'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2023-07-25T06:00:00-04:00'
+        walletRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/WalletReward'
+          example: []
+    WalletReward:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 130945e3-2b24-4530-a696-3b2c6977ba1c

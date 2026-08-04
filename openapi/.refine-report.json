@@ -1,0 +1,24 @@
+{
+  "provider": "lunchbox",
+  "sources": [
+    "lunchbox-customer-api-openapi.yml",
+    "lunchbox-misc-api-openapi.yml",
+    "lunchbox-orders-api-openapi.yml",
+    "lunchbox-service-types-api-openapi.yml",
+    "lunchbox-stores-api-openapi.yml",
+    "lunchbox-user-wallet-api-openapi.yml"
+  ],
+  "outputs": [
+    "lunchbox-customer-api-openapi.yml",
+    "lunchbox-misc-api-openapi.yml",
+    "lunchbox-orders-api-openapi.yml",
+    "lunchbox-service-types-api-openapi.yml",
+    "lunchbox-stores-api-openapi.yml",
+    "lunchbox-user-wallet-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
