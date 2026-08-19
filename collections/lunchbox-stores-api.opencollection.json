@@ -1,0 +1,472 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lunchbox Core Customer Stores API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Chain Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/configuration"
+          },
+          "docs": "Lunchbox Get Chain Configuration"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "123456",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Info"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/hours",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Hours"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/payment-methods",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_type_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Payment Methods"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Delivery Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/delivery-info",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Delivery Info"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Menus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_type_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Menus"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Menu Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Menu Categories"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Category Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Category Items"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get a Menu Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items/:item_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get a Menu Item"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Search Menu Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/item-search",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "barcode",
+                "value": "string",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Search Menu Items"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Promos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/promos",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customer_id",
+                "value": "1234",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Promos"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Item Reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items/:item_id/reviews",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Item Reviews"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Create an Item Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menus/:menu_id/categories/:category_id/items/:item_id/reviews",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "menu_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Create an Item Review"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Available Memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/available_memberships",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Available Memberships"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get External Ordering Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/menu",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get External Ordering Menu"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Submit External Ordering Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/stores/:store_id/orders",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Submit External Ordering Order"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/stores",
+            "params": [
+              {
+                "name": "limit",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "string",
+                "type": "query"
+              },
+              {
+                "name": "rest_id",
+                "value": "1234",
+                "type": "query"
+              },
+              {
+                "name": "promise_date",
+                "value": "1990-05-21",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Stores"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/management/stores/:store_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store by ID"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/stores"
+          },
+          "docs": "Lunchbox Get Stores"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Get Store Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/pos/stores/:store_id",
+            "params": [
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lunchbox Get Store Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lunchbox Core Customer Misc API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Misc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lunchbox Get Contact Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/contact"
+          },
+          "docs": "Lunchbox Get Contact Info"
+        },
+        {
+          "info": {
+            "name": "Lunchbox Submit a Contact Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/contact"
+          },
+          "docs": "Lunchbox Submit a Contact Message"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/countries"
+          },
+          "docs": "Lunchbox List Countries"
+        },
+        {
+          "info": {
+            "name": "Lunchbox List States",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{chain_name}.lunchbox.io/api/v2/states"
+          },
+          "docs": "Lunchbox List States"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

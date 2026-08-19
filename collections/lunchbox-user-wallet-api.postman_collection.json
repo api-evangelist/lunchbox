@@ -1,0 +1,902 @@
+{
+  "item": [
+    {
+      "id": "48bc423e-d05d-41fa-8a9b-d52c4c0631bf",
+      "name": "User Wallet",
+      "description": {
+        "content": "Create, search, retrieve, update, validate, confirm, refund, and adjust loyalty user wallets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b6c2612-394a-4209-8fcb-04cb87bd1bd6",
+          "name": "Lunchbox Create a User Wallet",
+          "request": {
+            "name": "Lunchbox Create a User Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthdate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2776133-f08e-4e20-9e2f-c37ef9ad9f06",
+              "name": "User wallet created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"birthdate\": \"1990-05-21\",\n  \"email\": \"john.smith@example.com\",\n  \"phone\": \"2125551234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01664fe8-05f1-4dca-a651-8e4b79dd4e33",
+          "name": "Lunchbox Search User Wallets",
+          "request": {
+            "name": "Lunchbox Search User Wallets",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc8085f3-4878-4a07-ab7d-92135a767ace",
+              "name": "Matching user wallets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72b7c791-6374-4aa9-9802-5f9f2f778190",
+          "name": "Lunchbox Get a User Wallet",
+          "request": {
+            "name": "Lunchbox Get a User Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8976a43-a06f-42fd-8111-fc6d94ff0aa2",
+              "name": "The requested user wallet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61dc561b-826c-4cad-812a-ac7fbe8710b5",
+          "name": "Lunchbox Update a User Wallet",
+          "request": {
+            "name": "Lunchbox Update a User Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthdate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "97a47e80-505e-48eb-afa0-0a27af31e8d0",
+              "name": "User wallet updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "311a3d58-ce1e-4ba7-97a3-711836833708",
+          "name": "Lunchbox Confirm a Wallet Transaction",
+          "request": {
+            "name": "Lunchbox Confirm a Wallet Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fe6e298-2c6f-4e83-870a-381d8c1ce878",
+              "name": "Transaction confirmed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8addfd42-fb82-41cd-8749-afb5273fd40e",
+          "name": "Lunchbox Validate a Wallet Transaction",
+          "request": {
+            "name": "Lunchbox Validate a Wallet Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2185521f-5931-4a9b-bc42-94cc41e20808",
+              "name": "Transaction validated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58cc1305-6f88-4ac7-a580-5ae767fad5ca",
+          "name": "Lunchbox Refund a Wallet Transaction",
+          "request": {
+            "name": "Lunchbox Refund a Wallet Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2799e6c4-476b-4dd2-8f02-5b3c488e806f",
+              "name": "Transaction refunded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29a619a4-62b1-4803-8f14-367d7e6c06aa",
+          "name": "Lunchbox Adjust a Wallet Balance",
+          "request": {
+            "name": "Lunchbox Adjust a Wallet Balance",
+            "description": {},
+            "url": {
+              "path": [
+                "loyalty-engine",
+                "user-wallets",
+                ":user_wallet_id",
+                "adjust"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_wallet_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "193b0c3f-24a2-4c0c-85bc-c3ffb380c166",
+              "name": "Wallet balance adjusted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "loyalty-engine",
+                    "user-wallets",
+                    ":user_wallet_id",
+                    "adjust"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_wallet_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The restaurant chain's Lunchbox subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "chain",
+      "key": "chain_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{chain_name}}.lunchbox.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4b7b5517-f26c-427f-b6a9-92d2355f8938",
+    "name": "Lunchbox Core Customer User Wallet API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.\n\nContact Support:\n Name: Lunchbox Support\n Email: support@lunchbox.io",
+      "type": "text/plain"
+    }
+  }
+}

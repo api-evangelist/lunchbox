@@ -1,0 +1,198 @@
+{
+  "item": [
+    {
+      "id": "3519b054-dbdc-42a8-9f17-7f5139f5cd86",
+      "name": "Service Types",
+      "description": {
+        "content": "Configure store service types.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ddadbde4-18f3-4634-84a0-e4d1f1d75228",
+          "name": "Lunchbox Update Service Types Config",
+          "request": {
+            "name": "Lunchbox Update Service Types Config",
+            "description": {},
+            "url": {
+              "path": [
+                "management",
+                "store",
+                ":rest_id",
+                "service_types",
+                ":service_type_id",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "rest_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "service_type_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approved\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"group_base_prep_time\": \"<integer>\",\n  \"base_prep_time\": \"<integer>\",\n  \"lead_time\": \"<integer>\",\n  \"hold_same_day_orders\": \"<boolean>\",\n  \"pos_autosend\": \"<boolean>\",\n  \"hold_future_orders\": \"<boolean>\",\n  \"min_subtotal\": \"<number>\",\n  \"allow_check_in\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5de2199b-fca1-4b06-8c75-3eca613bd0f2",
+              "name": "Service type configuration updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "management",
+                    "store",
+                    ":rest_id",
+                    "service_types",
+                    ":service_type_id",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "rest_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "service_type_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The restaurant chain's Lunchbox subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "chain",
+      "key": "chain_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{chain_name}}.lunchbox.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cd1c8616-d0c1-4a93-a8bc-029ec733af60",
+    "name": "Lunchbox Core Customer Service Types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.\n\nContact Support:\n Name: Lunchbox Support\n Email: support@lunchbox.io",
+      "type": "text/plain"
+    }
+  }
+}

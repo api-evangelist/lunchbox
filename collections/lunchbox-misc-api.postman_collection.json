@@ -1,0 +1,374 @@
+{
+  "item": [
+    {
+      "id": "f91b70d9-c3a0-49e8-ba2d-893ccbfa3fa1",
+      "name": "Misc",
+      "description": {
+        "content": "Reference data such as contact, countries, and states.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "853b2498-5f39-4253-9fd0-2763eca0dd89",
+          "name": "Lunchbox Get Contact Info",
+          "request": {
+            "name": "Lunchbox Get Contact Info",
+            "description": {},
+            "url": {
+              "path": [
+                "contact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a02b2a18-7930-4882-8f8a-f9e14c20a4f5",
+              "name": "Contact information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0efb60a-6d50-4357-9a3a-68b59a175d07",
+          "name": "Lunchbox Submit a Contact Message",
+          "request": {
+            "name": "Lunchbox Submit a Contact Message",
+            "description": {},
+            "url": {
+              "path": [
+                "contact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d988892-64cd-4dd7-bff2-a9754862d0f8",
+              "name": "Message submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e5cbab6-28dd-4e8e-8bf7-206deb7d88b2",
+          "name": "Lunchbox List Countries",
+          "request": {
+            "name": "Lunchbox List Countries",
+            "description": {},
+            "url": {
+              "path": [
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e1faf59-c486-4cb3-aa17-7150e5204f00",
+              "name": "Supported countries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a881a206-fbde-4c10-9f4d-abbd3e5b32e5",
+          "name": "Lunchbox List States",
+          "request": {
+            "name": "Lunchbox List States",
+            "description": {},
+            "url": {
+              "path": [
+                "states"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The restaurant chain's Lunchbox subdomain",
+                  "type": "any",
+                  "value": "{{chain_name}}",
+                  "key": "chain_name"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d65a8d08-fa0d-492c-a37a-af81e8f3d3d2",
+              "name": "Supported states.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The restaurant chain's Lunchbox subdomain",
+                      "type": "any",
+                      "value": "{{chain_name}}",
+                      "key": "chain_name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The restaurant chain's Lunchbox subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "chain",
+      "key": "chain_name"
+    },
+    {
+      "type": "string",
+      "value": "https://{{chain_name}}.lunchbox.io/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "42d0aaa6-fcaf-43f7-9368-ac09e1fe6c11",
+    "name": "Lunchbox Core Customer Misc API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.\n\nContact Support:\n Name: Lunchbox Support\n Email: support@lunchbox.io",
+      "type": "text/plain"
+    }
+  }
+}
