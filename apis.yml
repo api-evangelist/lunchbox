@@ -28,6 +28,15 @@ tags:
   - Guest Engagement
   - Catering
   - Menus
+  - Order
+  - Loyalty
+  - Enterprise
+tags_raw:
+  - Restaurant
+  - Online Ordering
+  - Guest Engagement
+  - Catering
+  - Menus
   - Orders
   - Loyalty
   - Enterprise
@@ -42,6 +51,8 @@ apis:
   humanURL: https://docs.lunchbox.io/
   baseURL: https://{chain_name}.lunchbox.io/api/v2
   tags:
+  - Customers
+  tags_raw:
   - Customer
   properties:
   - type: OpenAPI
@@ -55,7 +66,8 @@ apis:
   description: Reference data such as contact, countries, and states.
   humanURL: https://docs.lunchbox.io/
   baseURL: https://{chain_name}.lunchbox.io/api/v2
-  tags:
+  tags: []
+  tags_raw:
   - Misc
   properties:
   - type: OpenAPI
@@ -70,6 +82,8 @@ apis:
   humanURL: https://docs.lunchbox.io/
   baseURL: https://{chain_name}.lunchbox.io/api/v2
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
