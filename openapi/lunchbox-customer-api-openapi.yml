@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Lunchbox Core Customer API
   description: 'The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.'
@@ -712,19 +712,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    CustomerId:
-      name: customer_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    OrderId:
-      name: order_id
-      in: path
-      required: true
-      schema:
-        type: integer
   schemas:
     Address:
       type: object
@@ -736,12 +723,14 @@ components:
           type: string
           example: 1216 Broadway
         address2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         address3:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         city:
           type: string
@@ -756,8 +745,9 @@ components:
           type: string
           example: US
         instructions:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         latitude:
           type: number
@@ -765,6 +755,15 @@ components:
         longitude:
           type: number
           example: -73.98833
+    AuthSession:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        auth_cookie:
+          type: string
+          example: string
     LoginRequest:
       type: object
       required:
@@ -778,59 +777,6 @@ components:
         password:
           type: string
           example: string
-    AuthSession:
-      type: object
-      properties:
-        customer_id:
-          type: integer
-          example: 1234
-        auth_cookie:
-          type: string
-          example: string
-    Customer:
-      type: object
-      properties:
-        customer_id:
-          type: integer
-          example: 1234
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Smith
-        email:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        phone:
-          type: string
-          example: '2125551411'
-        is_phone_verified:
-          type: boolean
-          example: '2125551411'
-        is_verified:
-          type: boolean
-          example: true
-        is_guest:
-          type: boolean
-          example: true
-        is_mgmt:
-          type: boolean
-          example: true
-        company_name:
-          type: string
-          nullable: true
-          example: Sample
-        occupation:
-          type: string
-          nullable: true
-          example: string
-        birthdate:
-          type: string
-          format: date
-          nullable: true
-          example: '1990-05-21'
     RegistrationRequest:
       type: object
       required:
@@ -863,6 +809,66 @@ components:
           type: string
           format: date
           example: '1990-05-21'
+    Customer:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Smith
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
+        is_phone_verified:
+          type: boolean
+          example: '2125551411'
+        is_verified:
+          type: boolean
+          example: true
+        is_guest:
+          type: boolean
+          example: true
+        is_mgmt:
+          type: boolean
+          example: true
+        company_name:
+          type:
+          - string
+          - 'null'
+          example: Sample
+        occupation:
+          type:
+          - string
+          - 'null'
+          example: string
+        birthdate:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: '1990-05-21'
+  parameters:
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    CustomerId:
+      name: customer_id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     tokenAuth:
       type: apiKey

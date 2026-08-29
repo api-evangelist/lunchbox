@@ -1,16 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Lunchbox Core Customer Service Types API
-  description: 'The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.'
+  title: Lunchbox Management Service Types API
+  description: The Lunchbox 2.0 Management API is used for performing administrative functions for a restaurant chain, such as listing and configuring stores, fetching and managing orders, voiding orders, managing deliveries, and issuing refunds. Responses use standard HTTP status codes and JSON schemas.
   version: '2.0'
   contact:
     name: Lunchbox Support
     email: support@lunchbox.io
     url: https://docs.lunchbox.io/
-  termsOfService: https://lunchbox.io/
 servers:
 - url: https://{chain_name}.lunchbox.io/api/v2
-  description: Per-chain Lunchbox 2.0 Core API base URL
+  description: Per-chain Lunchbox 2.0 Management API base URL
   variables:
     chain_name:
       default: chain
@@ -52,6 +51,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    RestId:
+      name: rest_id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
     ServiceTypeConfig:
       type: object
@@ -86,13 +92,6 @@ components:
         allow_check_in:
           type: boolean
           example: true
-  parameters:
-    RestId:
-      name: rest_id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     tokenAuth:
       type: apiKey

@@ -1,22 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Lunchbox Core Customer User Wallet API
-  description: 'The Lunchbox 2.0 Core API is used for interfacing with Lunchbox ordering functions and building frontend interfaces that interact with the variety of Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes customer (guest) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks. The API uses standard HTTP status codes and all schemas are in JSON format.'
+  title: Lunchbox Loyalty User Wallet API
+  description: The Lunchbox 2.0 Loyalty API is used for interacting with Lunchbox Loyalty so that you can adjust loyalty balances, redeem rewards, and catalog user wallets. It is served by the Lunchbox loyalty engine and authenticated with an API key. Responses use standard HTTP status codes and JSON schemas.
   version: '2.0'
   contact:
     name: Lunchbox Support
     email: support@lunchbox.io
     url: https://docs.lunchbox.io/
-  termsOfService: https://lunchbox.io/
 servers:
-- url: https://{chain_name}.lunchbox.io/api/v2
-  description: Per-chain Lunchbox 2.0 Core API base URL
+- url: https://{loyalty_base_url}
+  description: Lunchbox loyalty engine base URL
   variables:
-    chain_name:
-      default: chain
-      description: The restaurant chain's Lunchbox subdomain
+    loyalty_base_url:
+      default: loyalty.lunchbox.io
+      description: The loyalty engine host
 security:
-- tokenAuth: []
+- apiKeyAuth: []
 tags:
 - name: User Wallet
   description: Create, search, retrieve, update, validate, confirm, refund, and adjust loyalty user wallets.
@@ -199,6 +198,51 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserWalletUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+        phone:
+          type: string
+          example: '2125551411'
+    WalletReward:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 130945e3-2b24-4530-a696-3b2c6977ba1c
+    UserWalletCreate:
+      type: object
+      required:
+      - email
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
     UserWallet:
       type: object
       properties:
@@ -224,9 +268,10 @@ components:
           type: string
           example: '2125551411'
         birthdate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2023-07-25T06:00:00-04:00'
         pointsBalance:
           type: integer
@@ -241,8 +286,9 @@ components:
           type: boolean
           example: true
         lastBirthdayYear:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           example: 1
         createdAt:
           type: string
@@ -257,51 +303,6 @@ components:
           items:
             $ref: '#/components/schemas/WalletReward'
           example: []
-    UserWalletCreate:
-      type: object
-      required:
-      - email
-      properties:
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
-        email:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        phone:
-          type: string
-          example: '2125551411'
-    WalletReward:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 130945e3-2b24-4530-a696-3b2c6977ba1c
-    UserWalletUpdate:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
-        phone:
-          type: string
-          example: '2125551411'
   parameters:
     UserWalletId:
       name: user_wallet_id
@@ -311,8 +312,8 @@ components:
         type: string
         format: uuid
   securitySchemes:
-    tokenAuth:
+    apiKeyAuth:
       type: apiKey
       in: header
-      name: Authorization
-      description: 'Team token passed as: Authorization: Token <team_token>'
+      name: Api-Key
+      description: Loyalty engine API key passed in the Api-Key header.
