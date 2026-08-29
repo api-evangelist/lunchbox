@@ -8,6 +8,18 @@ description: >-
   Open API supports last-mile delivery webhooks, menu consumption for digital boards and kiosks, and third-party
   marketplace integrations, and is documented on a dedicated developer portal at docs.lunchbox.io.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
