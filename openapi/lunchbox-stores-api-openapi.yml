@@ -589,6 +589,31 @@ paths:
           default: chain
           description: The restaurant chain's Lunchbox subdomain
 components:
+  parameters:
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    MenuId:
+      name: menu_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     Menu:
       type: object
@@ -662,6 +687,22 @@ components:
         is_available:
           type: boolean
           example: true
+    ManagedStore:
+      type: object
+      properties:
+        enable_loyalty:
+          type: boolean
+          example: true
+        driver_management:
+          type: boolean
+          example: true
+        global_disable_group_order:
+          type: boolean
+          example: true
+        restaurant_data:
+          type: object
+          additionalProperties: true
+          example: {}
     ManagedStoreSummary:
       type: object
       properties:
@@ -722,30 +763,18 @@ components:
           items:
             $ref: '#/components/schemas/ManagedStoreSummary'
           example: []
-    ManagedStore:
+    PosHours:
       type: object
       properties:
-        enable_loyalty:
-          type: boolean
-          example: true
-        driver_management:
-          type: boolean
-          example: true
-        global_disable_group_order:
-          type: boolean
-          example: true
-        restaurant_data:
-          type: object
-          additionalProperties: true
-          example: {}
-    PosLocation:
-      type: object
-      properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/PosHours'
-          example: []
+        iso_day_of_week:
+          type: integer
+          example: 1
+        start_time:
+          type: string
+          example: string
+        end_time:
+          type: string
+          example: string
     PosStore:
       type: object
       properties:
@@ -762,32 +791,6 @@ components:
           $ref: '#/components/schemas/PosContact'
         location:
           $ref: '#/components/schemas/PosLocation'
-    PosHours:
-      type: object
-      properties:
-        iso_day_of_week:
-          type: integer
-          example: 1
-        start_time:
-          type: string
-          example: string
-        end_time:
-          type: string
-          example: string
-    StoreUpdateEvent:
-      type: object
-      required:
-      - event_type
-      - pos_store_id
-      properties:
-        event_type:
-          type: string
-          enum:
-          - store_update
-          example: store_update
-        pos_store_id:
-          type: string
-          example: '123456'
     PosContact:
       type: object
       properties:
@@ -828,31 +831,28 @@ components:
         longitude:
           type: number
           example: -73.98833
-  parameters:
-    StoreId:
-      name: store_id
-      in: path
-      required: true
-      schema:
-        type: string
-    ItemId:
-      name: item_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    MenuId:
-      name: menu_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    CategoryId:
-      name: category_id
-      in: path
-      required: true
-      schema:
-        type: integer
+    StoreUpdateEvent:
+      type: object
+      required:
+      - event_type
+      - pos_store_id
+      properties:
+        event_type:
+          type: string
+          enum:
+          - store_update
+          example: store_update
+        pos_store_id:
+          type: string
+          example: '123456'
+    PosLocation:
+      type: object
+      properties:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/PosHours'
+          example: []
   securitySchemes:
     tokenAuth:
       type: apiKey

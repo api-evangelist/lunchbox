@@ -713,102 +713,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        address_id:
-          type: integer
-          example: 1234
-        address1:
-          type: string
-          example: 1216 Broadway
-        address2:
-          type:
-          - string
-          - 'null'
-          example: string
-        address3:
-          type:
-          - string
-          - 'null'
-          example: string
-        city:
-          type: string
-          example: New York
-        statecode:
-          type: string
-          example: NY
-        zipcode:
-          type: string
-          example: '10001'
-        country:
-          type: string
-          example: US
-        instructions:
-          type:
-          - string
-          - 'null'
-          example: string
-        latitude:
-          type: number
-          example: 40.74661
-        longitude:
-          type: number
-          example: -73.98833
-    AuthSession:
-      type: object
-      properties:
-        customer_id:
-          type: integer
-          example: 1234
-        auth_cookie:
-          type: string
-          example: string
-    LoginRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        password:
-          type: string
-          example: string
-    RegistrationRequest:
-      type: object
-      required:
-      - email
-      - password
-      properties:
-        email:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        password:
-          type: string
-          example: string
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Smith
-        phone:
-          type: string
-          example: '2125551411'
-        email_optin:
-          type: boolean
-          example: true
-        auto_login:
-          type: boolean
-          example: true
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
     Customer:
       type: object
       properties:
@@ -854,6 +758,102 @@ components:
           type:
           - string
           - 'null'
+          format: date
+          example: '1990-05-21'
+    AuthSession:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        auth_cookie:
+          type: string
+          example: string
+    LoginRequest:
+      type: object
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        password:
+          type: string
+          example: string
+    Address:
+      type: object
+      properties:
+        address_id:
+          type: integer
+          example: 1234
+        address1:
+          type: string
+          example: 1216 Broadway
+        address2:
+          type:
+          - string
+          - 'null'
+          example: string
+        address3:
+          type:
+          - string
+          - 'null'
+          example: string
+        city:
+          type: string
+          example: New York
+        statecode:
+          type: string
+          example: NY
+        zipcode:
+          type: string
+          example: '10001'
+        country:
+          type: string
+          example: US
+        instructions:
+          type:
+          - string
+          - 'null'
+          example: string
+        latitude:
+          type: number
+          example: 40.74661
+        longitude:
+          type: number
+          example: -73.98833
+    RegistrationRequest:
+      type: object
+      required:
+      - email
+      - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        password:
+          type: string
+          example: string
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Smith
+        phone:
+          type: string
+          example: '2125551411'
+        email_optin:
+          type: boolean
+          example: true
+        auto_login:
+          type: boolean
+          example: true
+        birthdate:
+          type: string
           format: date
           example: '1990-05-21'
   parameters:

@@ -24,7 +24,8 @@
     "lunchbox-management-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "lunchbox-pos-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "tag 'Orders' spans 3 source specs (lunchbox-core-openapi.yml, lunchbox-management-openapi.yml, lunchbox-pos-openapi.yml): per-path servers applied",
-    "tag 'Stores' spans 3 source specs (lunchbox-core-openapi.yml, lunchbox-management-openapi.yml, lunchbox-pos-openapi.yml): per-path servers applied"
+    "tag 'Stores' spans 3 source specs (lunchbox-core-openapi.yml, lunchbox-management-openapi.yml, lunchbox-pos-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "lunchbox-customer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
