@@ -51,13 +51,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    RestId:
-      name: rest_id
-      in: path
-      required: true
-      schema:
-        type: integer
   schemas:
     ServiceTypeConfig:
       type: object
@@ -92,6 +85,13 @@ components:
         allow_check_in:
           type: boolean
           example: true
+  parameters:
+    RestId:
+      name: rest_id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     tokenAuth:
       type: apiKey

@@ -712,63 +712,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    CustomerId:
+      name: customer_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
-    Customer:
-      type: object
-      properties:
-        customer_id:
-          type: integer
-          example: 1234
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Smith
-        email:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        phone:
-          type: string
-          example: '2125551411'
-        is_phone_verified:
-          type: boolean
-          example: '2125551411'
-        is_verified:
-          type: boolean
-          example: true
-        is_guest:
-          type: boolean
-          example: true
-        is_mgmt:
-          type: boolean
-          example: true
-        company_name:
-          type:
-          - string
-          - 'null'
-          example: Sample
-        occupation:
-          type:
-          - string
-          - 'null'
-          example: string
-        birthdate:
-          type:
-          - string
-          - 'null'
-          format: date
-          example: '1990-05-21'
-    AuthSession:
-      type: object
-      properties:
-        customer_id:
-          type: integer
-          example: 1234
-        auth_cookie:
-          type: string
-          example: string
     LoginRequest:
       type: object
       required:
@@ -856,19 +813,62 @@ components:
           type: string
           format: date
           example: '1990-05-21'
-  parameters:
-    OrderId:
-      name: order_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    CustomerId:
-      name: customer_id
-      in: path
-      required: true
-      schema:
-        type: integer
+    AuthSession:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        auth_cookie:
+          type: string
+          example: string
+    Customer:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1234
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Smith
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
+        is_phone_verified:
+          type: boolean
+          example: '2125551411'
+        is_verified:
+          type: boolean
+          example: true
+        is_guest:
+          type: boolean
+          example: true
+        is_mgmt:
+          type: boolean
+          example: true
+        company_name:
+          type:
+          - string
+          - 'null'
+          example: Sample
+        occupation:
+          type:
+          - string
+          - 'null'
+          example: string
+        birthdate:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: '1990-05-21'
   securitySchemes:
     tokenAuth:
       type: apiKey
