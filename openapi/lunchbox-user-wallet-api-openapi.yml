@@ -205,22 +205,6 @@ components:
           type: string
           format: uuid
           example: 130945e3-2b24-4530-a696-3b2c6977ba1c
-    UserWalletUpdate:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
-        phone:
-          type: string
-          example: '2125551411'
     UserWallet:
       type: object
       properties:
@@ -300,6 +284,22 @@ components:
           type: string
           format: email
           example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
+    UserWalletUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
         phone:
           type: string
           example: '2125551411'

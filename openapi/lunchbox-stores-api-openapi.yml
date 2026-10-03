@@ -589,7 +589,56 @@ paths:
           default: chain
           description: The restaurant chain's Lunchbox subdomain
 components:
+  parameters:
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    MenuId:
+      name: menu_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    MenuItem:
+      type: object
+      properties:
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        description:
+          type: string
+          example: string
+        price_cents:
+          type: integer
+          example: 100
+        is_available:
+          type: boolean
+          example: true
     Store:
       type: object
       properties:
@@ -638,46 +687,27 @@ components:
         service_type_id:
           type: integer
           example: 1234
-    MenuItem:
+    StorePage:
       type: object
       properties:
-        item_id:
+        current_page:
           type: integer
-          example: 1234
-        category_id:
-          type: integer
-          example: 1234
-        menu_id:
-          type: integer
-          example: 1234
-        name:
-          type: string
-          example: Sample
-        description:
-          type: string
-          example: string
-        price_cents:
-          type: integer
-          example: 100
-        is_available:
-          type: boolean
-          example: true
-    ManagedStore:
-      type: object
-      properties:
-        enable_loyalty:
-          type: boolean
-          example: true
-        driver_management:
-          type: boolean
-          example: true
-        global_disable_group_order:
-          type: boolean
-          example: true
-        restaurant_data:
-          type: object
-          additionalProperties: true
-          example: {}
+          example: 1
+        next_page:
+          type:
+          - integer
+          - 'null'
+          example: 1
+        previous_page:
+          type:
+          - integer
+          - 'null'
+          example: 1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagedStoreSummary'
+          example: []
     ManagedStoreSummary:
       type: object
       properties:
@@ -717,27 +747,50 @@ components:
         timezone:
           type: string
           example: string
-    StorePage:
+    ManagedStore:
       type: object
       properties:
-        current_page:
+        enable_loyalty:
+          type: boolean
+          example: true
+        driver_management:
+          type: boolean
+          example: true
+        global_disable_group_order:
+          type: boolean
+          example: true
+        restaurant_data:
+          type: object
+          additionalProperties: true
+          example: {}
+    PosHours:
+      type: object
+      properties:
+        iso_day_of_week:
           type: integer
           example: 1
-        next_page:
-          type:
-          - integer
-          - 'null'
-          example: 1
-        previous_page:
-          type:
-          - integer
-          - 'null'
-          example: 1
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManagedStoreSummary'
-          example: []
+        start_time:
+          type: string
+          example: string
+        end_time:
+          type: string
+          example: string
+    PosStore:
+      type: object
+      properties:
+        pos_store_id:
+          type: string
+          example: '123456'
+        store_id:
+          type: string
+          example: '123456'
+        name:
+          type: string
+          example: Sample
+        contact:
+          $ref: '#/components/schemas/PosContact'
+        location:
+          $ref: '#/components/schemas/PosLocation'
     PosContact:
       type: object
       properties:
@@ -778,22 +831,6 @@ components:
         longitude:
           type: number
           example: -73.98833
-    PosStore:
-      type: object
-      properties:
-        pos_store_id:
-          type: string
-          example: '123456'
-        store_id:
-          type: string
-          example: '123456'
-        name:
-          type: string
-          example: Sample
-        contact:
-          $ref: '#/components/schemas/PosContact'
-        location:
-          $ref: '#/components/schemas/PosLocation'
     StoreUpdateEvent:
       type: object
       required:
@@ -816,43 +853,6 @@ components:
           items:
             $ref: '#/components/schemas/PosHours'
           example: []
-    PosHours:
-      type: object
-      properties:
-        iso_day_of_week:
-          type: integer
-          example: 1
-        start_time:
-          type: string
-          example: string
-        end_time:
-          type: string
-          example: string
-  parameters:
-    StoreId:
-      name: store_id
-      in: path
-      required: true
-      schema:
-        type: string
-    ItemId:
-      name: item_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    MenuId:
-      name: menu_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    CategoryId:
-      name: category_id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     tokenAuth:
       type: apiKey
