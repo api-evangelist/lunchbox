@@ -589,31 +589,6 @@ paths:
           default: chain
           description: The restaurant chain's Lunchbox subdomain
 components:
-  parameters:
-    CategoryId:
-      name: category_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    MenuId:
-      name: menu_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    ItemId:
-      name: item_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    StoreId:
-      name: store_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     MenuItem:
       type: object
@@ -639,6 +614,18 @@ components:
         is_available:
           type: boolean
           example: true
+    Menu:
+      type: object
+      properties:
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        service_type_id:
+          type: integer
+          example: 1234
     Store:
       type: object
       properties:
@@ -675,18 +662,6 @@ components:
         enable_loyalty:
           type: boolean
           example: true
-    Menu:
-      type: object
-      properties:
-        menu_id:
-          type: integer
-          example: 1234
-        name:
-          type: string
-          example: Sample
-        service_type_id:
-          type: integer
-          example: 1234
     StorePage:
       type: object
       properties:
@@ -763,18 +738,28 @@ components:
           type: object
           additionalProperties: true
           example: {}
-    PosHours:
+    PosLocation:
       type: object
       properties:
-        iso_day_of_week:
-          type: integer
-          example: 1
-        start_time:
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/PosHours'
+          example: []
+    StoreUpdateEvent:
+      type: object
+      required:
+      - event_type
+      - pos_store_id
+      properties:
+        event_type:
           type: string
-          example: string
-        end_time:
+          enum:
+          - store_update
+          example: store_update
+        pos_store_id:
           type: string
-          example: string
+          example: '123456'
     PosStore:
       type: object
       properties:
@@ -831,28 +816,43 @@ components:
         longitude:
           type: number
           example: -73.98833
-    StoreUpdateEvent:
-      type: object
-      required:
-      - event_type
-      - pos_store_id
-      properties:
-        event_type:
-          type: string
-          enum:
-          - store_update
-          example: store_update
-        pos_store_id:
-          type: string
-          example: '123456'
-    PosLocation:
+    PosHours:
       type: object
       properties:
-        hours:
-          type: array
-          items:
-            $ref: '#/components/schemas/PosHours'
-          example: []
+        iso_day_of_week:
+          type: integer
+          example: 1
+        start_time:
+          type: string
+          example: string
+        end_time:
+          type: string
+          example: string
+  parameters:
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    MenuId:
+      name: menu_id
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     tokenAuth:
       type: apiKey
