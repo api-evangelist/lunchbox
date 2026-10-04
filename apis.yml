@@ -35,6 +35,9 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lunchbox.png
+x-docs-platform: postman
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
   - Restaurant
   - Online Ordering
@@ -149,6 +152,9 @@ apis:
   - type: GettingStarted
     url: https://support.lunchbox.io/en/articles/8684620-open-api-overview
 common:
+  - type: CapabilityMap
+    url: capabilities/lunchbox-capability-edges.yml
+    name: Lunchbox Business Capability Map
   - type: AgenticAccess
     url: agentic-access/lunchbox-agentic-access.yml
   - type: DomainSecurity
