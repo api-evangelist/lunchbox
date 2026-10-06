@@ -58,7 +58,7 @@ tags_raw:
   - Enterprise
 url: https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/apis.yml
 created: '2026-06-02'
-modified: '2026-06-02'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: lunchbox:lunchbox-customer-api
@@ -152,6 +152,8 @@ apis:
   - type: GettingStarted
     url: https://support.lunchbox.io/en/articles/8684620-open-api-overview
 common:
+  - url: https://lunchbox.io/press
+    type: Blog
   - type: CapabilityMap
     url: capabilities/lunchbox-capability-edges.yml
     name: Lunchbox Business Capability Map
