@@ -105,3 +105,31 @@ plans:
       - name: Order Aggregation
       - name: Gift Cards
       - name: Open API Access
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - period
+  - transaction
+  plans:
+  - name: SMB
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: Enterprise
+    access: enterprise
+    model: hybrid
+    model_how: derived
+    units:
+    - period
+    - transaction
+    periods:
+    - month
+    - per-use
