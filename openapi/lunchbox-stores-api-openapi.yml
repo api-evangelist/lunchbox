@@ -589,43 +589,32 @@ paths:
           default: chain
           description: The restaurant chain's Lunchbox subdomain
 components:
+  parameters:
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
+    MenuId:
+      name: menu_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    CategoryId:
+      name: category_id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
-    MenuItem:
-      type: object
-      properties:
-        item_id:
-          type: integer
-          example: 1234
-        category_id:
-          type: integer
-          example: 1234
-        menu_id:
-          type: integer
-          example: 1234
-        name:
-          type: string
-          example: Sample
-        description:
-          type: string
-          example: string
-        price_cents:
-          type: integer
-          example: 100
-        is_available:
-          type: boolean
-          example: true
-    Menu:
-      type: object
-      properties:
-        menu_id:
-          type: integer
-          example: 1234
-        name:
-          type: string
-          example: Sample
-        service_type_id:
-          type: integer
-          example: 1234
     Store:
       type: object
       properties:
@@ -662,6 +651,42 @@ components:
         enable_loyalty:
           type: boolean
           example: true
+    MenuItem:
+      type: object
+      properties:
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        description:
+          type: string
+          example: string
+        price_cents:
+          type: integer
+          example: 100
+        is_available:
+          type: boolean
+          example: true
+    Menu:
+      type: object
+      properties:
+        menu_id:
+          type: integer
+          example: 1234
+        name:
+          type: string
+          example: Sample
+        service_type_id:
+          type: integer
+          example: 1234
     StorePage:
       type: object
       properties:
@@ -746,20 +771,18 @@ components:
           items:
             $ref: '#/components/schemas/PosHours'
           example: []
-    StoreUpdateEvent:
+    PosHours:
       type: object
-      required:
-      - event_type
-      - pos_store_id
       properties:
-        event_type:
+        iso_day_of_week:
+          type: integer
+          example: 1
+        start_time:
           type: string
-          enum:
-          - store_update
-          example: store_update
-        pos_store_id:
+          example: string
+        end_time:
           type: string
-          example: '123456'
+          example: string
     PosStore:
       type: object
       properties:
@@ -776,6 +799,20 @@ components:
           $ref: '#/components/schemas/PosContact'
         location:
           $ref: '#/components/schemas/PosLocation'
+    StoreUpdateEvent:
+      type: object
+      required:
+      - event_type
+      - pos_store_id
+      properties:
+        event_type:
+          type: string
+          enum:
+          - store_update
+          example: store_update
+        pos_store_id:
+          type: string
+          example: '123456'
     PosContact:
       type: object
       properties:
@@ -816,43 +853,6 @@ components:
         longitude:
           type: number
           example: -73.98833
-    PosHours:
-      type: object
-      properties:
-        iso_day_of_week:
-          type: integer
-          example: 1
-        start_time:
-          type: string
-          example: string
-        end_time:
-          type: string
-          example: string
-  parameters:
-    CategoryId:
-      name: category_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    ItemId:
-      name: item_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    StoreId:
-      name: store_id
-      in: path
-      required: true
-      schema:
-        type: string
-    MenuId:
-      name: menu_id
-      in: path
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     tokenAuth:
       type: apiKey

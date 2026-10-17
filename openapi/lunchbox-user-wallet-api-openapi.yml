@@ -197,52 +197,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    UserWalletId:
+      name: user_wallet_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
-    WalletReward:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 130945e3-2b24-4530-a696-3b2c6977ba1c
-    UserWalletUpdate:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
-        phone:
-          type: string
-          example: '2125551411'
-    UserWalletCreate:
-      type: object
-      required:
-      - email
-      properties:
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
-        email:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        phone:
-          type: string
-          example: '2125551411'
     UserWallet:
       type: object
       properties:
@@ -303,14 +266,51 @@ components:
           items:
             $ref: '#/components/schemas/WalletReward'
           example: []
-  parameters:
-    UserWalletId:
-      name: user_wallet_id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
+    UserWalletUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+        phone:
+          type: string
+          example: '2125551411'
+    UserWalletCreate:
+      type: object
+      required:
+      - email
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        phone:
+          type: string
+          example: '2125551411'
+    WalletReward:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 130945e3-2b24-4530-a696-3b2c6977ba1c
   securitySchemes:
     apiKeyAuth:
       type: apiKey

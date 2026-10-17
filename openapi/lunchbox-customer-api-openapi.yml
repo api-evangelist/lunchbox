@@ -713,38 +713,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RegistrationRequest:
+    LoginRequest:
       type: object
       required:
-      - email
+      - username
       - password
       properties:
-        email:
+        username:
           type: string
           format: email
           example: demo@lunchbox.io
         password:
           type: string
           example: string
-        first_name:
-          type: string
-          example: John
-        last_name:
-          type: string
-          example: Smith
-        phone:
-          type: string
-          example: '2125551411'
-        email_optin:
-          type: boolean
-          example: true
-        auto_login:
-          type: boolean
-          example: true
-        birthdate:
-          type: string
-          format: date
-          example: '1990-05-21'
     Address:
       type: object
       properties:
@@ -787,19 +768,6 @@ components:
         longitude:
           type: number
           example: -73.98833
-    LoginRequest:
-      type: object
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-          format: email
-          example: demo@lunchbox.io
-        password:
-          type: string
-          example: string
     Customer:
       type: object
       properties:
@@ -856,6 +824,38 @@ components:
         auth_cookie:
           type: string
           example: string
+    RegistrationRequest:
+      type: object
+      required:
+      - email
+      - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: demo@lunchbox.io
+        password:
+          type: string
+          example: string
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Smith
+        phone:
+          type: string
+          example: '2125551411'
+        email_optin:
+          type: boolean
+          example: true
+        auto_login:
+          type: boolean
+          example: true
+        birthdate:
+          type: string
+          format: date
+          example: '1990-05-21'
   parameters:
     OrderId:
       name: order_id

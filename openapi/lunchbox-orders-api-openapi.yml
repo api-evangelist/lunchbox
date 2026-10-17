@@ -782,55 +782,38 @@ paths:
           description: The restaurant chain's Lunchbox subdomain
 components:
   schemas:
-    NewOrderRequest:
+    OrderItem:
       type: object
       properties:
-        customer_id:
+        menu_id:
           type: integer
           example: 1234
-        store_id:
+        quantity:
+          type: integer
+          example: 1
+        item_id:
+          type: integer
+          example: 1234
+        category_id:
+          type: integer
+          example: 1234
+        comment:
           type: string
-          example: '123456'
-        service_type_id:
-          type: integer
+          example: string
+        style_id:
+          type:
+          - integer
+          - 'null'
           example: 1234
-        is_group_order:
-          type: boolean
-          example: true
-    Charges:
-      type: object
-      properties:
-        total_cents:
-          type: integer
-          example: 100
-        subtotal_cents:
-          type: integer
-          example: 100
-        tax_cents:
-          type: integer
-          example: 100
-        delivery_cents:
-          type: integer
-          example: 100
-        tip_cents:
-          type: integer
-          example: 100
-        remaining_cents:
-          type: integer
-          example: 100
-    AddItemsRequest:
-      type: object
-      required:
-      - customer_id
-      - items
-      properties:
-        customer_id:
-          type: integer
+        size_id:
+          type:
+          - integer
+          - 'null'
           example: 1234
-        items:
+        child_items:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItem'
+            $ref: '#/components/schemas/OrderChildItem'
           example: []
     Order:
       type: object
@@ -865,38 +848,34 @@ components:
           $ref: '#/components/schemas/Customer'
         charges:
           $ref: '#/components/schemas/Charges'
-    OrderItem:
+    NewOrderRequest:
       type: object
       properties:
-        menu_id:
+        customer_id:
           type: integer
           example: 1234
-        quantity:
-          type: integer
-          example: 1
-        item_id:
-          type: integer
-          example: 1234
-        category_id:
-          type: integer
-          example: 1234
-        comment:
+        store_id:
           type: string
-          example: string
-        style_id:
-          type:
-          - integer
-          - 'null'
+          example: '123456'
+        service_type_id:
+          type: integer
           example: 1234
-        size_id:
-          type:
-          - integer
-          - 'null'
+        is_group_order:
+          type: boolean
+          example: true
+    AddItemsRequest:
+      type: object
+      required:
+      - customer_id
+      - items
+      properties:
+        customer_id:
+          type: integer
           example: 1234
-        child_items:
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/OrderChildItem'
+            $ref: '#/components/schemas/OrderItem'
           example: []
     Customer:
       type: object
@@ -973,6 +952,27 @@ components:
           - integer
           - 'null'
           example: 1234
+    Charges:
+      type: object
+      properties:
+        total_cents:
+          type: integer
+          example: 100
+        subtotal_cents:
+          type: integer
+          example: 100
+        tax_cents:
+          type: integer
+          example: 100
+        delivery_cents:
+          type: integer
+          example: 100
+        tip_cents:
+          type: integer
+          example: 100
+        remaining_cents:
+          type: integer
+          example: 100
     OrderPage:
       type: object
       properties:
@@ -1022,24 +1022,21 @@ components:
           type: string
           format: date-time
           example: '2023-07-25T06:00:00-04:00'
-    OrderUpdateEvent:
+    PosOrderAck:
       type: object
-      required:
-      - event_type
-      - pos_store_id
-      - pos_order_id
       properties:
-        event_type:
-          type: string
-          enum:
-          - order_update
-          example: order_update
         pos_store_id:
           type: string
           example: '123456'
         pos_order_id:
           type: string
           example: 1234
+        status:
+          type: object
+          properties:
+            is_completed:
+              type: boolean
+          example: {}
     PosOrderLocation:
       type: object
       properties:
@@ -1081,21 +1078,24 @@ components:
         instructions:
           type: string
           example: string
-    PosOrderAck:
+    OrderUpdateEvent:
       type: object
+      required:
+      - event_type
+      - pos_store_id
+      - pos_order_id
       properties:
+        event_type:
+          type: string
+          enum:
+          - order_update
+          example: order_update
         pos_store_id:
           type: string
           example: '123456'
         pos_order_id:
           type: string
           example: 1234
-        status:
-          type: object
-          properties:
-            is_completed:
-              type: boolean
-          example: {}
     PosOrder:
       type: object
       properties:
@@ -1167,18 +1167,18 @@ components:
       required: true
       schema:
         type: integer
-    StoreId:
-      name: store_id
-      in: path
-      required: true
-      schema:
-        type: string
     RestId:
       name: rest_id
       in: path
       required: true
       schema:
         type: integer
+    StoreId:
+      name: store_id
+      in: path
+      required: true
+      schema:
+        type: string
     PosStoreId:
       name: pos_store_id
       in: path
