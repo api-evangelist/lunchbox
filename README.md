@@ -1,4 +1,4 @@
-# Lunchbox (lunchbox)
+# Lunchbox
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,131 +66,248 @@
 
 Lunchbox is a digital ordering and guest engagement platform for enterprise restaurant chains and ghost kitchens, offering online ordering, catering, loyalty, marketing CRM, order aggregation, and call center tooling across thousands of locations. For technology partners, Lunchbox provides an Open API that connects a restaurant's tech stack to its ecosystem, exposing location and menu data, guest account management, and order injection into the POS. The Open API supports last-mile delivery webhooks, menu consumption for digital boards and kiosks, and third-party marketplace integrations, and is documented on a dedicated developer portal at docs.lunchbox.io.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/lunchbox/refs/heads/main/apis.yml)
+**Areas:** Restaurant · Online Ordering · Guest Engagement · Catering · Menus · Order · Loyalty · Enterprise
 
-## Scope
+## Lunchbox on APIs.io
 
-- **Type:** Index
+Everything profiled for Lunchbox is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lunchbox/](https://apis.io/providers/lunchbox/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Restaurant
-- Online Ordering
-- Guest Engagement
-- Catering
-- Menus
-- Orders
-- Loyalty
-- Enterprise
+- [Lunchbox Customer API](https://apis.io/apis/lunchbox/lunchbox-customer-api/) — Guest account registration, authentication, and profile management.
+- [Lunchbox Misc API](https://apis.io/apis/lunchbox/lunchbox-misc-api/) — Reference data such as contact, countries, and states.
+- [Lunchbox Orders API](https://apis.io/apis/lunchbox/lunchbox-orders-api/) — Order creation, item management, discounts, payments, and group orders.
+- [Lunchbox Service Types API](https://apis.io/apis/lunchbox/lunchbox-service-types-api/) — Configure store service types.
+- [Lunchbox Stores API](https://apis.io/apis/lunchbox/lunchbox-stores-api/) — Store configuration, hours, menus, and discounts.
+- [Lunchbox User Wallet API](https://apis.io/apis/lunchbox/lunchbox-user-wallet-api/) — Create, search, retrieve, update, validate, confirm, refund, and adjust loyalty user wallets.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-06-02
-- **Modified:** 2026-06-02
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Lunchbox Core API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Lunchbox 2.0 Core API is used for interfacing with ordering functions and building frontend interfaces that interact with Lunchbox integrations: POS, Last Mile, Loyalty, Marketing, Gift Card and more. It exposes guest (customer) account management, store and menu data, order creation and item management, discounts, payments, group ordering, and order webhooks.
+- [Lunchbox Agentic Access](https://apis.io/agentic-access/lunchbox/lunchbox-agentic-access/)
 
-- **Human URL:** [https://docs.lunchbox.io/](https://docs.lunchbox.io/)
-- **Base URL:** `https://{chain_name}.lunchbox.io/api/v2`
+#### JSON Schema (33)
 
-#### Tags
+The data models the API reads and writes.
 
-- Online Ordering
-- Menus
-- Orders
-- Guests
-- Webhooks
+- [AddItemsRequest](https://apis.io/schemas/lunchbox/core-add-items-request/)
+- [Address](https://apis.io/schemas/lunchbox/core-address/)
+- [AuthSession](https://apis.io/schemas/lunchbox/core-auth-session/)
+- [Charges](https://apis.io/schemas/lunchbox/core-charges/)
+- [Customer](https://apis.io/schemas/lunchbox/core-customer/)
+- [LoginRequest](https://apis.io/schemas/lunchbox/core-login-request/)
+- [Menu](https://apis.io/schemas/lunchbox/core-menu/)
+- [MenuItem](https://apis.io/schemas/lunchbox/core-menu-item/)
+- [NewOrderRequest](https://apis.io/schemas/lunchbox/core-new-order-request/)
+- [Order](https://apis.io/schemas/lunchbox/core-order/)
+- [OrderChildItem](https://apis.io/schemas/lunchbox/core-order-child-item/)
+- [OrderItem](https://apis.io/schemas/lunchbox/core-order-item/)
+- [RegistrationRequest](https://apis.io/schemas/lunchbox/core-registration-request/)
+- [Store](https://apis.io/schemas/lunchbox/core-store/)
+- [UserWallet](https://apis.io/schemas/lunchbox/loyalty-user-wallet/)
+- [UserWalletCreate](https://apis.io/schemas/lunchbox/loyalty-user-wallet-create/)
+- [UserWalletUpdate](https://apis.io/schemas/lunchbox/loyalty-user-wallet-update/)
+- [WalletReward](https://apis.io/schemas/lunchbox/loyalty-wallet-reward/)
+- [ManagedOrderSummary](https://apis.io/schemas/lunchbox/management-managed-order-summary/)
+- [ManagedStore](https://apis.io/schemas/lunchbox/management-managed-store/)
+- [ManagedStoreSummary](https://apis.io/schemas/lunchbox/management-managed-store-summary/)
+- [OrderPage](https://apis.io/schemas/lunchbox/management-order-page/)
+- [ServiceTypeConfig](https://apis.io/schemas/lunchbox/management-service-type-config/)
+- [StorePage](https://apis.io/schemas/lunchbox/management-store-page/)
+- [OrderUpdateEvent](https://apis.io/schemas/lunchbox/pos-order-update-event/)
+- …and 8 more published on APIs.io
 
-#### Properties
+#### JSON Structure (33)
 
-- [Documentation](https://docs.lunchbox.io/)
-- [Getting Started](https://support.lunchbox.io/en/articles/8684620-open-api-overview)
-- [OpenAPI](openapi/lunchbox-core-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lunchbox-core.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lunchbox-core.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### Lunchbox Management API
+- [Core Add Items Request Structure](https://apis.io/json-structure/lunchbox/core-add-items-request-structure/)
+- [Core Address Structure](https://apis.io/json-structure/lunchbox/core-address-structure/)
+- [Core Auth Session Structure](https://apis.io/json-structure/lunchbox/core-auth-session-structure/)
+- [Core Charges Structure](https://apis.io/json-structure/lunchbox/core-charges-structure/)
+- [Core Customer Structure](https://apis.io/json-structure/lunchbox/core-customer-structure/)
+- [Core Login Request Structure](https://apis.io/json-structure/lunchbox/core-login-request-structure/)
+- [Core Menu Item Structure](https://apis.io/json-structure/lunchbox/core-menu-item-structure/)
+- [Core Menu Structure](https://apis.io/json-structure/lunchbox/core-menu-structure/)
+- [Core New Order Request Structure](https://apis.io/json-structure/lunchbox/core-new-order-request-structure/)
+- [Core Order Child Item Structure](https://apis.io/json-structure/lunchbox/core-order-child-item-structure/)
+- [Core Order Item Structure](https://apis.io/json-structure/lunchbox/core-order-item-structure/)
+- [Core Order Structure](https://apis.io/json-structure/lunchbox/core-order-structure/)
+- [Core Registration Request Structure](https://apis.io/json-structure/lunchbox/core-registration-request-structure/)
+- [Core Store Structure](https://apis.io/json-structure/lunchbox/core-store-structure/)
+- [Loyalty User Wallet Create Structure](https://apis.io/json-structure/lunchbox/loyalty-user-wallet-create-structure/)
+- [Loyalty User Wallet Structure](https://apis.io/json-structure/lunchbox/loyalty-user-wallet-structure/)
+- [Loyalty User Wallet Update Structure](https://apis.io/json-structure/lunchbox/loyalty-user-wallet-update-structure/)
+- [Loyalty Wallet Reward Structure](https://apis.io/json-structure/lunchbox/loyalty-wallet-reward-structure/)
+- [Management Managed Order Summary Structure](https://apis.io/json-structure/lunchbox/management-managed-order-summary-structure/)
+- [Management Managed Store Structure](https://apis.io/json-structure/lunchbox/management-managed-store-structure/)
+- [Management Managed Store Summary Structure](https://apis.io/json-structure/lunchbox/management-managed-store-summary-structure/)
+- [Management Order Page Structure](https://apis.io/json-structure/lunchbox/management-order-page-structure/)
+- [Management Service Type Config Structure](https://apis.io/json-structure/lunchbox/management-service-type-config-structure/)
+- [Management Store Page Structure](https://apis.io/json-structure/lunchbox/management-store-page-structure/)
+- [Pos Order Update Event Structure](https://apis.io/json-structure/lunchbox/pos-order-update-event-structure/)
+- …and 8 more published on APIs.io
 
-The Lunchbox 2.0 Management API performs administrative functions for a restaurant chain, including listing and configuring stores, configuring service types, fetching and managing orders, voiding orders, canceling deliveries, and issuing refunds.
+#### JSON-LD (4)
 
-- **Human URL:** [https://docs.lunchbox.io/](https://docs.lunchbox.io/)
-- **Base URL:** `https://{chain_name}.lunchbox.io/api/v2`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Lunchbox Core Context](https://apis.io/jsonld/lunchbox/lunchbox-core-context/)
+- [Lunchbox Loyalty Context](https://apis.io/jsonld/lunchbox/lunchbox-loyalty-context/)
+- [Lunchbox Management Context](https://apis.io/jsonld/lunchbox/lunchbox-management-context/)
+- [Lunchbox Pos Context](https://apis.io/jsonld/lunchbox/lunchbox-pos-context/)
 
-- Administration
-- Stores
-- Orders
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://docs.lunchbox.io/)
-- [OpenAPI](openapi/lunchbox-management-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lunchbox-management.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lunchbox-management.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Lunchbox Vocabulary](https://apis.io/vocabularies/lunchbox/lunchbox-vocabulary/)
 
-### Lunchbox Loyalty API
+#### Examples (33)
 
-The Lunchbox 2.0 Loyalty API interacts with Lunchbox Loyalty so that partners can adjust loyalty balances, redeem rewards, and catalog user wallets. It is served by the loyalty engine and authenticated with an API key.
+Example requests and responses.
 
-- **Human URL:** [https://docs.lunchbox.io/](https://docs.lunchbox.io/)
-- **Base URL:** `https://{loyalty_base_url}`
+- [Core Add Items Request Example](https://apis.io/examples/lunchbox/core-add-items-request-example/)
+- [Core Address Example](https://apis.io/examples/lunchbox/core-address-example/)
+- [Core Auth Session Example](https://apis.io/examples/lunchbox/core-auth-session-example/)
+- [Core Charges Example](https://apis.io/examples/lunchbox/core-charges-example/)
+- [Core Customer Example](https://apis.io/examples/lunchbox/core-customer-example/)
+- [Core Login Request Example](https://apis.io/examples/lunchbox/core-login-request-example/)
+- [Core Menu Example](https://apis.io/examples/lunchbox/core-menu-example/)
+- [Core Menu Item Example](https://apis.io/examples/lunchbox/core-menu-item-example/)
+- [Core New Order Request Example](https://apis.io/examples/lunchbox/core-new-order-request-example/)
+- [Core Order Child Item Example](https://apis.io/examples/lunchbox/core-order-child-item-example/)
+- [Core Order Example](https://apis.io/examples/lunchbox/core-order-example/)
+- [Core Order Item Example](https://apis.io/examples/lunchbox/core-order-item-example/)
+- [Core Registration Request Example](https://apis.io/examples/lunchbox/core-registration-request-example/)
+- [Core Store Example](https://apis.io/examples/lunchbox/core-store-example/)
+- [Loyalty User Wallet Create Example](https://apis.io/examples/lunchbox/loyalty-user-wallet-create-example/)
+- [Loyalty User Wallet Example](https://apis.io/examples/lunchbox/loyalty-user-wallet-example/)
+- [Loyalty User Wallet Update Example](https://apis.io/examples/lunchbox/loyalty-user-wallet-update-example/)
+- [Loyalty Wallet Reward Example](https://apis.io/examples/lunchbox/loyalty-wallet-reward-example/)
+- [Management Managed Order Summary Example](https://apis.io/examples/lunchbox/management-managed-order-summary-example/)
+- [Management Managed Store Example](https://apis.io/examples/lunchbox/management-managed-store-example/)
+- [Management Managed Store Summary Example](https://apis.io/examples/lunchbox/management-managed-store-summary-example/)
+- [Management Order Page Example](https://apis.io/examples/lunchbox/management-order-page-example/)
+- [Management Service Type Config Example](https://apis.io/examples/lunchbox/management-service-type-config-example/)
+- [Management Store Page Example](https://apis.io/examples/lunchbox/management-store-page-example/)
+- [Pos Order Update Event Example](https://apis.io/examples/lunchbox/pos-order-update-event-example/)
+- …and 8 more published on APIs.io
 
-#### Tags
+#### Collections (10)
 
-- Loyalty
-- Wallets
-- Rewards
+Postman and Open Collection request collections.
 
-#### Properties
+- [Lunchbox Core API](https://apis.io/collections/lunchbox/open-lunchbox-core/)
+- [Lunchbox Core Customer API](https://apis.io/collections/lunchbox/open-lunchbox-customer-api/)
+- [Lunchbox Loyalty API](https://apis.io/collections/lunchbox/open-lunchbox-loyalty/)
+- [Lunchbox Management API](https://apis.io/collections/lunchbox/open-lunchbox-management/)
+- [Lunchbox Core Customer Misc API](https://apis.io/collections/lunchbox/open-lunchbox-misc-api/)
+- [Lunchbox Core Customer Orders API](https://apis.io/collections/lunchbox/open-lunchbox-orders-api/)
+- [Lunchbox POS API](https://apis.io/collections/lunchbox/open-lunchbox-pos/)
+- [Lunchbox Core Customer Service Types API](https://apis.io/collections/lunchbox/open-lunchbox-service-types-api/)
+- [Lunchbox Core Customer Stores API](https://apis.io/collections/lunchbox/open-lunchbox-stores-api/)
+- [Lunchbox Core Customer User Wallet API](https://apis.io/collections/lunchbox/open-lunchbox-user-wallet-api/)
 
-- [Documentation](https://docs.lunchbox.io/)
-- [OpenAPI](openapi/lunchbox-loyalty-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lunchbox-loyalty.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lunchbox-loyalty.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-### Lunchbox POS API
+Spectral rulesets for the provider's contracts.
 
-The Lunchbox 2.0 POS API defines the contract between Lunchbox and a POS provider integration. Lunchbox retrieves store details and submits orders to the POS provider, and the POS provider notifies Lunchbox of store and order changes via webhooks.
+- [Lunchbox — jsonschema rules](https://apis.io/rules/lunchbox/lunchbox-jsonschema-spectral-rules/)
+- [Lunchbox API Rules](https://apis.io/rules/lunchbox/lunchbox-spectral-rules/)
 
-- **Human URL:** [https://docs.lunchbox.io/](https://docs.lunchbox.io/)
-- **Base URL:** `https://{chain_name}.lunchbox.io/api/v2`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- POS
-- Orders
-- Webhooks
-- Stores
+- [Lunchbox Authentication](https://apis.io/security/lunchbox/lunchbox-authentication/)
+- [Lunchbox Domain Security](https://apis.io/security/lunchbox/lunchbox-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.lunchbox.io/)
-- [OpenAPI](openapi/lunchbox-pos-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/lunchbox-pos.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/lunchbox-pos.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Lunchbox Plans Pricing](https://apis.io/plans/lunchbox/lunchbox-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Lunchbox Rate Limits](https://apis.io/rate-limits/lunchbox/lunchbox-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Lunchbox Finops](https://apis.io/finops/lunchbox/lunchbox-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://lunchbox.io/)
 - [Documentation](https://docs.lunchbox.io/)
-- [API Reference](https://docs.lunchbox.io/)
-- [Support](https://support.lunchbox.io/)
-- [GitHub Organization](https://github.com/lunchboxinc)
-- [LinkedIn](https://www.linkedin.com/company/lunchboxtechnologies)
+- [API reference](https://docs.lunchbox.io/)
 - [Pricing](https://lunchbox.io/service-fees)
-- [Status Page](https://lunchbox.instatus.com)
-- [Plans](plans/lunchbox-plans-pricing.yml)
-- [Rate Limits](rate-limits/lunchbox-rate-limits.yml)
-- [Fin Ops](finops/lunchbox-finops.yml)
-- [Vocabulary](vocabulary/lunchbox-vocabulary.yml)
-- [Spectral Rules](rules/lunchbox-spectral-rules.yml) — [Spectral](https://docs.stoplight.io/docs/spectral)
+- [Support](https://support.lunchbox.io/)
+- [Blog](https://lunchbox.io/press)
+- [GitHub](https://github.com/lunchboxinc)
+- [Status](https://lunchbox.instatus.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 54.1 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 10.5 |
+
+**Agent readiness 29.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lunchbox/](https://apis.io/providers/lunchbox/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Lunchbox: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lunchbox/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
